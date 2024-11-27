@@ -65,7 +65,7 @@ export default function NewWorkspaceModal({ hideModal = noop }) {
                   />
                 </div>
                 {error && (
-                  <p className="text-red-400 text-sm">Error: {error}</p>
+                  <p className="text-red-400 text-sm">{t('new-workspace.error', {error})}</p>
                 )}
               </div>
             </div>
@@ -74,7 +74,7 @@ export default function NewWorkspaceModal({ hideModal = noop }) {
                 type="submit"
                 className="transition-all duration-300 bg-white text-black hover:opacity-60 px-4 py-2 rounded-lg text-sm"
               >
-                Save
+                {t('new-workspace.save')}
               </button>
             </div>
           </form>

@@ -95,6 +95,8 @@ const TRANSLATIONS = {
   "new-workspace": {
     title: "New Workspace",
     placeholder: "My Workspace",
+    error: "Error: {{error}}",
+    save: "Save",
   },
 
   // Workspace Settings menu items
