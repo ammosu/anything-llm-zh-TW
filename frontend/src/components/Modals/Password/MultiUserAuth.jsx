@@ -120,10 +120,10 @@ const ResetPasswordForm = ({ onSubmit }) => {
       <div className="flex items-start justify-between pt-11 pb-9 w-screen md:w-full md:px-12 px-6">
         <div className="flex flex-col gap-y-4 w-full">
           <h3 className="text-4xl md:text-2xl font-bold text-white text-center md:text-left">
-            Reset Password
+            {t("login.resetPasswordForm.title")}
           </h3>
           <p className="text-sm text-white/90 md:text-left md:max-w-[300px] px-4 md:px-0 text-center">
-            Enter your new password.
+            {t("login.resetPasswordForm.description")}
           </p>
         </div>
       </div>
@@ -133,7 +133,7 @@ const ResetPasswordForm = ({ onSubmit }) => {
             <input
               type="password"
               name="newPassword"
-              placeholder="New Password"
+              placeholder={t("login.resetPasswordForm.newPassword")}
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               className="border-none bg-theme-settings-input-bg text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
@@ -144,7 +144,7 @@ const ResetPasswordForm = ({ onSubmit }) => {
             <input
               type="password"
               name="confirmPassword"
-              placeholder="Confirm Password"
+              placeholder={t("login.resetPasswordForm.confirmPassword")}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               className="border-none bg-theme-settings-input-bg text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
@@ -158,7 +158,7 @@ const ResetPasswordForm = ({ onSubmit }) => {
           type="submit"
           className="md:text-primary-button md:bg-transparent md:w-[300px] text-dark-text text-sm font-bold focus:ring-4 focus:outline-none rounded-md border-[1.5px] border-primary-button md:h-[34px] h-[48px] md:hover:text-white md:hover:bg-primary-button bg-primary-button focus:z-10 w-full"
         >
-          Reset Password
+          {t("login.resetPasswordForm.resetPasswordButton")}
         </button>
       </div>
     </form>

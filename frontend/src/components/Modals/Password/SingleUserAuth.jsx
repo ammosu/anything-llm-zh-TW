@@ -99,7 +99,7 @@ export default function SingleUserAuth() {
                   autoComplete="off"
                 />
               </div>
-              {error && <p className="text-red-400 text-sm">Error: {error}</p>}
+              {error && <p className="text-red-400 text-sm"> {t("login.error")} {error}</p>}
             </div>
           </div>
           <div className="flex items-center md:p-12 px-10 mt-12 md:mt-0 space-x-2 border-gray-600 w-full flex-col gap-y-8">

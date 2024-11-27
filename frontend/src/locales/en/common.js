@@ -68,6 +68,14 @@ const TRANSLATIONS = {
       "recovery-code": "Recovery Code {{index}}",
       "back-to-login": "Back to Login",
     },
+    error: "Error: ",
+    resetPasswordForm:{
+      title: "Reset Password",
+      description: "Enter your new password.",
+      newPassword: "New Password",
+      confirmPassword: "Confirm Password",
+      resetPasswordButton: "Reset Password"
+    },
   },
 
   welcomeMessage: {
