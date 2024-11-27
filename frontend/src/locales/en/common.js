@@ -139,6 +139,14 @@ const TRANSLATIONS = {
     },
   },
 
+  // ChangeWarning
+  changeWarning: {
+    "title": "Warning",
+    "confirmMessage": "Are you sure you want to proceed?",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+
   // Chat Settings
   chat: {
     llm: {
