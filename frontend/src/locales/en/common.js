@@ -9,6 +9,10 @@ const TRANSLATIONS = {
     save: "Save changes",
     previous: "Previous Page",
     next: "Next Page",
+    // additional
+    Save: "Save",
+    cancel: "Cancel",
+    unsavedChanges: "Unsaved Changes",
   },
 
   // Setting Sidebar menu items.
