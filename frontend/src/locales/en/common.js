@@ -141,6 +141,7 @@ const TRANSLATIONS = {
   // Workspace Directory
   workspaceDirectory: {
     "name": "Workspace Name",
+    "nameColumn": "Name",
     "loadingMessage": "Loading selected files...",
     "noDocuments": "No Documents",
     "estimatedCost": "Estimated Cost: {{cost}}",
@@ -162,6 +163,25 @@ const TRANSLATIONS = {
       "watchingDescription2": "This feature currently supports online-based content and will not be available for manually uploaded documents."
     },
 
+  },
+
+  workspaceFileRow: {
+    "removingFileMessage": "Removing file from workspace",
+    "removeFileError": "Failed to remove document",
+    "pinError": "Failed to {action} document.",
+    "pinSuccess": "Document {action} workspace.",
+    "pinErrorMessage": "Failed to pin document. {error}",
+    "pinTooltip": "Pin to workspace",
+    "unpinTooltip": "Un-Pin from workspace",
+    "watchError": "Failed to {action} document.",
+    "watchSuccess": "Document {action}.",
+    "watchErrorMessage": "Failed to watch document. {error}",
+    "watchTooltip": "Watch document for changes",
+    "unwatchTooltip": "Stop watching for changes",
+    "removeTooltip": "Remove document from workspace",
+    "removingFileMessage": "Removing file from workspace",
+    "nameColumn": "Name",
+    "noDocuments": "No Documents"
   },
 
   // General Appearance

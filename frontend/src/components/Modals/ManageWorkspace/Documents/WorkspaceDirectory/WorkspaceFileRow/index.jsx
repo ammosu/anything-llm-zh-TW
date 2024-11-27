@@ -8,6 +8,7 @@ import { ArrowUUpLeft, Eye, File, PushPin } from "@phosphor-icons/react";
 import Workspace from "@/models/workspace";
 import showToast from "@/utils/toast";
 import System from "@/models/system";
+import { useTranslation } from "react-i18next";
 
 export default function WorkspaceFileRow({
   item,
@@ -23,19 +24,21 @@ export default function WorkspaceFileRow({
   disableSelection,
   setSelectedItems,
 }) {
+  const { t } = useTranslation();
+
   const onRemoveClick = async (e) => {
     e.stopPropagation();
     setLoading(true);
 
     try {
-      setLoadingMessage(`Removing file from workspace`);
+      setLoadingMessage(t("workspaceFileRow.removingFileMessage"));
       await Workspace.modifyEmbeddings(workspace.slug, {
         adds: [],
         deletes: [`${folderName}/${item.name}`],
       });
       await fetchKeys(true);
     } catch (error) {
-      console.error("Failed to remove document:", error);
+      console.error(t("workspaceFileRow.removeFileError"), error);
     }
     setSelectedItems({});
     setLoadingMessage("");
@@ -121,6 +124,7 @@ export default function WorkspaceFileRow({
 }
 
 const PinItemToWorkspace = memo(({ workspace, docPath, item }) => {
+  const { t } = useTranslation();
   const [pinned, setPinned] = useState(
     item?.pinnedWorkspaces?.includes(workspace.id) || false
   );
@@ -138,20 +142,22 @@ const PinItemToWorkspace = memo(({ workspace, docPath, item }) => {
       );
 
       if (!success) {
-        showToast(`Failed to ${!pinned ? "pin" : "unpin"} document.`, "error", {
-          clear: true,
-        });
+        showToast(
+          t("workspaceFileRow.pinError", { action: !pinned ? "pin" : "unpin" }),
+          "error",
+          { clear: true }
+        );
         return;
       }
 
       showToast(
-        `Document ${!pinned ? "pinned to" : "unpinned from"} workspace`,
+        t("workspaceFileRow.pinSuccess", { action: !pinned ? "pinned to" : "unpinned from" }),
         "success",
         { clear: true }
       );
       setPinned(!pinned);
     } catch (error) {
-      showToast(`Failed to pin document. ${error.message}`, "error", {
+      showToast(t("workspaceFileRow.pinErrorMessage", { error: error.message }), "error", {
         clear: true,
       });
       return;
@@ -168,9 +174,7 @@ const PinItemToWorkspace = memo(({ workspace, docPath, item }) => {
     >
       <PushPin
         data-tooltip-id="pin-document"
-        data-tooltip-content={
-          pinned ? "Un-Pin from workspace" : "Pin to workspace"
-        }
+        data-tooltip-content={pinned ? t("workspaceFileRow.unpinTooltip") : t("workspaceFileRow.pinTooltip")}
         size={16}
         onClick={updatePinStatus}
         weight={hover || pinned ? "fill" : "regular"}
@@ -181,6 +185,7 @@ const PinItemToWorkspace = memo(({ workspace, docPath, item }) => {
 });
 
 const WatchForChanges = memo(({ workspace, docPath, item }) => {
+  const { t } = useTranslation();
   const [watched, setWatched] = useState(item?.watched || false);
   const [hover, setHover] = useState(false);
   const watchEvent = new CustomEvent("watch_document_for_changes");
@@ -196,28 +201,20 @@ const WatchForChanges = memo(({ workspace, docPath, item }) => {
         );
 
       if (!success) {
-        showToast(
-          `Failed to ${!watched ? "watch" : "unwatch"} document.`,
-          "error",
-          {
-            clear: true,
-          }
-        );
+        showToast(t("workspaceFileRow.watchError", { action: !watched ? "watch" : "unwatch" }), "error", {
+          clear: true,
+        });
         return;
       }
 
       showToast(
-        `Document ${
-          !watched
-            ? "will be watched for changes"
-            : "will no longer be watched for changes"
-        }.`,
+        t("workspaceFileRow.watchSuccess", { action: !watched ? "watching for changes" : "no longer watching for changes" }),
         "success",
         { clear: true }
       );
       setWatched(!watched);
     } catch (error) {
-      showToast(`Failed to watch document. ${error.message}`, "error", {
+      showToast(t("workspaceFileRow.watchErrorMessage", { error: error.message }), "error", {
         clear: true,
       });
       return;
@@ -235,7 +232,7 @@ const WatchForChanges = memo(({ workspace, docPath, item }) => {
       <Eye
         data-tooltip-id="watch-changes"
         data-tooltip-content={
-          watched ? "Stop watching for changes" : "Watch document for changes"
+          watched ? t("workspaceFileRow.unwatchTooltip") : t("workspaceFileRow.watchTooltip")
         }
         size={16}
         onClick={updateWatchStatus}
@@ -247,11 +244,12 @@ const WatchForChanges = memo(({ workspace, docPath, item }) => {
 });
 
 const RemoveItemFromWorkspace = ({ item, onClick }) => {
+  const { t } = useTranslation();
   return (
     <div>
       <ArrowUUpLeft
         data-tooltip-id="remove-document"
-        data-tooltip-content="Remove document from workspace"
+        data-tooltip-content={t("workspaceFileRow.removeTooltip")}
         onClick={onClick}
         className="text-base font-bold w-4 h-4 ml-2 flex-shrink-0 cursor-pointer"
       />
