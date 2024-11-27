@@ -116,6 +116,54 @@ const TRANSLATIONS = {
     agent: "Agent Configuration",
   },
 
+  // Manage Workspace
+  manageWorkspace: {
+    editing: "Editing",
+    mobileWarning: "Editing these settings are only available on a desktop device. Please access this page on your desktop to continue.",
+    dismiss: "Dismiss",
+    documents: "Documents",
+    dataConnectors: "Data Connectors"
+  },
+
+  // Document Settings
+  documentSettings: {
+    updatingWorkspace: "Updating workspace...",
+    updatingWorkspaceInfo: "This may take a while for large documents",
+    workspaceUpdated: "Workspace updated successfully.",
+    workspaceUpdateError: "Workspace update failed: {{error}}",
+    moveSelectedItems: "Move selected items",
+    costEstimationInfo: "Cost estimation based on selected items",
+    openaiCostPerToken: "OpenAI cost per token: {{cost}}",
+    highlightWorkspace: "Highlight workspace",
+    saveChanges: "Save changes"
+  },
+
+  // Workspace Directory
+  workspaceDirectory: {
+    "name": "Workspace Name",
+    "loadingMessage": "Loading selected files...",
+    "noDocuments": "No Documents",
+    "estimatedCost": "Estimated Cost: {{cost}}",
+    "oneTimeCost": "*One time cost for embeddings",
+    "saveAndEmbed": "Save and Embed",
+    "selectAll": "Select All",
+    "deselectAll": "Deselect All",
+    "removeSelected": "Remove Selected",
+    "date": "Date: ",
+    "type": "Type: ",
+
+    alerts: {
+      "pinningTitle": "What is document pinning?",
+      "pinningDescription1": "When you <b>pin</b> a document in AnythingLLM we will inject the entire content of the document into your prompt window for your LLM to fully comprehend.",
+      "pinningDescription2": "This works best with <b>large-context models</b> or small files that are critical to its knowledge-base.",
+      "pinningDescription3": "If you are not getting the answers you desire from AnythingLLM by default then pinning is a great way to get higher quality answers in a click.",
+      "watchingTitle": "What does watching a document do?",
+      "watchingDescription1": "When you <b>watch</b> a document in AnythingLLM we will <i>automatically</i> sync your document content from its original source on regular intervals. This will automatically update the content in every workspace where this file is managed.",
+      "watchingDescription2": "This feature currently supports online-based content and will not be available for manually uploaded documents."
+    },
+
+  },
+
   // General Appearance
   general: {
     vector: {

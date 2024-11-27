@@ -5,6 +5,7 @@ import System from "../../../../models/system";
 import showToast from "../../../../utils/toast";
 import Directory from "./Directory";
 import WorkspaceDirectory from "./WorkspaceDirectory";
+import { useTranslation } from "react-i18next";
 
 // OpenAI Cost per token
 // ref: https://openai.com/pricing#:~:text=%C2%A0/%201K%20tokens-,Embedding%20models,-Build%20advanced%20search
@@ -16,6 +17,7 @@ const MODEL_COSTS = {
 };
 
 export default function DocumentSettings({ workspace, systemSettings }) {
+  const { t } = useTranslation();
   const [highlightWorkspace, setHighlightWorkspace] = useState(false);
   const [availableDocs, setAvailableDocs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -86,8 +88,8 @@ export default function DocumentSettings({ workspace, systemSettings }) {
   const updateWorkspace = async (e) => {
     e.preventDefault();
     setLoading(true);
-    showToast("Updating workspace...", "info", { autoClose: false });
-    setLoadingMessage("This may take a while for large documents");
+    showToast(t("documentSettings.updatingWorkspace"), "info", { autoClose: false });
+    setLoadingMessage(t("documentSettings.updatingWorkspaceInfo"));
 
     const changesToSend = {
       adds: movedItems.map((item) => `${item.folderName}/${item.name}`),
@@ -99,15 +101,15 @@ export default function DocumentSettings({ workspace, systemSettings }) {
     await Workspace.modifyEmbeddings(workspace.slug, changesToSend)
       .then((res) => {
         if (!!res.message) {
-          showToast(`Error: ${res.message}`, "error", { clear: true });
+          showToast(t("documentSettings.workspaceUpdateError", { error: res.message }), "error", { clear: true });
           return;
         }
-        showToast("Workspace updated successfully.", "success", {
+        showToast(t("documentSettings.workspaceUpdated"), "success", {
           clear: true,
         });
       })
       .catch((error) => {
-        showToast(`Workspace update failed: ${error}`, "error", {
+        showToast(t("documentSettings.workspaceUpdateError", { error }), "error", {
           clear: true,
         });
       });

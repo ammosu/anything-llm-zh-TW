@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import Workspace from "@/models/workspace";
 import { Tooltip } from "react-tooltip";
 import { safeJsonParse } from "@/utils/request";
+import { useTranslation } from "react-i18next";
 
 function WorkspaceDirectory({
   workspace,
@@ -25,6 +26,7 @@ function WorkspaceDirectory({
   embeddingCosts,
   movedItems,
 }) {
+  const { t } = useTranslation();
   const [selectedItems, setSelectedItems] = useState({});
 
   const toggleSelection = (item) => {
@@ -55,7 +57,7 @@ function WorkspaceDirectory({
 
   const removeSelectedItems = async () => {
     setLoading(true);
-    setLoadingMessage("Removing selected files from workspace");
+    setLoadingMessage(t("workspaceDirectory.loadingMessage"));
 
     const itemsToRemove = Object.keys(selectedItems).map((itemId) => {
       const folder = files.items.find((f) =>
@@ -73,7 +75,7 @@ function WorkspaceDirectory({
       await fetchKeys(true);
       setSelectedItems({});
     } catch (error) {
-      console.error("Failed to remove documents:", error);
+      console.error(t("workspaceDirectory.errorRemovingDocuments"), error);
     }
 
     setLoadingMessage("");
@@ -97,7 +99,7 @@ function WorkspaceDirectory({
           <div className="text-white/80 text-xs grid grid-cols-12 py-2 px-3.5 border-b border-white/20 bg-theme-settings-input-bg sticky top-0 z-10 rounded-t-2xl shadow-lg">
             <div className="col-span-10 flex items-center gap-x-[4px]">
               <div className="shrink-0 w-3 h-3" />
-              <p className="ml-[7px]">Name</p>
+              <p className="ml-[7px]">{t("workspaceDirectory.nameColumn")}</p>
             </div>
             <p className="col-span-2" />
           </div>
@@ -122,7 +124,7 @@ function WorkspaceDirectory({
         </div>
         <div className="relative w-[560px] h-[445px] mt-5">
           <div
-            className={`absolute inset-0 rounded-2xl  ${
+            className={`absolute inset-0 rounded-2xl ${
               highlightWorkspace ? "border-4 border-cyan-300/80 z-[999]" : ""
             }`}
           />
@@ -153,7 +155,9 @@ function WorkspaceDirectory({
                 ) : (
                   <div className="shrink-0 w-3 h-3" />
                 )}
-                <p className="ml-[7px] light:text-theme-text-primary">Name</p>
+                <p className="ml-[7px] light:text-theme-text-primary">
+                  {t("workspaceDirectory.nameColumn")}
+                </p>
               </div>
               <p className="col-span-2" />
             </div>
@@ -182,7 +186,7 @@ function WorkspaceDirectory({
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
                   <p className="text-white text-opacity-40 text-sm font-medium">
-                    No Documents
+                    {t("workspaceDirectory.noDocuments")}
                   </p>
                 </div>
               )}
@@ -201,14 +205,14 @@ function WorkspaceDirectory({
                         (sum, folder) => sum + folder.items.length,
                         0
                       )
-                        ? "Deselect All"
-                        : "Select All"}
+                        ? t("workspaceDirectory.deselectAll")
+                        : t("workspaceDirectory.selectAll")}
                     </button>
                     <button
                       onClick={removeSelectedItems}
                       className="border-none text-sm font-semibold bg-white light:bg-[#E0F2FE] h-[30px] px-2.5 rounded-lg hover:bg-neutral-800/80 hover:text-white light:text-[#026AA2] light:hover:bg-[#026AA2] light:hover:text-white"
                     >
-                      Remove Selected
+                      {t("workspaceDirectory.removeSelected")}
                     </button>
                   </div>
                 </div>
@@ -222,14 +226,15 @@ function WorkspaceDirectory({
               <p className="text-sm font-semibold">
                 {embeddingCosts === 0
                   ? ""
-                  : `Estimated Cost: ${
-                      embeddingCosts < 0.01
-                        ? `< $0.01`
-                        : dollarFormat(embeddingCosts)
-                    }`}
+                  : t("workspaceDirectory.estimatedCost", {
+                      cost:
+                        embeddingCosts < 0.01
+                          ? "< $0.01"
+                          : dollarFormat(embeddingCosts),
+                    })}
               </p>
               <p className="mt-2 text-xs italic" hidden={embeddingCosts === 0}>
-                *One time cost for embeddings
+                {t("workspaceDirectory.oneTimeCost")}
               </p>
             </div>
 
@@ -237,7 +242,7 @@ function WorkspaceDirectory({
               onClick={(e) => handleSaveChanges(e)}
               className="border border-slate-200 px-5 py-2.5 rounded-lg text-white text-sm items-center flex gap-x-2 hover:bg-slate-200 hover:text-slate-800 focus:ring-gray-800"
             >
-              Save and Embed
+              {t("workspaceDirectory.saveAndEmbed")}
             </button>
           </div>
         )}
@@ -250,7 +255,9 @@ function WorkspaceDirectory({
 }
 
 const PinAlert = memo(() => {
+  const { t } = useTranslation();
   const [showAlert, setShowAlert] = useState(false);
+
   function dismissAlert() {
     setShowAlert(false);
     window.localStorage.setItem(SEEN_DOC_PIN_ALERT, "1");
@@ -277,26 +284,27 @@ const PinAlert = memo(() => {
               weight="regular"
             />
             <h3 className="text-xl font-semibold text-white">
-              What is document pinning?
+              {t("workspaceDirectory.alerts.pinningTitle")}
             </h3>
           </div>
         </div>
         <div className="py-7 px-9 space-y-2 flex-col">
           <div className="w-full text-white text-md flex flex-col gap-y-2">
-            <p>
-              When you <b>pin</b> a document in AnythingLLM we will inject the
-              entire content of the document into your prompt window for your
-              LLM to fully comprehend.
-            </p>
-            <p>
-              This works best with <b>large-context models</b> or small files
-              that are critical to its knowledge-base.
-            </p>
-            <p>
-              If you are not getting the answers you desire from AnythingLLM by
-              default then pinning is a great way to get higher quality answers
-              in a click.
-            </p>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: t("workspaceDirectory.alerts.pinningDescription1"),
+              }}
+            />
+            <p
+              dangerouslySetInnerHTML={{
+                __html: t("workspaceDirectory.alerts.pinningDescription2"),
+              }}
+            />
+            <p
+              dangerouslySetInnerHTML={{
+                __html: t("workspaceDirectory.alerts.pinningDescription3"),
+              }}
+            />
           </div>
         </div>
         <div className="flex w-full justify-end items-center p-6 space-x-2 border-t border-theme-modal-border rounded-b">
@@ -304,7 +312,7 @@ const PinAlert = memo(() => {
             onClick={dismissAlert}
             className="transition-all duration-300 bg-white text-black hover:opacity-60 px-4 py-2 rounded-lg text-sm"
           >
-            Okay, got it
+            {t("workspaceDirectory.alerts.okayGotIt")}
           </button>
         </div>
       </div>
@@ -313,7 +321,9 @@ const PinAlert = memo(() => {
 });
 
 const DocumentWatchAlert = memo(() => {
+  const { t } = useTranslation();
   const [showAlert, setShowAlert] = useState(false);
+
   function dismissAlert() {
     setShowAlert(false);
     window.localStorage.setItem(SEEN_WATCH_ALERT, "1");
@@ -340,31 +350,27 @@ const DocumentWatchAlert = memo(() => {
               weight="regular"
             />
             <h3 className="text-xl font-semibold text-white">
-              What does watching a document do?
+              {t("workspaceDirectory.alerts.watchingTitle")}
             </h3>
           </div>
         </div>
         <div className="py-7 px-9 space-y-2 flex-col">
           <div className="w-full text-white text-md flex flex-col gap-y-2">
+            <p
+              dangerouslySetInnerHTML={{
+                __html: t("workspaceDirectory.alerts.watchingDescription1"),
+              }}
+            />
+            <p>{t("workspaceDirectory.alerts.watchingDescription2")}</p>
             <p>
-              When you <b>watch</b> a document in AnythingLLM we will{" "}
-              <i>automatically</i> sync your document content from it's original
-              source on regular intervals. This will automatically update the
-              content in every workspace where this file is managed.
-            </p>
-            <p>
-              This feature currently supports online-based content and will not
-              be available for manually uploaded documents.
-            </p>
-            <p>
-              You can manage what documents are watched from the{" "}
+              {t("workspaceDirectory.alerts.manageWatchedFiles")}{" "}
               <Link
                 to={paths.experimental.liveDocumentSync.manage()}
                 className="text-blue-600 underline"
               >
-                File manager
+                {t("workspaceDirectory.alerts.fileManager")}
               </Link>{" "}
-              admin view.
+              {t("workspaceDirectory.alerts.adminView")}
             </p>
           </div>
         </div>
@@ -373,7 +379,7 @@ const DocumentWatchAlert = memo(() => {
             onClick={dismissAlert}
             className="transition-all duration-300 bg-white text-black hover:opacity-60 px-4 py-2 rounded-lg text-sm"
           >
-            Okay, got it
+            {t("workspaceDirectory.alerts.okayGotIt")}
           </button>
         </div>
       </div>
@@ -404,6 +410,8 @@ function RenderFileRows({ files, movedItems, children }) {
  * or updated so that tooltips are attached as the items are changed.
  */
 function WorkspaceDocumentTooltips() {
+  const { t } = useTranslation();
+
   return (
     <>
       <Tooltip
@@ -421,10 +429,10 @@ function WorkspaceDocumentTooltips() {
               </p>
               <div className="flex mt-1 gap-x-2">
                 <p className="">
-                  Date: <b>{data.date}</b>
+                  {t("workspaceDirectory.date")}<b>{data.date}</b>
                 </p>
                 <p className="">
-                  Type: <b>{data.extension}</b>
+                  {t("workspaceDirectory.type")}<b>{data.extension}</b>
                 </p>
               </div>
             </div>
