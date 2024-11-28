@@ -138,6 +138,22 @@ const TRANSLATIONS = {
     saveChanges: "Save changes"
   },
 
+  uploadFile: {
+    "documentProcessorUnavailable": "Document Processor Unavailable",
+    "uploadUnavailableMessage": "We can't upload your files right now because the document processor is offline. Please try again later.",
+    "clickToUpload": "Click to upload or drag and drop",
+    "supportMessage": "supports text files, csv's, spreadsheets, audio files, and more!",
+    "submitLink": "or submit a link",
+    "placeholderUrl": "https://example.com",
+    "fetchWebsite": "Fetch website",
+    "fetching": "Fetching...",
+    "disclaimer": "These files will be uploaded to the document processor running on this AnythingLLM instance. These files are not sent or shared with a third party.",
+    "scrapingLink": "Scraping link...",
+    "uploadLinkSuccess": "Link uploaded successfully",
+    "uploadLinkError": "Error uploading link: {{error}}",
+    "uploading": "Uploading file...",
+  },
+
   // Workspace Directory
   workspaceDirectory: {
     "name": "Workspace Name",
