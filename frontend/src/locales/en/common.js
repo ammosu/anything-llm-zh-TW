@@ -138,6 +138,31 @@ const TRANSLATIONS = {
     saveChanges: "Save changes"
   },
 
+  dataConnectors: {
+    searchPlaceholder: "Search data connectors",
+    noResults: "No data connectors found.",
+    github: {
+      "name": "GitHub Repo",
+      "description": "Import an entire public or private Github repository in a single click."
+    },
+    gitlab: {
+      "name": "GitLab Repo",
+      "description": "Import an entire public or private GitLab repository in a single click."
+    },
+    youtubeTranscript: {
+      "name": "YouTube Transcript",
+      "description": "Import the transcription of an entire YouTube video from a link."
+    },
+    websiteDepth: {
+      "name": "Bulk Link Scraper",
+      "description": "Scrape a website and its sub-links up to a certain depth."
+    },
+    confluence: {
+      "name": "Confluence",
+      "description": "Import an entire Confluence page in a single click."
+    }
+  },
+
   contextMenu: {
     selectAll: "Select All",
     unselectAll: "Unselect All",
