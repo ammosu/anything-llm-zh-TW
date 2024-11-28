@@ -3,8 +3,10 @@ import System from "@/models/system";
 import showToast from "@/utils/toast";
 import { Warning } from "@phosphor-icons/react";
 import { Tooltip } from "react-tooltip";
+import { useTranslation } from "react-i18next";
 
 export default function ConfluenceOptions() {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -14,7 +16,7 @@ export default function ConfluenceOptions() {
     try {
       setLoading(true);
       showToast(
-        "Fetching all pages for Confluence space - this may take a while.",
+        t("dataConnectors.confluence.toastFetchingPages"),
         "info",
         {
           clear: true,
@@ -36,7 +38,10 @@ export default function ConfluenceOptions() {
       }
 
       showToast(
-        `Pages collected from Confluence space ${data.spaceKey}. Output folder is ${data.destination}.`,
+        t("dataConnectors.confluence.toastPagesCollected", {
+          spaceKey: data.spaceKey,
+          destination: data.destination,
+        }),
         "success",
         { clear: true }
       );
@@ -59,12 +64,11 @@ export default function ConfluenceOptions() {
                 <div className="flex flex-col gap-y-1 mb-4">
                   <label className="text-white text-sm font-bold flex gap-x-2 items-center">
                     <p className="font-bold text-theme-text-primary">
-                      Confluence deployment type
+                      {t("dataConnectors.confluence.deploymentType")}
                     </p>
                   </label>
                   <p className="text-xs font-normal text-theme-text-secondary">
-                    Determine if your Confluence instance is hosted on Atlassian
-                    cloud or self-hosted.
+                    {t("dataConnectors.confluence.deploymentTypeDescription")}
                   </p>
                 </div>
                 <select
@@ -75,25 +79,27 @@ export default function ConfluenceOptions() {
                   spellCheck={false}
                   defaultValue="true"
                 >
-                  <option value="true">Atlassian Cloud</option>
-                  <option value="false">Self-hosted</option>
+                  <option value="true">{t("dataConnectors.confluence.atlassianCloud")}</option>
+                  <option value="false">{t("dataConnectors.confluence.selfHosted")}</option>
                 </select>
               </div>
 
               <div className="flex flex-col pr-10">
                 <div className="flex flex-col gap-y-1 mb-4">
                   <label className="text-white text-sm font-bold flex gap-x-2 items-center">
-                    <p className="font-bold text-white">Confluence base URL</p>
+                    <p className="font-bold text-theme-text-primary">
+                      {t("dataConnectors.confluence.baseUrl")}
+                    </p>
                   </label>
                   <p className="text-xs font-normal text-theme-text-secondary">
-                    This is the base URL of your Confluence space.
+                    {t("dataConnectors.confluence.baseUrlDescription")}
                   </p>
                 </div>
                 <input
                   type="url"
                   name="baseUrl"
                   className="border-none bg-theme-settings-input-bg text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                  placeholder="eg: https://example.atlassian.net, http://localhost:8211, etc..."
+                  placeholder={t("dataConnectors.confluence.baseUrlPlaceholder")}
                   required={true}
                   autoComplete="off"
                   spellCheck={false}
@@ -102,18 +108,17 @@ export default function ConfluenceOptions() {
               <div className="flex flex-col pr-10">
                 <div className="flex flex-col gap-y-1 mb-4">
                   <label className="text-white text-sm font-bold">
-                    Confluence space key
+                    {t("dataConnectors.confluence.spaceKey")}
                   </label>
                   <p className="text-xs font-normal text-theme-text-secondary">
-                    This is the spaces key of your confluence instance that will
-                    be used. Usually begins with ~
+                    {t("dataConnectors.confluence.spaceKeyDescription")}
                   </p>
                 </div>
                 <input
                   type="text"
                   name="spaceKey"
                   className="border-none bg-theme-settings-input-bg text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                  placeholder="eg: ~7120208c08555d52224113949698b933a3bb56"
+                  placeholder={t("dataConnectors.confluence.spaceKeyPlaceholder")}
                   required={true}
                   autoComplete="off"
                   spellCheck={false}
@@ -122,17 +127,17 @@ export default function ConfluenceOptions() {
               <div className="flex flex-col pr-10">
                 <div className="flex flex-col gap-y-1 mb-4">
                   <label className="text-white text-sm font-bold">
-                    Confluence Username
+                    {t("dataConnectors.confluence.username")}
                   </label>
                   <p className="text-xs font-normal text-theme-text-secondary">
-                    Your Confluence username.
+                    {t("dataConnectors.confluence.usernameDescription")}
                   </p>
                 </div>
                 <input
                   type="text"
                   name="username"
                   className="border-none bg-theme-settings-input-bg text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                  placeholder="jdoe@example.com"
+                  placeholder={t("dataConnectors.confluence.usernamePlaceholder")}
                   required={true}
                   autoComplete="off"
                   spellCheck={false}
@@ -141,8 +146,8 @@ export default function ConfluenceOptions() {
               <div className="flex flex-col pr-10">
                 <div className="flex flex-col gap-y-1 mb-4">
                   <label className="text-white text-sm font-bold flex gap-x-2 items-center">
-                    <p className="font-bold text-white">
-                      Confluence Access Token
+                    <p className="font-bold text-theme-text-primary">
+                      {t("dataConnectors.confluence.accessToken")}
                     </p>
                     <Warning
                       size={14}
@@ -157,8 +162,7 @@ export default function ConfluenceOptions() {
                       clickable={true}
                     >
                       <p className="text-sm">
-                        You need to provide an access token for authentication.
-                        You can generate an access token{" "}
+                        {t("dataConnectors.confluence.accessTokenTooltip")}{" "}
                         <a
                           href="https://id.atlassian.com/manage-profile/security/api-tokens"
                           target="_blank"
@@ -166,21 +170,21 @@ export default function ConfluenceOptions() {
                           className="underline"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          here
+                          {t("dataConnectors.confluence.accessTokenLinkText")}
                         </a>
                         .
                       </p>
                     </Tooltip>
                   </label>
                   <p className="text-xs font-normal text-theme-text-secondary">
-                    Access token for authentication.
+                    {t("dataConnectors.confluence.accessTokenDescription")}
                   </p>
                 </div>
                 <input
                   type="password"
                   name="accessToken"
                   className="border-none bg-theme-settings-input-bg text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                  placeholder="abcd1234"
+                  placeholder={t("dataConnectors.confluence.accessTokenPlaceholder")}
                   required={true}
                   autoComplete="off"
                   spellCheck={false}
@@ -195,12 +199,11 @@ export default function ConfluenceOptions() {
               disabled={loading}
               className="mt-2 w-full justify-center border border-slate-200 px-4 py-2 rounded-lg text-dark-text text-sm font-bold items-center flex gap-x-2 bg-slate-200 hover:bg-slate-300 hover:text-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed"
             >
-              {loading ? "Collecting pages..." : "Submit"}
+              {loading ? t("dataConnectors.confluence.collectingPages") : t("dataConnectors.confluence.submit")}
             </button>
             {loading && (
               <p className="text-xs text-theme-text-secondary">
-                Once complete, all pages will be available for embedding into
-                workspaces.
+                {t("dataConnectors.confluence.loadingMessage")}
               </p>
             )}
           </div>

@@ -159,7 +159,31 @@ const TRANSLATIONS = {
     },
     confluence: {
       "name": "Confluence",
-      "description": "Import an entire Confluence page in a single click."
+      "description": "Import an entire Confluence page in a single click.",
+      "toastFetchingPages": "Fetching all pages for Confluence space - this may take a while.",
+      "toastPagesCollected": "Pages collected from Confluence space {{spaceKey}}. Output folder is {{destination}}.",
+      "deploymentType": "Confluence deployment type",
+      "deploymentTypeDescription": "Determine if your Confluence instance is hosted on Atlassian cloud or self-hosted.",
+      "atlassianCloud": "Atlassian Cloud",
+      "selfHosted": "Self-hosted",
+      "baseUrl": "Confluence base URL",
+      "baseUrlDescription": "This is the base URL of your Confluence space.",
+      "baseUrlPlaceholder": "eg: https://example.atlassian.net, http://localhost:8211, etc...",
+      "spaceKey": "Confluence space key",
+      "spaceKeyDescription": "This is the space key of your Confluence instance. Usually begins with ~",
+      "spaceKeyPlaceholder": "eg: ~7120208c08555d52224113949698b933a3bb56",
+      "username": "Confluence Username",
+      "usernameDescription": "Your Confluence username.",
+      "usernamePlaceholder": "jdoe@example.com",
+      "accessToken": "Confluence Access Token",
+      "accessTokenTooltip": "You need to provide an access token for authentication.",
+      "accessTokenLinkText": "here",
+      "accessTokenDescription": "Access token for authentication.",
+      "accessTokenPlaceholder": "abcd1234",
+      "submit": "Submit",
+      "collectingPages": "Collecting pages...",
+      "loadingMessage": "Once complete, all pages will be available for embedding into workspaces."
+
     }
   },
 
