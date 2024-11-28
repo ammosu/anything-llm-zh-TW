@@ -138,6 +138,23 @@ const TRANSLATIONS = {
     saveChanges: "Save changes"
   },
 
+  directory: {
+    myDocuments: "My Documents",
+    searchPlaceholder: "Search for document",
+    newFolder: "New Folder",
+    name: "Name",
+    noDocuments: "No Documents",
+    deleteConfirmation: "Are you sure you want to delete these files and folders?\nThis will remove the files from the system and remove them from any existing workspaces automatically.\nThis action is not reversible.",
+    removingDocuments: "Removing {{toRemove}} documents and {{foldersToRemove}} folders. Please wait.",
+    movingDocuments: "Moving {{count}} documents. Please wait.",
+    moveToWorkspace: "Move to Workspace",
+    errorMovingFiles: "Error moving files: {{message}}",
+    successfullyMoved: "Successfully moved {{count}} documents.",
+    searching: "Searching...",
+    remove: "Remove",
+    uploading: "Uploading..."
+  },
+
   // Documents Upload
   uploadFile: {
     "documentProcessorUnavailable": "Document Processor Unavailable",
