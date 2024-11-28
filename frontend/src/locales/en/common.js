@@ -138,6 +138,16 @@ const TRANSLATIONS = {
     saveChanges: "Save changes"
   },
 
+  contextMenu: {
+    selectAll: "Select All",
+    unselectAll: "Unselect All",
+    cancel: "Cancel"
+  },
+
+  fileRow: {
+    cached: "Cached"
+  },
+
   newFolderModal: {
     title: "Create New Folder",
     folderNameLabel: "Folder Name",
