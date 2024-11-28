@@ -138,6 +138,15 @@ const TRANSLATIONS = {
     saveChanges: "Save changes"
   },
 
+  newFolderModal: {
+    title: "Create New Folder",
+    folderNameLabel: "Folder Name",
+    placeholder: "Enter folder name",
+    error: "Failed to create folder",
+    cancel: "Cancel",
+    create: "Create Folder"
+  },
+
   directory: {
     myDocuments: "My Documents",
     searchPlaceholder: "Search for document",
