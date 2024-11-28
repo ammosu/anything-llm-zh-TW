@@ -138,6 +138,7 @@ const TRANSLATIONS = {
     saveChanges: "Save changes"
   },
 
+  // Documents Upload
   uploadFile: {
     "documentProcessorUnavailable": "Document Processor Unavailable",
     "uploadUnavailableMessage": "We can't upload your files right now because the document processor is offline. Please try again later.",
