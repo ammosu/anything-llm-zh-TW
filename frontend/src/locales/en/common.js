@@ -143,7 +143,27 @@ const TRANSLATIONS = {
     noResults: "No data connectors found.",
     github: {
       "name": "GitHub Repo",
-      "description": "Import an entire public or private Github repository in a single click."
+      "description": "Import an entire public or private Github repository in a single click.",
+      "repoLabel": "GitHub Repo URL",
+      "repoDescription": "URL of the GitHub repository you want to collect.",
+      "repoPlaceholder": "https://github.com/username/repository",
+      "tokenLabel": "GitHub Access Token",
+      "tokenOptional": "optional",
+      "tokenDescription": "Access Token to prevent rate limiting.",
+      "tokenPlaceholder": "github_pat_1234_abcdefg",
+      "ignoreLabel": "File Ignores",
+      "ignoreDescription": "List in .gitignore format to ignore specific files during collection. Press enter after each entry you want to save.",
+      "ignorePlaceholder": "!*.js, images/*, .DS_Store, bin/*",
+      "branchLabel": "Branch",
+      "branchDescription": "Branch you want to collect files from.",
+      "branchLoading": "-- loading available branches --",
+      "loadingButton": "Collecting files...",
+      "submitButton": "Submit",
+      "loadingHint": "Once complete, all files will be available for embedding into workspaces in the document picker.",
+      "patAlert": "Without filling out the GitHub Access Token, this data connector will only collect top-level files due to GitHub API rate limits. Get a free Personal Access Token with a GitHub account here.",
+      "patTooltip": "Without a Personal Access Token, the GitHub API may limit the number of files collected due to rate limits. Create a temporary Access Token to avoid this issue.",
+      "toastFetchingFiles": "Fetching all files for repo - this may take a while.",
+      "toastFilesCollected": "{{files}} {{filePlural}} collected from {{author}}/{{repo}}:{{branch}}. Output folder is {{destination}}."
     },
     gitlab: {
       "name": "GitLab Repo",

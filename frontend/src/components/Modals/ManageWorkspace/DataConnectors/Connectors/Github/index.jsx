@@ -5,9 +5,11 @@ import pluralize from "pluralize";
 import { TagsInput } from "react-tag-input-component";
 import { Info, Warning } from "@phosphor-icons/react";
 import { Tooltip } from "react-tooltip";
+import { useTranslation } from "react-i18next";
 
 const DEFAULT_BRANCHES = ["main", "master"];
 export default function GithubOptions() {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [repo, setRepo] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
@@ -24,11 +26,10 @@ export default function GithubOptions() {
 
     try {
       setLoading(true);
-      showToast(
-        "Fetching all files for repo - this may take a while.",
-        "info",
-        { clear: true, autoClose: false }
-      );
+      showToast(t("dataConnectors.github.toastFetchingFiles"), "info", {
+        clear: true,
+        autoClose: false,
+      });
       const { data, error } = await System.dataConnectors.github.collect({
         repo: form.get("repo"),
         accessToken: form.get("accessToken"),
@@ -43,9 +44,14 @@ export default function GithubOptions() {
       }
 
       showToast(
-        `${data.files} ${pluralize("file", data.files)} collected from ${
-          data.author
-        }/${data.repo}:${data.branch}. Output folder is ${data.destination}.`,
+        t("dataConnectors.github.toastFilesCollected", {
+          files: data.files,
+          filePlural: pluralize("file", data.files),
+          author: data.author,
+          repo: data.repo,
+          branch: data.branch,
+          destination: data.destination,
+        }),
         "success",
         { clear: true }
       );
@@ -68,17 +74,17 @@ export default function GithubOptions() {
               <div className="flex flex-col pr-10">
                 <div className="flex flex-col gap-y-1 mb-4">
                   <label className="text-white text-sm font-bold">
-                    GitHub Repo URL
+                    {t("dataConnectors.github.repoLabel")}
                   </label>
                   <p className="text-xs font-normal text-theme-text-secondary">
-                    Url of the GitHub repo you wish to collect.
+                    {t("dataConnectors.github.repoDescription")}
                   </p>
                 </div>
                 <input
                   type="url"
                   name="repo"
                   className="border-none bg-theme-settings-input-bg text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                  placeholder="https://github.com/Mintplex-Labs/anything-llm"
+                  placeholder={t("dataConnectors.github.repoPlaceholder")}
                   required={true}
                   autoComplete="off"
                   onChange={(e) => setRepo(e.target.value)}
@@ -89,23 +95,25 @@ export default function GithubOptions() {
               <div className="flex flex-col pr-10">
                 <div className="flex flex-col gap-y-1 mb-4">
                   <label className="text-white font-bold text-sm flex gap-x-2 items-center">
-                    <p className="font-bold text-white">Github Access Token</p>{" "}
+                    <p className="font-bold text-white">
+                      {t("dataConnectors.github.tokenLabel")}
+                    </p>{" "}
                     <p className="text-xs font-light flex items-center">
                       <span className="text-theme-text-secondary">
-                        optional
+                        {t("dataConnectors.github.tokenOptional")}
                       </span>
                       <PATTooltip accessToken={accessToken} />
                     </p>
                   </label>
                   <p className="text-xs font-normal text-theme-text-secondary">
-                    Access Token to prevent rate limiting.
+                    {t("dataConnectors.github.tokenDescription")}
                   </p>
                 </div>
                 <input
                   type="text"
                   name="accessToken"
                   className="border-none bg-theme-settings-input-bg text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                  placeholder="github_pat_1234_abcdefg"
+                  placeholder={t("dataConnectors.github.tokenPlaceholder")}
                   required={false}
                   autoComplete="off"
                   spellCheck={false}
@@ -122,18 +130,19 @@ export default function GithubOptions() {
             <div className="flex flex-col w-full py-4 pr-10">
               <div className="flex flex-col gap-y-1 mb-4">
                 <label className="text-white text-sm flex gap-x-2 items-center">
-                  <p className="text-white text-sm font-bold">File Ignores</p>
+                  <p className="text-white text-sm font-bold">
+                    {t("dataConnectors.github.ignoreLabel")}
+                  </p>
                 </label>
                 <p className="text-xs font-normal text-theme-text-secondary">
-                  List in .gitignore format to ignore specific files during
-                  collection. Press enter after each entry you want to save.
+                  {t("dataConnectors.github.ignoreDescription")}
                 </p>
               </div>
               <TagsInput
                 value={ignores}
                 onChange={setIgnores}
                 name="ignores"
-                placeholder="!*.js, images/*, .DS_Store, bin/*"
+                placeholder={t("dataConnectors.github.ignorePlaceholder")}
                 classNames={{
                   tag: "bg-theme-settings-input-bg light:bg-black/10 bg-blue-300/10 text-zinc-800",
                   input:
@@ -150,12 +159,11 @@ export default function GithubOptions() {
               disabled={loading}
               className="mt-2 w-full justify-center border border-slate-200 px-4 py-2 rounded-lg text-dark-text text-sm font-bold items-center flex gap-x-2 bg-slate-200 hover:bg-slate-300 hover:text-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed"
             >
-              {loading ? "Collecting files..." : "Submit"}
+              {loading ? t("dataConnectors.github.loadingButton") : t("dataConnectors.github.submitButton")}
             </button>
             {loading && (
               <p className="text-xs text-white/50">
-                Once complete, all files will be available for embedding into
-                workspaces in the document picker.
+                {t("dataConnectors.github.loadingHint")}
               </p>
             )}
           </div>
@@ -166,6 +174,7 @@ export default function GithubOptions() {
 }
 
 function GitHubBranchSelection({ repo, accessToken }) {
+  const { t } = useTranslation();
   const [allBranches, setAllBranches] = useState(DEFAULT_BRANCHES);
   const [loading, setLoading] = useState(true);
 
@@ -192,9 +201,11 @@ function GitHubBranchSelection({ repo, accessToken }) {
     return (
       <div className="flex flex-col w-60">
         <div className="flex flex-col gap-y-1 mb-4">
-          <label className="text-white text-sm font-bold">Branch</label>
+          <label className="text-white text-sm font-bold">
+            {t("dataConnectors.github.branchLabel")}
+          </label>
           <p className="text-xs font-normal text-theme-text-secondary">
-            Branch you wish to collect files from.
+            {t("dataConnectors.github.branchDescription")}
           </p>
         </div>
         <select
@@ -203,7 +214,7 @@ function GitHubBranchSelection({ repo, accessToken }) {
           className="border-none bg-theme-settings-input-bg border-gray-500 text-white focus:outline-primary-button active:outline-primary-button outline-none text-sm rounded-lg block w-full p-2.5"
         >
           <option disabled={true} selected={true}>
-            -- loading available branches --
+            {t("dataConnectors.github.branchLoading")}
           </option>
         </select>
       </div>
@@ -213,9 +224,11 @@ function GitHubBranchSelection({ repo, accessToken }) {
   return (
     <div className="flex flex-col w-60">
       <div className="flex flex-col gap-y-1 mb-4">
-        <label className="text-white text-sm font-bold">Branch</label>
+        <label className="text-white text-sm font-bold">
+          {t("dataConnectors.github.branchLabel")}
+        </label>
         <p className="text-xs font-normal text-theme-text-secondary">
-          Branch you wish to collect files from.
+          {t("dataConnectors.github.branchDescription")}
         </p>
       </div>
       <select
@@ -223,40 +236,25 @@ function GitHubBranchSelection({ repo, accessToken }) {
         required={true}
         className="border-none bg-theme-settings-input-bg border-gray-500 text-white focus:outline-primary-button active:outline-primary-button outline-none text-sm rounded-lg block w-full p-2.5"
       >
-        {allBranches.map((branch) => {
-          return (
-            <option key={branch} value={branch}>
-              {branch}
-            </option>
-          );
-        })}
+        {allBranches.map((branch) => (
+          <option key={branch} value={branch}>
+            {branch}
+          </option>
+        ))}
       </select>
     </div>
   );
 }
 
 function PATAlert({ accessToken }) {
+  const { t } = useTranslation();
   if (!!accessToken) return null;
   return (
     <div className="flex flex-col md:flex-row md:items-center gap-x-2 text-white mb-4 bg-blue-800/30 w-fit rounded-lg px-4 py-2">
       <div className="gap-x-2 flex items-center">
         <Info className="shrink-0" size={25} />
         <p className="text-sm">
-          Without filling out the <b>Github Access Token</b> this data connector
-          will only be able to collect the <b>top-level</b> files of the repo
-          due to GitHub's public API rate-limits.
-          <br />
-          <br />
-          <a
-            href="https://github.com/settings/personal-access-tokens/new"
-            rel="noreferrer"
-            target="_blank"
-            className="underline"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {" "}
-            Get a free Personal Access Token with a GitHub account here.
-          </a>
+          {t("dataConnectors.github.patAlert")}
         </p>
       </div>
     </div>
@@ -264,6 +262,7 @@ function PATAlert({ accessToken }) {
 }
 
 function PATTooltip({ accessToken }) {
+  const { t } = useTranslation();
   if (!!accessToken) return null;
   return (
     <>
@@ -281,30 +280,7 @@ function PATTooltip({ accessToken }) {
         className="max-w-xs z-99"
         clickable={true}
       >
-        <p className="text-sm">
-          Without a{" "}
-          <a
-            href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens"
-            rel="noreferrer"
-            target="_blank"
-            className="underline"
-            onClick={(e) => e.stopPropagation()}
-          >
-            Personal Access Token
-          </a>
-          , the GitHub API may limit the number of files that can be collected
-          due to rate limits. You can{" "}
-          <a
-            href="https://github.com/settings/personal-access-tokens/new"
-            rel="noreferrer"
-            target="_blank"
-            className="underline"
-            onClick={(e) => e.stopPropagation()}
-          >
-            create a temporary Access Token
-          </a>{" "}
-          to avoid this issue.
-        </p>
+        <p className="text-sm">{t("dataConnectors.github.patTooltip")}</p>
       </Tooltip>
     </>
   );
