@@ -866,6 +866,40 @@ const TRANSLATIONS = {
     },
   },
 
+  //////////////// pages /////////////////
+  // Agents Badge
+  "defaultBadge": {
+    "tooltip": "This skill is enabled by default and cannot be turned off.",
+    "label": "Default"
+  },
+
+  // Skills
+  "skills": {
+    "activated": "Skill activated.",
+    "deactivated": "Skill deactivated.",
+    "errorRequired": "{{key}} is required to have a value.",
+    "errorType": "{{key}} must be of type {{type}}.",
+    "success": "Skill config updated successfully.",
+    "name": "{{name}}",
+    "description": "{{description}} by {{author}}",
+    "fieldLabel": "{{key}}",
+    "saveButton": "Save",
+    "noOptions": "There are no options to modify for this skill.",
+    "confirmDelete": "Are you sure you want to delete this skill? This action cannot be undone.",
+    "deleteSuccess": "Skill deleted successfully.",
+    "deleteFailure": "Failed to delete skill.",
+    "deleteButton": "Delete Skill",
+    "noImportedSkills": "No imported skills found",
+    "learnAboutAgentSkills": "Learn about agent skills in the",
+    "agentDocs": "AnythingLLM Agent Docs",
+    "status": {
+      "on": "On",
+      "off": "Off"
+    },
+  },
+  
+  ///////////////////////////////////////////////////////
+
   // API Keys
   api: {
     title: "API Keys",
