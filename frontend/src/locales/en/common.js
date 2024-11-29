@@ -365,6 +365,26 @@ const TRANSLATIONS = {
     "noDocuments": "No Documents"
   },
 
+  // Thread container
+  threads: {
+    loading: "Loading threads...",
+    listAriaLabel: "Threads",
+    defaultThreadName: "default",
+    startingThread: "Starting Thread...",
+    newThread: "New Thread",
+    deleteSelected: "Delete Selected",
+    newThreadError: "Could not create thread - {{error}}",
+    deleted: "deleted thread",
+    rename: "Rename",
+    delete: "Delete Thread",
+    options: "Thread options",
+    renamePrompt: "What would you like to rename this thread to?",
+    renameError: "Thread could not be updated! {{message}}",
+    deleteConfirm: "Are you sure you want to delete this thread? All of its chats will be deleted. You cannot undo this.",
+    deleteError: "Thread could not be deleted!",
+    deleteSuccess: "Thread deleted successfully!"
+  },
+
   // General Appearance
   general: {
     vector: {

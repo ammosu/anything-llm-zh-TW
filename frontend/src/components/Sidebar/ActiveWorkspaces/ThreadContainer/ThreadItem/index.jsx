@@ -11,6 +11,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import truncate from "truncate";
+import { useTranslation } from "react-i18next";
 
 const THREAD_CALLOUT_DETAIL_WIDTH = 26;
 export default function ThreadItem({
@@ -25,6 +26,7 @@ export default function ThreadItem({
   ctrlPressed = false,
 }) {
   const { slug } = useParams();
+  const { t } = useTranslation();
   const optionsContainer = useRef(null);
   const [showOptions, setShowOptions] = useState(false);
   const linkTo = !thread.slug
@@ -63,7 +65,11 @@ export default function ThreadItem({
         className="h-full"
       />
       <div
-        className={`flex w-full items-center justify-between pr-2 group relative ${isActive ? "bg-[var(--theme-sidebar-thread-selected)] border border-solid border-transparent light:border-blue-400" : "hover:bg-theme-sidebar-subitem-hover"} rounded-[4px]`}
+        className={`flex w-full items-center justify-between pr-2 group relative ${
+          isActive
+            ? "bg-[var(--theme-sidebar-thread-selected)] border border-solid border-transparent light:border-blue-400"
+            : "hover:bg-theme-sidebar-subitem-hover"
+        } rounded-[4px]`}
       >
         {thread.deleted ? (
           <div className="w-full flex justify-between">
@@ -71,7 +77,7 @@ export default function ThreadItem({
               <p
                 className={`text-left text-sm text-slate-400/50 light:text-slate-500 italic`}
               >
-                deleted thread
+                {t("threads.deleted")}
               </p>
             </div>
             {ctrlPressed && (
@@ -126,7 +132,7 @@ export default function ThreadItem({
                   type="button"
                   className="border-none"
                   onClick={() => setShowOptions(!showOptions)}
-                  aria-label="Thread options"
+                  aria-label={t("threads.options")}
                 >
                   <DotsThree
                     className="text-slate-300 light:text-theme-text-secondary hover:text-white hover:light:text-theme-text-primary"
@@ -153,6 +159,7 @@ export default function ThreadItem({
 
 function OptionsMenu({ containerRef, workspace, thread, onRemove, close }) {
   const menuRef = useRef(null);
+  const { t } = useTranslation();
 
   // Ref menu options
   const outsideClick = (e) => {
@@ -188,7 +195,7 @@ function OptionsMenu({ containerRef, workspace, thread, onRemove, close }) {
 
   const renameThread = async () => {
     const name = window
-      .prompt("What would you like to rename this thread to?")
+      .prompt(t("threads.renamePrompt"))
       ?.trim();
     if (!name || name.length === 0) {
       close();
@@ -201,9 +208,11 @@ function OptionsMenu({ containerRef, workspace, thread, onRemove, close }) {
       { name }
     );
     if (!!message) {
-      showToast(`Thread could not be updated! ${message}`, "error", {
-        clear: true,
-      });
+      showToast(
+        t("threads.renameError", { message }),
+        "error",
+        { clear: true }
+      );
       close();
       return;
     }
@@ -213,19 +222,14 @@ function OptionsMenu({ containerRef, workspace, thread, onRemove, close }) {
   };
 
   const handleDelete = async () => {
-    if (
-      !window.confirm(
-        "Are you sure you want to delete this thread? All of its chats will be deleted. You cannot undo this."
-      )
-    )
-      return;
+    if (!window.confirm(t("threads.deleteConfirm"))) return;
     const success = await Workspace.threads.delete(workspace.slug, thread.slug);
     if (!success) {
-      showToast("Thread could not be deleted!", "error", { clear: true });
+      showToast(t("threads.deleteError"), "error", { clear: true });
       return;
     }
     if (success) {
-      showToast("Thread deleted successfully!", "success", { clear: true });
+      showToast(t("threads.deleteSuccess"), "success", { clear: true });
       onRemove(thread.id);
       return;
     }
@@ -242,7 +246,7 @@ function OptionsMenu({ containerRef, workspace, thread, onRemove, close }) {
         className="w-full rounded-md flex items-center p-2 gap-x-2 hover:bg-slate-500/20 text-slate-300 light:text-theme-text-primary"
       >
         <PencilSimple size={18} />
-        <p className="text-sm">Rename</p>
+        <p className="text-sm">{t("threads.rename")}</p>
       </button>
       <button
         onClick={handleDelete}
@@ -250,7 +254,7 @@ function OptionsMenu({ containerRef, workspace, thread, onRemove, close }) {
         className="w-full rounded-md flex items-center p-2 gap-x-2 hover:bg-red-500/20 text-slate-300 light:text-theme-text-primary hover:text-red-100"
       >
         <Trash size={18} />
-        <p className="text-sm">Delete Thread</p>
+        <p className="text-sm">{t("threads.delete")}</p>
       </button>
     </div>
   );

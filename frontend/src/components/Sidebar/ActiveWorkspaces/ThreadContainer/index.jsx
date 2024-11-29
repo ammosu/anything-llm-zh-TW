@@ -5,9 +5,12 @@ import { Plus, CircleNotch, Trash } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import ThreadItem from "./ThreadItem";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 export const THREAD_RENAME_EVENT = "renameThread";
 
 export default function ThreadContainer({ workspace }) {
+  const { t } = useTranslation();
   const { threadSlug = null } = useParams();
   const [threads, setThreads] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -58,9 +61,7 @@ export default function ThreadContainer({ workspace }) {
         // previously marked threads that were never deleted
         // come back to life.
         setThreads((prev) =>
-          prev.map((t) => {
-            return { ...t, deleted: false };
-          })
+          prev.map((t) => ({ ...t, deleted: false }))
         );
       }
     };
@@ -76,25 +77,23 @@ export default function ThreadContainer({ workspace }) {
 
   const toggleForDeletion = (id) => {
     setThreads((prev) =>
-      prev.map((t) => {
-        if (t.id !== id) return t;
-        return { ...t, deleted: !t.deleted };
-      })
+      prev.map((t) =>
+        t.id !== id ? t : { ...t, deleted: !t.deleted }
+      )
     );
   };
 
   const handleDeleteAll = async () => {
-    const slugs = threads.filter((t) => t.deleted === true).map((t) => t.slug);
+    const slugs = threads.filter((t) => t.deleted).map((t) => t.slug);
     await Workspace.threads.deleteBulk(workspace.slug, slugs);
     setThreads((prev) => prev.filter((t) => !t.deleted));
   };
 
   function removeThread(threadId) {
     setThreads((prev) =>
-      prev.map((_t) => {
-        if (_t.id !== threadId) return _t;
-        return { ..._t, deleted: true };
-      })
+      prev.map((_t) =>
+        _t.id !== threadId ? _t : { ..._t, deleted: true }
+      )
     );
 
     // Show thread was deleted, but then remove from threads entirely so it will
@@ -107,7 +106,9 @@ export default function ThreadContainer({ workspace }) {
   if (loading) {
     return (
       <div className="flex flex-col bg-pulse w-full h-10 items-center justify-center">
-        <p className="text-xs text-white animate-pulse">loading threads....</p>
+        <p className="text-xs text-white animate-pulse">
+          {t("threads.loading")}
+        </p>
       </div>
     );
   }
@@ -119,12 +120,12 @@ export default function ThreadContainer({ workspace }) {
     : 0;
 
   return (
-    <div className="flex flex-col" role="list" aria-label="Threads">
+    <div className="flex flex-col" role="list" aria-label={t("threads.listAriaLabel")}>
       <ThreadItem
         idx={0}
         activeIdx={activeThreadIdx}
         isActive={activeThreadIdx === 0}
-        thread={{ slug: null, name: "default" }}
+        thread={{ slug: null, name: t("threads.defaultThreadName") }}
         hasNext={threads.length > 0}
       />
       {threads.map((thread, i) => (
@@ -152,12 +153,13 @@ export default function ThreadContainer({ workspace }) {
 }
 
 function NewThreadButton({ workspace }) {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const onClick = async () => {
     setLoading(true);
     const { thread, error } = await Workspace.threads.new(workspace.slug);
     if (!!error) {
-      showToast(`Could not create thread - ${error}`, "error", { clear: true });
+      showToast(t("threads.newThreadError", { error }), "error", { clear: true });
       setLoading(false);
       return;
     }
@@ -190,11 +192,11 @@ function NewThreadButton({ workspace }) {
 
         {loading ? (
           <p className="text-left text-white light:text-theme-text-primary text-sm">
-            Starting Thread...
+            {t("threads.startingThread")}
           </p>
         ) : (
           <p className="text-left text-white light:text-theme-text-primary text-sm">
-            New Thread
+            {t("threads.newThread")}
           </p>
         )}
       </div>
@@ -203,8 +205,9 @@ function NewThreadButton({ workspace }) {
 }
 
 function DeleteAllThreadButton({ ctrlPressed, threads, onDelete }) {
-  if (!ctrlPressed || threads.filter((t) => t.deleted).length === 0)
-    return null;
+  const { t } = useTranslation();
+  if (!ctrlPressed || threads.filter((t) => t.deleted).length === 0) return null;
+
   return (
     <button
       type="button"
@@ -220,7 +223,7 @@ function DeleteAllThreadButton({ ctrlPressed, threads, onDelete }) {
           />
         </div>
         <p className="text-white light:text-theme-text-secondary text-left text-sm group-hover:text-red-400">
-          Delete Selected
+          {t("threads.deleteSelected")}
         </p>
       </div>
     </button>
