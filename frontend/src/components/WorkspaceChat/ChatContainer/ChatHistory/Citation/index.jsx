@@ -16,6 +16,7 @@ import {
 } from "@phosphor-icons/react";
 import ConfluenceLogo from "@/media/dataConnectors/confluence.png";
 import { toPercentString } from "@/utils/numbers";
+import { useTranslation } from "react-i18next";
 
 function combineLikeSources(sources) {
   const combined = {};
@@ -36,6 +37,7 @@ function combineLikeSources(sources) {
 }
 
 export default function Citations({ sources = [] }) {
+  const { t } = useTranslation();
   if (sources.length === 0) return null;
   const [open, setOpen] = useState(false);
   const [selectedSource, setSelectedSource] = useState(null);
@@ -48,7 +50,7 @@ export default function Citations({ sources = [] }) {
           open ? "pb-2" : ""
         } hover:text-white/75 hover:light:text-black/75 transition-all duration-300`}
       >
-        {open ? "Hide Citations" : "Show Citations"}
+        {open ? t("citations.hide") : t("citations.show")}
         <CaretRight
           className={`w-3.5 h-3.5 inline-block ml-1 transform transition-transform duration-300 ${
             open ? "rotate-90" : ""
@@ -102,6 +104,7 @@ function omitChunkHeader(text) {
 }
 
 function CitationDetailModal({ source, onClose }) {
+  const { t } = useTranslation();
   const { references, title, chunks } = source;
   const { isUrl, text: webpageUrl, href: linkTo } = parseChunkSource(source);
 
@@ -130,7 +133,7 @@ function CitationDetailModal({ source, onClose }) {
           </div>
           {references > 1 && (
             <p className="text-xs text-gray-400 mt-2">
-              Referenced {references} times.
+              {t("citations.referenced", { count: references })}
             </p>
           )}
           <button
@@ -158,11 +161,11 @@ function CitationDetailModal({ source, onClose }) {
                       <div className="w-full flex items-center text-xs text-white/60 gap-x-2 cursor-default">
                         <div
                           data-tooltip-id="similarity-score"
-                          data-tooltip-content={`This is the semantic similarity score of this chunk of text compared to your query calculated by the vector database.`}
+                          data-tooltip-content={t("citations.similarityTooltip")}
                           className="flex items-center gap-x-1"
                         >
                           <Info size={14} />
-                          <p>{toPercentString(score)} match</p>
+                          <p>{toPercentString(score)} {t("citations.match")}</p>
                         </div>
                       </div>
                     )}

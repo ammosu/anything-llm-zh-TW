@@ -510,6 +510,20 @@ const TRANSLATIONS = {
     copied: "Copied!"
   },
 
+  // Chartable
+  chartable: {
+    unsupported: "Unsupported chart type.",
+  },
+
+  // Citation
+  citations: {
+    show: "Show Citations",
+    hide: "Hide Citations",
+    referenced: "Referenced {{count}} times.",
+    similarityTooltip: "This is the semantic similarity score of this chunk of text compared to your query calculated by the vector database.",
+    match: "match"
+  },
+
   // General Appearance
   general: {
     vector: {

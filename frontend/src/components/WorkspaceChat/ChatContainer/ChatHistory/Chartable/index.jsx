@@ -36,12 +36,14 @@ import { memo, useCallback, useState } from "react";
 import { saveAs } from "file-saver";
 import { useGenerateImage } from "recharts-to-png";
 import { CircleNotch, DownloadSimple } from "@phosphor-icons/react";
+import { useTranslation } from "react-i18next";
 
 const dataFormatter = (number) => {
   return Intl.NumberFormat("us").format(number).toString();
 };
 
 export function Chartable({ props, workspace }) {
+  const { t } = useTranslation();
   const [getDivJpeg, { ref }] = useGenerateImage({
     quality: 1,
     type: "image/jpeg",
@@ -76,7 +78,7 @@ export function Chartable({ props, workspace }) {
       case "area":
         return (
           <div className="bg-zinc-900 p-8 rounded-xl text-white">
-            <h3 className="text-lg font-medium">{title}</h3>
+            <h3 className="text-lg font-medium">{t("chart.title", { title })}</h3>
             <AreaChart
               className="h-[350px]"
               data={data}
@@ -361,7 +363,7 @@ export function Chartable({ props, workspace }) {
           </div>
         );
       default:
-        return <p>Unsupported chart type.</p>;
+        return <p>{t("chartable.unsupported")}</p>;
     }
   };
 
