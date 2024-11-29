@@ -605,6 +605,15 @@ const TRANSLATIONS = {
     saveButton: "Save"
   },
 
+  // Text Size
+  textSize: {
+    "tooltip": "Change text size",
+    "ariaLabel": "Change text size",
+    "small": "Small",
+    "normal": "Normal",
+    "large": "Large"
+  },
+
   // Add Presets
   addPresetModal: {
     title: "Add New Preset",

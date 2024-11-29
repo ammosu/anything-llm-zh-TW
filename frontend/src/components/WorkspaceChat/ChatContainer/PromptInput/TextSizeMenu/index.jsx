@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { TextT } from "@phosphor-icons/react";
 import { Tooltip } from "react-tooltip";
+import { useTranslation } from "react-i18next";
 
 export default function TextSizeButton() {
+  const { t } = useTranslation();
   const [showTextSizeMenu, setShowTextSizeMenu] = useState(false);
   const buttonRef = useRef(null);
 
@@ -12,8 +14,8 @@ export default function TextSizeButton() {
         ref={buttonRef}
         id="text-size-btn"
         data-tooltip-id="tooltip-text-size-btn"
-        data-tooltip-content="Change text size"
-        aria-label="Change text size"
+        data-tooltip-content={t("textSize.tooltip")}
+        aria-label={t("textSize.ariaLabel")}
         onClick={() => setShowTextSizeMenu(!showTextSizeMenu)}
         className={`border-none relative flex justify-center items-center opacity-60 hover:opacity-100 light:opacity-100 light:hover:opacity-60 cursor-pointer ${
           showTextSizeMenu ? "!opacity-100" : ""
@@ -41,6 +43,7 @@ export default function TextSizeButton() {
 }
 
 function TextSizeMenu({ showing, setShowing, buttonRef }) {
+  const { t } = useTranslation();
   const formRef = useRef(null);
   const [selectedSize, setSelectedSize] = useState(
     window.localStorage.getItem("anythingllm_text_size") || "normal"
@@ -75,56 +78,35 @@ function TextSizeMenu({ showing, setShowing, buttonRef }) {
         ref={formRef}
         className="absolute bottom-16 -ml-8 w-[140px] p-2 bg-theme-action-menu-bg rounded-lg shadow-md flex flex-col justify-center items-start gap-2 z-50"
       >
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            setShowing(false);
-            handleTextSizeChange("small");
-          }}
-          className={`border-none w-full hover:cursor-pointer px-2 py-1 rounded-md flex flex-col justify-start group ${
-            selectedSize === "small"
-              ? "bg-theme-action-menu-item-hover"
-              : "hover:bg-theme-action-menu-item-hover"
-          }`}
-        >
-          <div className="w-full flex-col text-left flex pointer-events-none">
-            <div className="text-theme-text-primary text-xs">Small</div>
-          </div>
-        </button>
-
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            setShowing(false);
-            handleTextSizeChange("normal");
-          }}
-          className={`border-none w-full hover:cursor-pointer px-2 py-1 rounded-md flex flex-col justify-start group ${
-            selectedSize === "normal"
-              ? "bg-theme-action-menu-item-hover"
-              : "hover:bg-theme-action-menu-item-hover"
-          }`}
-        >
-          <div className="w-full flex-col text-left flex pointer-events-none">
-            <div className="text-theme-text-primary text-sm">Normal</div>
-          </div>
-        </button>
-
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            setShowing(false);
-            handleTextSizeChange("large");
-          }}
-          className={`border-none w-full hover:cursor-pointer px-2 py-1 rounded-md flex flex-col justify-start group ${
-            selectedSize === "large"
-              ? "bg-theme-action-menu-item-hover"
-              : "hover:bg-theme-action-menu-item-hover"
-          }`}
-        >
-          <div className="w-full flex-col text-left flex pointer-events-none">
-            <div className="text-theme-text-primary text-[16px]">Large</div>
-          </div>
-        </button>
+        {["small", "normal", "large"].map((size) => (
+          <button
+            key={size}
+            onClick={(e) => {
+              e.preventDefault();
+              setShowing(false);
+              handleTextSizeChange(size);
+            }}
+            className={`border-none w-full hover:cursor-pointer px-2 py-1 rounded-md flex flex-col justify-start group ${
+              selectedSize === size
+                ? "bg-theme-action-menu-item-hover"
+                : "hover:bg-theme-action-menu-item-hover"
+            }`}
+          >
+            <div className="w-full flex-col text-left flex pointer-events-none">
+              <div
+                className={`text-theme-text-primary ${
+                  size === "small"
+                    ? "text-xs"
+                    : size === "normal"
+                    ? "text-sm"
+                    : "text-[16px]"
+                }`}
+              >
+                {t(`textSize.${size}`)}
+              </div>
+            </div>
+          </button>
+        ))}
       </div>
     </div>
   );
