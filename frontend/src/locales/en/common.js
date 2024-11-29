@@ -663,6 +663,13 @@ const TRANSLATIONS = {
     },
   },
 
+  /////////////////// test
+  "agentDbConnection": {
+    "confirmation": "Delete {{database_id}} from the list of available SQL connections? This cannot be undone.",
+    "logoAlt": "{{engine}} logo",
+  },
+  
+
   // ChangeWarning
   changeWarning: {
     "title": "Warning",
