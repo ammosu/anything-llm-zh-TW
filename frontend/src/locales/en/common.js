@@ -434,6 +434,23 @@ const TRANSLATIONS = {
     playSample: "Play sample"
   },
 
+  // Transcription
+  nativeTranscription: {
+    "selection": "Select Whisper Model",
+    "warn": {
+      "start": "This model is optimized for local usage.",
+      "recommend": "We recommend using this model for small tasks.",
+      "end": "Expected memory usage: {{size}}"
+    }
+  },
+
+  openAiWhisperOptions: {
+    apiKeyLabel: "API Key",
+    apiKeyPlaceholder: "OpenAI API Key",
+    whisperModelLabel: "Whisper Model",
+    whisperModelOption: "Whisper Large"
+  },
+
   // General Appearance
   general: {
     vector: {

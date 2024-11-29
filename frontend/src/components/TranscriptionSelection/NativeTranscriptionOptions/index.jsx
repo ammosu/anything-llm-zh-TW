@@ -12,7 +12,7 @@ export default function NativeTranscriptionOptions({ settings }) {
       <div className="w-full flex items-center gap-4">
         <div className="flex flex-col w-60">
           <label className="text-white text-sm font-semibold block mb-3">
-            {t("common.selection")}
+            {t("nativeTranscription.selection")}
           </label>
           <select
             name="WhisperModelPref"
@@ -55,12 +55,12 @@ function WhisperSmall() {
       <div className="gap-x-2 flex items-center">
         <Gauge size={25} />
         <p className="text-sm">
-          {t("transcription.warn-start")}
+          {t("nativeTranscription.warn.start")}
           <br />
-          {t("transcription.warn-recommend")}
+          {t("nativeTranscription.warn.recommend")}
           <br />
           <br />
-          <i>{t("transcription.warn-end")} (250mb)</i>
+          <i>{t("nativeTranscription.warn.end", { size: "250MB" })}</i>
         </p>
       </div>
     </div>
@@ -75,12 +75,12 @@ function WhisperLarge() {
       <div className="gap-x-2 flex items-center">
         <Gauge size={25} />
         <p className="text-sm">
-          {t("transcription.warn-start")}
+          {t("nativeTranscription.warn.start")}
           <br />
-          {t("transcription.warn-recommend")}
+          {t("nativeTranscription.warn.recommend")}
           <br />
           <br />
-          <i>{t("transcription.warn-end")} (1.56GB)</i>
+          <i>{t("nativeTranscription.warn.end", { size: "1.56GB" })}</i>
         </p>
       </div>
     </div>
