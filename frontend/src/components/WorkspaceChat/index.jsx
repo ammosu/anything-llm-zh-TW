@@ -6,8 +6,10 @@ import paths from "@/utils/paths";
 import ModalWrapper from "../ModalWrapper";
 import { useParams } from "react-router-dom";
 import { DnDFileUploaderProvider } from "./ChatContainer/DnDWrapper";
+import { useTranslation } from "react-i18next";
 
 export default function WorkspaceChat({ loading, workspace }) {
+  const { t } = useTranslation();
   const { threadSlug = null } = useParams();
   const [history, setHistory] = useState([]);
   const [loadingHistory, setLoadingHistory] = useState(true);
@@ -39,10 +41,10 @@ export default function WorkspaceChat({ loading, workspace }) {
             <div className="relative w-full max-w-2xl bg-theme-bg-secondary rounded-lg shadow border-2 border-theme-modal-border">
               <div className="flex flex-col gap-y-4 w-full p-6 text-center">
                 <p className="font-semibold text-red-500 text-xl">
-                  Workspace not found!
+                  {t("workspaceChat.workspaceNotFound")}
                 </p>
                 <p className="text-sm mt-4 text-white">
-                  It looks like a workspace by this name is not available.
+                  {t("workspaceChat.workspaceUnavailable")}
                 </p>
 
                 <div className="flex w-full justify-center items-center mt-4">
@@ -50,7 +52,7 @@ export default function WorkspaceChat({ loading, workspace }) {
                     href={paths.home()}
                     className="transition-all duration-300 bg-white text-black hover:opacity-60 px-4 py-2 rounded-lg text-sm flex items-center gap-x-2"
                   >
-                    Go back to homepage
+                    {t("workspaceChat.goToHomepage")}
                   </a>
                 </div>
               </div>
@@ -74,6 +76,7 @@ export default function WorkspaceChat({ loading, workspace }) {
 // but still be able to attach a handler to copy code snippets on all elements
 // that are code snippets.
 function copyCodeSnippet(uuid) {
+  const { t } = useTranslation();
   const target = document.querySelector(`[data-code="${uuid}"]`);
   if (!target) return false;
   const markdown =
@@ -85,7 +88,7 @@ function copyCodeSnippet(uuid) {
   window.navigator.clipboard.writeText(markdown);
   target.classList.add("text-green-500");
   const originalText = target.innerHTML;
-  target.innerText = "Copied!";
+  target.innerText = t("workspaceChat.copied");
   target.setAttribute("disabled", true);
 
   setTimeout(() => {

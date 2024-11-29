@@ -502,6 +502,14 @@ const TRANSLATIONS = {
     defaultUsername: "AA"
   },
 
+  // Workspace Chat
+  workspaceChat: {
+    workspaceNotFound: "Workspace not found!",
+    workspaceUnavailable: "It looks like a workspace by this name is not available.",
+    goToHomepage: "Go back to homepage",
+    copied: "Copied!"
+  },
+
   // General Appearance
   general: {
     vector: {
