@@ -197,7 +197,15 @@ const TRANSLATIONS = {
     },
     youtubeTranscript: {
       "name": "YouTube Transcript",
-      "description": "Import the transcription of an entire YouTube video from a link."
+      "description": "Import the transcription of an entire YouTube video from a link.",
+      "toastFetching": "Fetching transcript for YouTube video.",
+      "toastSuccess": "{{title}} by {{author}} transcription completed. Output folder is {{destination}}.",
+      "formLabel": "YouTube Video URL",
+      "formDescription": "URL of the YouTube video you wish to transcribe.",
+      "formPlaceholder": "https://youtube.com/watch?v=abc123",
+      "formSubmitButton": "Collect transcript",
+      "formLoading": "Collecting transcript...",
+      "formLoadingHint": "Once complete, the transcription will be available for embedding into workspaces in the document picker."
     },
     websiteDepth: {
       "name": "Bulk Link Scraper",

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import System from "@/models/system";
 import showToast from "@/utils/toast";
+import { useTranslation } from "react-i18next";
 
 export default function YoutubeOptions() {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -11,7 +13,7 @@ export default function YoutubeOptions() {
 
     try {
       setLoading(true);
-      showToast("Fetching transcript for YouTube video.", "info", {
+      showToast(t("dataConnectors.youtubeTranscript.toastFetching"), "info", {
         clear: true,
         autoClose: false,
       });
@@ -27,7 +29,11 @@ export default function YoutubeOptions() {
       }
 
       showToast(
-        `${data.title} by ${data.author} transcription completed. Output folder is ${data.destination}.`,
+        t("dataConnectors.youtubeTranscript.toastSuccess", {
+          title: data.title,
+          author: data.author,
+          destination: data.destination,
+        }),
         "success",
         { clear: true }
       );
@@ -50,17 +56,17 @@ export default function YoutubeOptions() {
               <div className="flex flex-col pr-10">
                 <div className="flex flex-col gap-y-1 mb-4">
                   <label className="text-white text-sm font-bold">
-                    YouTube Video URL
+                    {t("dataConnectors.youtubeTranscript.formLabel")}
                   </label>
                   <p className="text-xs font-normal text-theme-text-secondary">
-                    URL of the YouTube video you wish to transcribe.
+                    {t("dataConnectors.youtubeTranscript.formDescription")}
                   </p>
                 </div>
                 <input
                   type="url"
                   name="url"
                   className="border-none bg-theme-settings-input-bg text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                  placeholder="https://youtube.com/watch?v=abc123"
+                  placeholder={t("dataConnectors.youtubeTranscript.formPlaceholder")}
                   required={true}
                   autoComplete="off"
                   spellCheck={false}
@@ -75,12 +81,13 @@ export default function YoutubeOptions() {
               disabled={loading}
               className="mt-2 w-full justify-center border border-slate-200 px-4 py-2 rounded-lg text-dark-text text-sm font-bold items-center flex gap-x-2 bg-slate-200 hover:bg-slate-300 hover:text-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed"
             >
-              {loading ? "Collecting transcript..." : "Collect transcript"}
+              {loading
+                ? t("dataConnectors.youtubeTranscript.formLoading")
+                : t("dataConnectors.youtubeTranscript.formSubmitButton")}
             </button>
             {loading && (
               <p className="text-xs text-theme-text-secondary max-w-sm">
-                Once complete, the transcription will be available for embedding
-                into workspaces in the document picker.
+                {t("dataConnectors.youtubeTranscript.formLoadingHint")}
               </p>
             )}
           </div>
