@@ -6,9 +6,11 @@ import { useModal } from "@/hooks/useModal";
 import System from "@/models/system";
 import { DotsThree, Plus } from "@phosphor-icons/react";
 import showToast from "@/utils/toast";
+import { useTranslation } from "react-i18next";
 
 export const CMD_REGEX = new RegExp(/[^a-zA-Z0-9_-]/g);
 export default function SlashPresets({ setShowing, sendCommand }) {
+  const { t } = useTranslation();
   const isActiveAgentSession = useIsAgentSessionActive();
   const {
     isOpen: isAddModalOpen,
@@ -36,7 +38,7 @@ export default function SlashPresets({ setShowing, sendCommand }) {
   const handleSavePreset = async (preset) => {
     const { error } = await System.createSlashCommandPreset(preset);
     if (!!error) {
-      showToast(error, "error");
+      showToast(t("slashPresets.toastError"), "error");
       return false;
     }
 
@@ -57,7 +59,7 @@ export default function SlashPresets({ setShowing, sendCommand }) {
     );
 
     if (!!error) {
-      showToast(error, "error");
+      showToast(t("slashPresets.toastError"), "error");
       return;
     }
 
@@ -113,7 +115,7 @@ export default function SlashPresets({ setShowing, sendCommand }) {
         <div className="w-full flex-row flex pointer-events-none items-center gap-2">
           <Plus size={24} weight="fill" className="text-theme-text-primary" />
           <div className="text-theme-text-primary text-sm font-medium">
-            Add New Preset
+            {t("slashPresets.addNewPreset")}
           </div>
         </div>
       </button>

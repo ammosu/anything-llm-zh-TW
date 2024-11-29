@@ -571,6 +571,53 @@ const TRANSLATIONS = {
     fileEmbedded: "File embedded!"
   },
 
+  // Reset Command
+  resetCommand: {
+    "command": "/reset",
+    "description": "Clear your chat history and begin a new chat"
+  },
+
+  // Exit Command
+  agentSession: {
+    "exitCommand": "/exit",
+    "exitDescription": "Halt the current agent session."
+  },
+
+  // Slash Presets
+  slashPresets: {
+    "toastError": "An error occurred while processing the preset.",
+    "addNewPreset": "Add New Preset"
+  },
+
+  // Edit Presets
+  editPreset: {
+    title: "Edit Preset",
+    commandLabel: "Command",
+    commandPlaceholder: "your-command",
+    promptLabel: "Prompt",
+    promptPlaceholder: "This is a test prompt. Please respond with a poem about LLMs.",
+    descriptionLabel: "Description",
+    descriptionPlaceholder: "Responds with a poem about LLMs.",
+    confirmDelete: "Are you sure you want to delete this preset?",
+    deleteButton: "Delete Preset",
+    deleting: "Deleting...",
+    cancelButton: "Cancel",
+    saveButton: "Save"
+  },
+
+  // Add Presets
+  addPresetModal: {
+    title: "Add New Preset",
+    commandLabel: "Command",
+    commandPlaceholder: "your-command",
+    promptLabel: "Prompt",
+    promptPlaceholder: "This is the content that will be injected in front of your prompt.",
+    descriptionLabel: "Description",
+    descriptionPlaceholder: "Responds with a poem about LLMs.",
+    cancelButton: "Cancel",
+    saveButton: "Save"
+  },
+
   // General Appearance
   general: {
     vector: {
