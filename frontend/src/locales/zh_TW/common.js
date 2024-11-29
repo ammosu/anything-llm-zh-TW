@@ -9,6 +9,10 @@ const TRANSLATIONS = {
     save: "儲存修改",
     previous: "上一頁",
     next: "下一頁",
+    // additional
+    Save: "存檔",
+    cancel: "取消",
+    unsavedChanges: "尚未保存的變更",
   },
 
   // 設定側邊欄選單項目
@@ -58,10 +62,19 @@ const TRANSLATIONS = {
     },
     "password-reset": {
       title: "重設密碼",
-      description: "請在下方提供必要資訊以重設您的密碼。",
+      description: 
+        "請在下方提供必要資訊以重設您的密碼。",
       "recovery-codes": "復原碼",
       "recovery-code": "復原碼 {{index}}",
       "back-to-login": "返回登入頁面",
+    },
+    error: "Error: ",
+    resetPasswordForm:{
+      title: "Reset Password",
+      description: "Enter your new password.",
+      newPassword: "New Password",
+      confirmPassword: "Confirm Password",
+      resetPasswordButton: "Reset Password"
     },
   },
 
@@ -77,7 +90,8 @@ const TRANSLATIONS = {
     part4:
       "很簡單。所有資料集都組織成我們稱之為「工作區」的儲存區。工作區是檔案、文件、圖片、PDF 和其他檔案的儲存區，這些檔案將會被轉換成 LLM 可以理解並在對話中使用的格式。\n\n您可以隨時新增和移除檔案。",
     createWorkspace: "建立您的第一個工作區",
-    user2: "這像是 AI Dropbox 之類的嗎？那對話功能呢？它是一個對話機器人嗎？",
+    user2:
+      "這像是 AI Dropbox 之類的嗎？那對話功能呢？它是一個對話機器人嗎？",
     part5:
       "AnythingLLM 不僅是一個更聰明的 Dropbox。\n\nAnythingLLM 提供兩種與您的資料互動的方式：\n\n<i>查詢：</i> 您的對話將會根據工作區中可存取的文件內容，傳回資料或推論。新增更多文件到工作區會讓它變得更聰明！\n\n<i>對話：</i> 您的文件加上持續進行中的對話紀錄，兩者會同時貢獻給 LLM 的知識庫。這非常適合用於附加即時的文字資訊，或是修正 LLM 可能產生的誤解。\n\n您可以在<i>對話過程中</i>隨時切換這兩種模式！",
     user3: "哇，這聽起來很棒，讓我馬上試試看！",
@@ -89,6 +103,8 @@ const TRANSLATIONS = {
   "new-workspace": {
     title: "新增工作區",
     placeholder: "我的工作區",
+    error: "錯誤: {{error}}",
+    save: "存檔",
   },
 
   // 工作區設定選單項目
@@ -98,6 +114,516 @@ const TRANSLATIONS = {
     vector: "向量資料庫",
     members: "成員管理",
     agent: "智慧代理人設定",
+  },
+
+  // 管理工作區
+  "manageWorkspace": {
+    "editing": "編輯",
+    "mobileWarning": "僅可在桌面設備上編輯這些設定。請在桌面設備上訪問此頁面以繼續。",
+    "dismiss": "關閉",
+    "documents": "文件",
+    "dataConnectors": "資料連接器"
+  },
+
+  // 文件設定
+  "documentSettings": {
+    "updatingWorkspace": "正在更新工作區...",
+    "updatingWorkspaceInfo": "對於大型文件可能需要一些時間",
+    "workspaceUpdated": "工作區更新成功。",
+    "workspaceUpdateError": "工作區更新失敗：{{error}}",
+    "moveSelectedItems": "移動選擇的項目",
+    "costEstimationInfo": "基於選擇的項目進行成本估算",
+    "openaiCostPerToken": "OpenAI 每個 Token 的成本：{{cost}}",
+    "highlightWorkspace": "強調顯示工作區",
+    "saveChanges": "儲存變更"
+  },
+
+  // 復原碼
+  "recoveryCodes": {
+    "title": "復原碼",
+    "description": "為了在未來重設您的密碼，您需要這些復原碼。下載或複製復原碼以進行保存。",
+    "warning": "這些復原碼只會顯示一次！",
+    "copySuccessMessage": "復原碼已複製到剪貼簿",
+    "fileName": "recovery_codes.txt",
+    "downloadButton": "下載",
+    "closeButton": "關閉"
+  },
+
+  // 資料連接器
+  "dataConnectors": {
+    "searchPlaceholder": "搜尋資料連接器",
+    "noResults": "未找到資料連接器。",
+    "github": {
+      "name": "GitHub 儲存庫",
+      "description": "一鍵匯入整個公開或私人的 GitHub 儲存庫。",
+      "repoLabel": "GitHub 儲存庫 URL",
+      "repoDescription": "您希望收集的 GitHub 儲存庫 URL。",
+      "repoPlaceholder": "https://github.com/username/repository",
+      "tokenLabel": "GitHub Access Token",
+      "tokenOptional": "可選",
+      "tokenDescription": "Access Token可避免速率限制。",
+      "tokenPlaceholder": "github_pat_1234_abcdefg",
+      "ignoreLabel": "忽略的文件",
+      "ignoreDescription": "以 .gitignore 格式列出在收集中需要忽略的特定文件。按 Enter 儲存每個條目。",
+      "ignorePlaceholder": "!*.js, images/*, .DS_Store, bin/*",
+      "branchLabel": "分支",
+      "branchDescription": "您希望收集文件的分支。",
+      "branchLoading": "-- 載入可用分支 --",
+      "loadingButton": "正在收集文件...",
+      "submitButton": "提交",
+      "loadingHint": "完成後，所有文件都將可嵌入到文件選擇器的工作區中。",
+      "patAlert": "如果不填寫 GitHub Access Token，則此資料連接器只能收集頂層文件，因為 GitHub API 的速率限制。點擊此處獲取免費的個人Access Token。",
+      "patTooltip": "如果沒有個人Access Token，GitHub API 可能會限制可收集的文件數量。建議創建臨時Access Token以避免此問題。",
+      "toastFetchingFiles": "正在為儲存庫提取所有文件 - 這可能需要一些時間。",
+      "toastFilesCollected": "{{files}} 個 {{filePlural}} 從 {{author}}/{{repo}}:{{branch}} 收集完成。輸出資料夾為 {{destination}}。"
+    },
+    "gitlab": {
+      "name": "GitLab 儲存庫",
+      "description": "一鍵匯入整個公開或私人的 GitLab 儲存庫。",
+      "repoLabel": "GitLab 儲存庫 URL",
+      "repoDescription": "您希望收集的 GitLab 儲存庫 URL。",
+      "repoPlaceholder": "https://gitlab.com/gitlab-org/gitlab",
+      "accessTokenLabel": "GitLab Access Token",
+      "optional": "可選",
+      "accessTokenDescription": "Access Token可避免速率限制。",
+      "accessTokenPlaceholder": "glpat-XXXXXXXXXXXXXXXXXXXX",
+      "fileIgnoresLabel": "忽略的文件",
+      "fileIgnoresDescription": "以 .gitignore 格式列出在收集中需要忽略的特定文件。按 Enter 儲存每個條目。",
+      "fileIgnoresPlaceholder": "!*.js, images/*, .DS_Store, bin/*",
+      "toastFetching": "正在為儲存庫提取所有文件 - 這可能需要一些時間。",
+      "toastSuccess": "{{files}} 個 {{fileLabel}} 從 {{author}}/{{repo}}:{{branch}} 收集完成。輸出資料夾為 {{destination}}。",
+      "submit": "提交",
+      "submitLoading": "正在收集文件...",
+      "submitDescription": "完成後，所有文件都將可嵌入到文件選擇器的工作區中。",
+      "branchLabel": "分支",
+      "branchDescription": "您希望收集文件的分支。",
+      "branchLoading": "-- 載入可用分支 --",
+      "patAlertMessage": "如果不填寫 GitLab Access Token，則此資料連接器只能收集頂層文件，因為 GitLab API 的速率限制。",
+      "patAlertLinkText": "點擊此處獲取免費的個人Access Token。",
+      "patTooltipMessage": "如果沒有個人Access Token，GitLab API 可能會限制可收集的文件數量。",
+      "patTooltipLinkText": "創建臨時Access Token",
+      "patTooltipMessageSuffix": "以避免此問題。",
+      "settingsLabel": "設定",
+      "settingsDescription": "選擇要從 GitLab API 中提取的其他實體。",
+      "fetchIssuesLabel": "將問題作為文件提取"
+    },
+    "youtubeTranscript": {
+      "name": "YouTube 逐字稿",
+      "description": "匯入整個 YouTube 影片的逐字稿。",
+      "toastFetching": "正在為 YouTube 影片提取逐字稿。",
+      "toastSuccess": "{{title}} 由 {{author}} 的逐字稿完成。輸出資料夾為 {{destination}}。",
+      "formLabel": "YouTube 影片 URL",
+      "formDescription": "您希望提取逐字稿的 YouTube 影片 URL。",
+      "formPlaceholder": "https://youtube.com/watch?v=abc123",
+      "formSubmitButton": "收集逐字稿",
+      "formLoading": "正在收集逐字稿...",
+      "formLoadingHint": "完成後，逐字稿將可嵌入到文件選擇器的工作區中。"
+    },
+    "websiteDepth": {
+      "name": "批量連結抓取器",
+      "description": "抓取網站及其子連結至一定深度。",
+      "scrapingInfo": "正在抓取網站 - 這可能需要一些時間。",
+      "scrapingSuccess": "成功抓取了 {{count}} 個 {{pages}}！",
+      "scrapingButtonSubmit": "提交",
+      "scrapingButtonLoading": "正在抓取網站...",
+      "scrapingNote": "完成後，所有抓取的頁面將可嵌入到文件選擇器的工作區中。",
+      "urlLabel": "網站 URL",
+      "urlDescription": "您希望抓取的網站 URL。",
+      "urlPlaceholder": "https://example.com",
+      "depthLabel": "深度",
+      "depthDescription": "工作者應從起始 URL 跟隨的子連結層數。",
+      "maxLinksLabel": "最大連結數",
+      "maxLinksDescription": "要抓取的最大連結數。",
+      "page": "頁面"
+    },
+    "confluence": {
+      "name": "Confluence",
+      "description": "一鍵匯入整個 Confluence 頁面。",
+      "toastFetchingPages": "正在為 Confluence 空間提取所有頁面 - 這可能需要一些時間。",
+      "toastPagesCollected": "已從 Confluence 空間 {{spaceKey}} 中收集頁面。輸出資料夾為 {{destination}}。",
+      "deploymentType": "Confluence 部署類型",
+      "deploymentTypeDescription": "確定您的 Confluence 實例是託管於 Atlassian 雲端還是自託管。",
+      "atlassianCloud": "Atlassian 雲端",
+      "selfHosted": "自託管",
+      "baseUrl": "Confluence 基本 URL",
+      "baseUrlDescription": "這是您的 Confluence 空間的基本 URL。",
+      "baseUrlPlaceholder": "例如：https://example.atlassian.net, http://localhost:8211 等",
+      "spaceKey": "Confluence 空間鍵值",
+      "spaceKeyDescription": "這是您的 Confluence 實例的空間鍵值。通常以 ~ 開頭。",
+      "spaceKeyPlaceholder": "例如：~7120208c08555d52224113949698b933a3bb56",
+      "username": "Confluence 使用者名稱",
+      "usernameDescription": "您的 Confluence 使用者名稱。",
+      "usernamePlaceholder": "jdoe@example.com",
+      "accessToken": "Confluence Access Token",
+      "accessTokenTooltip": "您需要提供Access Token以進行驗證。",
+      "accessTokenLinkText": "點擊此處",
+      "accessTokenDescription": "驗證所需的Access Token。",
+      "accessTokenPlaceholder": "abcd1234",
+      "submit": "提交",
+      "collectingPages": "正在收集頁面...",
+      "loadingMessage": "完成後，所有頁面都將可嵌入到文件選擇器的工作區中。"
+    }
+  },
+
+  "contextMenu": {
+    "selectAll": "全選",
+    "unselectAll": "取消全選",
+    "cancel": "取消"
+  },
+
+  "fileRow": {
+    "cached": "已快取"
+  },
+
+  "newFolderModal": {
+    "title": "建立新資料夾",
+    "folderNameLabel": "資料夾名稱",
+    "placeholder": "輸入資料夾名稱",
+    "error": "建立資料夾失敗",
+    "cancel": "取消",
+    "create": "建立資料夾"
+  },
+
+  "directory": {
+    "myDocuments": "我的文件",
+    "searchPlaceholder": "搜尋文件",
+    "newFolder": "新資料夾",
+    "name": "名稱",
+    "noDocuments": "沒有文件",
+    "deleteConfirmation": "您確定要刪除這些文件和資料夾嗎？\n這將從系統中移除文件，並自動將其從任何現有的工作區中移除。\n此操作無法撤銷。",
+    "removingDocuments": "正在移除 {{toRemove}} 個文件及 {{foldersToRemove}} 個資料夾。請稍候。",
+    "movingDocuments": "正在移動 {{count}} 個文件。請稍候。",
+    "moveToWorkspace": "移動到工作區",
+    "errorMovingFiles": "移動文件時發生錯誤：{{message}}",
+    "successfullyMoved": "成功移動了 {{count}} 個文件。",
+    "searching": "正在搜尋...",
+    "remove": "移除",
+    "uploading": "正在上傳..."
+  },
+
+  // 文件上傳
+  "uploadFile": {
+    "documentProcessorUnavailable": "文件處理器不可用",
+    "uploadUnavailableMessage": "我們現在無法上傳您的文件，因為文件處理器已離線。請稍後再試。",
+    "clickToUpload": "點擊上傳或拖放文件",
+    "supportMessage": "支持文本文件、CSV、試算表、錄音檔文件等！",
+    "submitLink": "或提交一個連結",
+    "placeholderUrl": "https://example.com",
+    "fetchWebsite": "抓取網站",
+    "fetching": "正在抓取...",
+    "disclaimer": "這些文件將上傳至此 AnythingLLM 實例中的文件處理器。這些文件不會發送或共享至第三方。",
+    "scrapingLink": "正在抓取連結...",
+    "uploadLinkSuccess": "連結上傳成功",
+    "uploadLinkError": "上傳連結時出現錯誤：{{error}}",
+    "uploading": "正在上傳文件..."
+  },
+
+  // 工作區目錄
+  "workspaceDirectory": {
+    "name": "工作區名稱",
+    "nameColumn": "名稱",
+    "loadingMessage": "正在載入選擇的文件...",
+    "noDocuments": "沒有文件",
+    "estimatedCost": "預估成本：{{cost}}",
+    "oneTimeCost": "*嵌入的單次成本",
+    "saveAndEmbed": "儲存並嵌入",
+    "selectAll": "全選",
+    "deselectAll": "取消全選",
+    "removeSelected": "移除選擇的項目",
+    "date": "日期：",
+    "type": "類型：",
+
+    "alerts": {
+      "pinningTitle": "什麼是文件釘選？",
+      "pinningDescription1": "當您在 AnythingLLM 中<b>釘選</b>一個文件時，我們將把該文件的完整內容加入到提示詞視窗中，以便 LLM 完全理解。",
+      "pinningDescription2": "這對於<b>大上下文模型</b>或對知識庫至關重要的小文件效果最好。",
+      "pinningDescription3": "如果默認情況下未能從 AnythingLLM 獲得理想的答案，釘選是一鍵獲得高質量答案的好方法。",
+      "watchingTitle": "監控文件是什麼作用？",
+      "watchingDescription1": "當您在 AnythingLLM 中<b>監控</b>一個文件時，我們將<i>自動</i>從原始來源定期同步文件內容。這將自動更新該文件所在的每個工作區中的內容。",
+      "watchingDescription2": "此功能目前支持基於線上的內容，對於手動上傳的文件將不可用。"
+    }
+  },
+
+  "workspaceFileRow": {
+    "removingFileMessage": "正在從工作區移除文件",
+    "removeFileError": "移除文件失敗",
+    "pinError": "文件 {action} 失敗。",
+    "pinSuccess": "文件已 {action} 工作區。",
+    "pinErrorMessage": "釘選文件失敗：{error}",
+    "pinTooltip": "釘選到工作區",
+    "unpinTooltip": "從工作區取消釘選",
+    "watchError": "文件 {action} 失敗。",
+    "watchSuccess": "文件已 {action}。",
+    "watchErrorMessage": "監控文件失敗：{error}",
+    "watchTooltip": "監控文件變更",
+    "unwatchTooltip": "停止監控變更",
+    "removeTooltip": "從工作區移除文件",
+    "removingFileMessage": "從工作區移除文件",
+    "nameColumn": "名稱",
+    "noDocuments": "沒有文件"
+  },
+
+  // 訊息主題容器
+  "threads": {
+    "loading": "正在載入訊息主題...",
+    "listAriaLabel": "訊息主題",
+    "defaultThreadName": "預設",
+    "startingThread": "正在開始新的主題...",
+    "newThread": "新主題",
+    "deleteSelected": "刪除選擇的項目",
+    "newThreadError": "無法建立主題 - {{error}}",
+    "deleted": "已刪除主題",
+    "rename": "重新命名",
+    "delete": "刪除主題",
+    "options": "主題選項",
+    "renamePrompt": "您希望將此主題重新命名為什麼？",
+    "renameError": "無法更新主題！{{message}}",
+    "deleteConfirm": "您確定要刪除此主題嗎？它的所有聊天內容將被刪除，無法復原。",
+    "deleteError": "無法刪除主題！",
+    "deleteSuccess": "主題刪除成功！"
+  },
+
+  // 語音識別
+  "browserNativeSTT": {
+    "noConfigurationNeeded": "此提供者不需要任何配置。"
+  },
+
+  // 語音合成
+  "browserNativeTTS": {
+    "noConfigurationNeeded": "此提供者不需要任何配置。"
+  },
+
+  "elevenLabsTTS": {
+    "apiKeyLabel": "API 金鑰",
+    "apiKeyPlaceholder": "ElevenLabs API 金鑰",
+    "modelSelectionLabel": "聊天模型選擇",
+    "loadingModels": "-- 正在載入可用模型 --"
+  },
+
+  "openAiGenericTTS": {
+    "baseUrlLabel": "基本 URL",
+    "baseUrlPlaceholder": "http://localhost:7851/v1",
+    "baseUrlDescription": "這應是您將從中生成 TTS 音訊回應的 OpenAI 相容 TTS 服務的基本 URL。",
+    "apiKeyLabel": "API 金鑰",
+    "apiKeyPlaceholder": "API 金鑰",
+    "apiKeyDescription": "某些 TTS 服務需要 API 金鑰來生成 TTS 回應 - 如果您的服務不需要，可以不填。",
+    "voiceModelLabel": "語音模型",
+    "voiceModelPlaceholder": "您的語音模型識別碼",
+    "voiceModelDescription": "大多數 TTS 服務將有多個語音模型可用，這是您要使用的語音模型識別碼。"
+  },
+
+  "openAiTTS": {
+    "apiKeyLabel": "API 金鑰",
+    "apiKeyPlaceholder": "OpenAI API 金鑰",
+    "voiceModelLabel": "語音模型"
+  },
+
+  "piperTTS": {
+    "description": "所有 PiperTTS 模型將在您的瀏覽器中本地運行。這可能會對低端設備造成較大的資源佔用。",
+    "voiceSelection": "語音模型選擇",
+    "loadingModels": "-- 正在載入可用模型 --",
+    "fetchError": "無法從網頁工作者獲取語音。",
+    "flushSuccess": "所有語音已從瀏覽器存儲中清除",
+    "storedModelInfo": "'✔' 表示此模型已本地存儲，無需在運行時下載。",
+    "flushCache": "清除語音快取",
+    "demoMessage": "您好，歡迎使用 AnythingLLM！",
+    "stopDemo": "停止示範",
+    "loadingVoice": "正在載入語音",
+    "playSample": "播放樣本"
+  },
+
+  // 逐字稿選項
+  "nativeTranscription": {
+    "selection": "選擇 Whisper 模型",
+    "warn": {
+      "start": "此模型已針對本地使用進行優化。",
+      "recommend": "我們建議將此模型用於小型任務。",
+      "end": "預期記憶體使用量：{{size}}"
+    }
+  },
+
+  "openAiWhisperOptions": {
+    "apiKeyLabel": "API 金鑰",
+    "apiKeyPlaceholder": "OpenAI API 金鑰",
+    "whisperModelLabel": "Whisper 模型",
+    "whisperModelOption": "Whisper Large"
+  },
+
+  // 使用者選單
+  "accountModal": {
+    "title": "編輯帳戶",
+    "pfp": {
+      "label": "個人頭像",
+      "dimensions": "800 x 800",
+      "remove": "移除個人頭像",
+      "altText": "使用者個人頭像"
+    },
+    "form": {
+      "username": {
+        "label": "使用者名稱",
+        "placeholder": "使用者的名稱",
+        "helperText": "使用者名稱只能包含小寫字母、數字、底線和連字號，不允許空格"
+      },
+      "password": {
+        "label": "新密碼",
+        "placeholder": "{{username}} 的新密碼",
+        "helperText": "密碼必須至少包含 8 個字元"
+      }
+    },
+    "buttons": {
+      "cancel": "取消",
+      "update": "更新帳戶"
+    },
+    "errors": {
+      "uploadPfp": "上傳個人頭像失敗：{{error}}",
+      "removePfp": "移除個人頭像失敗：{{error}}",
+      "updateProfile": "更新使用者失敗：{{error}}"
+    },
+    "success": {
+      "uploadPfp": "個人頭像上傳成功。",
+      "removePfp": "個人頭像移除成功。",
+      "updateProfile": "使用者資料更新成功。"
+    },
+    "languagePreference": {
+      "label": "偏好語言"
+    },
+    "themePreference": {
+      "label": "主題偏好"
+    }
+  },
+
+  "userButton": {
+    "account": "帳戶",
+    "support": "支援",
+    "signOut": "登出",
+    "profilePictureAlt": "使用者個人頭像",
+    "defaultUsername": "AA"
+  },
+
+  // 工作區聊天
+  "workspaceChat": {
+    "workspaceNotFound": "找不到工作區！",
+    "workspaceUnavailable": "似乎無法使用此名稱的工作區。",
+    "goToHomepage": "返回首頁",
+    "copied": "已複製！"
+  },
+
+  // Chartable
+  chartable: {
+    unsupported: "不支援的圖表類型。",
+  },
+
+  // 引用
+  "citations": {
+    "show": "顯示引用",
+    "hide": "隱藏引用",
+    "referenced": "被引用 {{count}} 次。",
+    "similarityTooltip": "這是此段文字與您查詢之間的語義相似度分數，由向量數據庫計算。",
+    "match": "匹配"
+  },
+
+  // 歷史訊息
+  "historicalMessage": {
+    "errorMessage": "無法回應訊息。",
+    "workspaceProfileImage": "工作區個人頭像",
+    "attachmentImageAlt": "附件圖片：{{name}}"
+  },
+
+  // 提示回覆
+  "promptReply": {
+    "loading": "正在載入...",
+    "errorIcon": "錯誤圖標",
+    "errorMessage": "無法回應訊息。",
+    "errorReason": "原因：{{reason}}",
+    "unknownReason": "未知",
+    "response": "助手回應"
+  },
+
+  "workspaceProfileImage": {
+    "alt": "工作區個人頭像"
+  },
+
+  // 聊天歷史
+  "chatHistory": {
+    "welcomeMessage": "歡迎來到您的新工作區。",
+    "getStartedUpload": "要開始，請",
+    "uploadDocument": "上傳文件",
+    "orSendChat": "或發送聊天訊息。",
+    "getStartedSendChat": "要開始，請發送聊天訊息。",
+    "statusResponse": "{{content}}"
+  },
+
+  // 拖放上傳
+  "dndUploader": {
+    "addAnything": "添加任何內容",
+    "dropFile": "將您的文件拖放至此處以自動嵌入到工作區中。"
+  },
+
+  // 附件
+  "attachment": {
+    "uploading": "正在上傳大小為 {{size}} 的文件...",
+    "failed": "{{error}}。此文件上傳失敗，將無法在工作區中使用。",
+    "defaultError": "發生錯誤",
+    "attached": "{{name}} 將附加至此提示。它將不會被永久嵌入。",
+    "imageAttached": "圖片已附加！",
+    "embedded": "{{name}} 已上傳並嵌入到此工作區中。它現在可以用於 RAG 聊天。",
+    "fileEmbedded": "文件嵌入成功！"
+  },
+
+  // 重置指令
+  "resetCommand": {
+    "command": "/reset",
+    "description": "清除您的聊天記錄並開始新的聊天"
+  },
+
+  // 退出指令
+  "agentSession": {
+    "exitCommand": "/exit",
+    "exitDescription": "停止當前的代理會話。"
+  },
+
+  // 快捷指令預設
+  "slashPresets": {
+    "toastError": "處理預設時發生錯誤。",
+    "addNewPreset": "新增預設"
+  },
+
+  // 編輯預設
+  "editPreset": {
+    "title": "編輯預設",
+    "commandLabel": "指令",
+    "commandPlaceholder": "您的指令",
+    "promptLabel": "提示",
+    "promptPlaceholder": "這是一個測試提示。請回應一首關於 LLM 的詩。",
+    "descriptionLabel": "描述",
+    "descriptionPlaceholder": "回應一首關於 LLM 的詩。",
+    "confirmDelete": "您確定要刪除此預設嗎？",
+    "deleteButton": "刪除預設",
+    "deleting": "正在刪除...",
+    "cancelButton": "取消",
+    "saveButton": "儲存"
+  },
+
+  // 字體大小
+  "textSize": {
+    "tooltip": "更改文字大小",
+    "ariaLabel": "更改文字大小",
+    "small": "小",
+    "normal": "正常",
+    "large": "大"
+  },
+
+  // 新增預設
+  "addPresetModal": {
+    "title": "新增預設",
+    "commandLabel": "指令",
+    "commandPlaceholder": "您的指令",
+    "promptLabel": "提示",
+    "promptPlaceholder": "這是將被注入到提示前的內容。",
+    "descriptionLabel": "描述",
+    "descriptionPlaceholder": "回應一首關於 LLM 的詩。",
+    "cancelButton": "取消",
+    "saveButton": "儲存"
   },
 
   // 一般外觀
@@ -111,7 +637,8 @@ const TRANSLATIONS = {
     },
     message: {
       title: "建議對話訊息",
-      description: "自訂要建議給工作區使用者的訊息。",
+      description: 
+        "自訂要建議給工作區使用者的訊息。",
       add: "新增訊息",
       save: "儲存訊息",
       heading: "請向我說明",
@@ -119,19 +646,29 @@ const TRANSLATIONS = {
     },
     pfp: {
       title: "助理個人檔案圖片",
-      description: "自訂此工作區助理的個人檔案圖片。",
+      description: 
+        "自訂此工作區助理的個人檔案圖片。",
       image: "工作區圖片",
       remove: "移除工作區圖片",
     },
     delete: {
       title: "刪除工作區",
-      description: "刪除此工作區及其所有資料。這將會為所有使用者刪除該工作區。",
+      description: 
+        "刪除此工作區及其所有資料。這將會為所有使用者刪除該工作區。",
       delete: "刪除工作區",
       deleting: "正在刪除工作區...",
       "confirm-start": "您即將刪除整個",
       "confirm-end":
         "工作區。這將會移除向量資料庫中的所有向量嵌入。\n\n原始檔案將保持不變。此動作無法復原。",
     },
+  },
+
+  // 更改警告
+  "changeWarning": {
+    "title": "警告",
+    "confirmMessage": "您確定要繼續嗎？",
+    "cancel": "取消",
+    "confirm": "確認"
   },
 
   // 對話設定
@@ -165,9 +702,11 @@ const TRANSLATIONS = {
     },
     history: {
       title: "對話紀錄",
-      "desc-start": "先前對話訊息數量，將會包含在回應的短期記憶體中。",
+      "desc-start": 
+        "先前對話訊息數量，將會包含在回應的短期記憶體中。",
       recommend: "建議 20。",
-      "desc-end": "根據訊息大小，任何超過 45 的數值都可能會導致對話持續失敗。",
+      "desc-end": 
+        "根據訊息大小，任何超過 45 的數值都可能會導致對話持續失敗。",
     },
     prompt: {
       title: "提示詞",
@@ -178,11 +717,13 @@ const TRANSLATIONS = {
       title: "查詢模式拒絕回應",
       "desc-start": "在",
       query: "查詢",
-      "desc-end": "模式下，當找不到內容時，您可能需要傳回自訂的拒絕回應。",
+      "desc-end": 
+        "模式下，當找不到內容時，您可能需要傳回自訂的拒絕回應。",
     },
     temperature: {
       title: "LLM 溫度值",
-      "desc-start": "此設定控制 LLM 回應的「創意度」。",
+      "desc-start": 
+        "此設定控制 LLM 回應的「創意度」。",
       "desc-end":
         "數值越高，創意度越高。對於某些模型，設定過高可能會導致不連貫的回應。",
       hint: "大多數 LLM 都有各種可接受的有效值範圍。請查詢您的 LLM 提供者以取得該資訊。",
@@ -223,15 +764,18 @@ const TRANSLATIONS = {
       "不直接支援工具呼叫的 LLM 的效能，高度取決於模型的功能和精確度。某些功能可能受限或無法使用。",
     provider: {
       title: "工作區智慧代理人 LLM 提供者",
-      description: "此工作區 @agent 智慧代理人將使用的特定 LLM 提供者與模型。",
+      description:
+        "此工作區 @agent 智慧代理人將使用的特定 LLM 提供者與模型。",
     },
     mode: {
       chat: {
         title: "工作區智慧代理人對話模型",
-        description: "此工作區 @agent 智慧代理人將使用的特定對話模型。",
+        description:
+          "此工作區 @agent 智慧代理人將使用的特定對話模型。",
       },
       title: "工作區智慧代理人模型",
-      description: "此工作區 @agent 智慧代理人將使用的特定 LLM 模型。",
+      description:
+        "此工作區 @agent 智慧代理人將使用的特定 LLM 模型。",
       wait: "-- 等待模型中 --",
     },
 
@@ -246,11 +790,13 @@ const TRANSLATIONS = {
       },
       view: {
         title: "檢視與摘要文件",
-        description: "允許智慧代理人列出並摘要目前已嵌入的工作區檔案內容。",
+        description:
+          "允許智慧代理人列出並摘要目前已嵌入的工作區檔案內容。",
       },
       scrape: {
         title: "擷取網站",
-        description: "允許智慧代理人瀏覽並擷取網站內容。",
+        description:
+          "允許智慧代理人瀏覽並擷取網站內容。",
       },
       generate: {
         title: "產生圖表",
@@ -275,7 +821,8 @@ const TRANSLATIONS = {
   // 工作區對話紀錄
   recorded: {
     title: "工作區對話紀錄",
-    description: "這些是所有已記錄的對話和訊息，依建立日期排序。",
+    description:
+      "這些是所有已記錄的對話和訊息，依建立日期排序。",
     export: "匯出",
     table: {
       id: "編號",
@@ -346,8 +893,10 @@ const TRANSLATIONS = {
     provider: "語音轉錄提供者",
     "warn-start":
       "在記憶體或處理器資源有限的電腦上使用本機 Whisper 模型，處理媒體檔案時可能會造成 AnythingLLM 停頓。",
-    "warn-recommend": "我們建議至少 2GB 的記憶體，並且上傳小於 10MB 的檔案。",
-    "warn-end": "內建模型將會在第一次使用時自動下載。",
+    "warn-recommend":
+      "我們建議至少 2GB 的記憶體，並且上傳小於 10MB 的檔案。",
+    "warn-end":
+      "內建模型將會在第一次使用時自動下載。",
   },
 
   embedding: {

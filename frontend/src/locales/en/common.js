@@ -262,7 +262,6 @@ const TRANSLATIONS = {
       submit: "Submit",
       collectingPages: "Collecting pages...",
       loadingMessage: "Once complete, all pages will be available for embedding into workspaces."
-
     }
   },
 
@@ -343,7 +342,6 @@ const TRANSLATIONS = {
       "watchingDescription1": "When you <b>watch</b> a document in AnythingLLM we will <i>automatically</i> sync your document content from its original source on regular intervals. This will automatically update the content in every workspace where this file is managed.",
       "watchingDescription2": "This feature currently supports online-based content and will not be available for manually uploaded documents."
     },
-
   },
 
   workspaceFileRow: {
@@ -540,6 +538,7 @@ const TRANSLATIONS = {
     unknownReason: "unknown",
     response: "Response from assistant"
   },
+  
   workspaceProfileImage: {
     alt: "Workspace profile picture"
   },
