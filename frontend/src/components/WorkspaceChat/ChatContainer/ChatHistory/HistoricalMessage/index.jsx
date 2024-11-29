@@ -10,6 +10,7 @@ import createDOMPurify from "dompurify";
 import { EditMessageForm, useEditMessage } from "./Actions/EditMessage";
 import { useWatchDeleteMessage } from "./Actions/DeleteMessage";
 import TTSMessage from "./Actions/TTSButton";
+import { useTranslation } from "react-i18next";
 
 const DOMPurify = createDOMPurify(window);
 const HistoricalMessage = ({
@@ -27,6 +28,7 @@ const HistoricalMessage = ({
   saveEditedMessage,
   forkThread,
 }) => {
+  const { t } = useTranslation();
   const { isEditing } = useEditMessage({ chatId, role });
   const { isDeleted, completeDelete, onEndAnimation } = useWatchDeleteMessage({
     chatId,
@@ -49,8 +51,8 @@ const HistoricalMessage = ({
             <ProfileImage role={role} workspace={workspace} />
             <div className="p-2 rounded-lg bg-red-50 text-red-500">
               <span className="inline-block">
-                <Warning className="h-4 w-4 mb-1 inline-block" /> Could not
-                respond to message.
+                <Warning className="h-4 w-4 mb-1 inline-block" />{" "}
+                {t("historicalMessage.errorMessage")}
               </span>
               <p className="text-xs font-mono mt-2 border-l-2 border-red-300 pl-2 bg-red-200 p-2 rounded-sm">
                 {error}
@@ -126,12 +128,13 @@ const HistoricalMessage = ({
 };
 
 function ProfileImage({ role, workspace }) {
+  const { t } = useTranslation();
   if (role === "assistant" && workspace.pfpUrl) {
     return (
       <div className="relative w-[35px] h-[35px] rounded-full flex-shrink-0 overflow-hidden">
         <img
           src={workspace.pfpUrl}
-          alt="Workspace profile picture"
+          alt={t("historicalMessage.workspaceProfileImage")}
           className="absolute top-0 left-0 w-full h-full object-cover rounded-full bg-white"
         />
       </div>
@@ -164,6 +167,7 @@ export default memo(
 );
 
 function ChatAttachments({ attachments = [] }) {
+  const { t } = useTranslation();
   if (!attachments.length) return null;
   return (
     <div className="flex flex-wrap gap-2">
@@ -171,6 +175,7 @@ function ChatAttachments({ attachments = [] }) {
         <img
           key={item.name}
           src={item.contentString}
+          alt={t("historicalMessage.attachmentImageAlt", { name: item.name })}
           className="max-w-[300px] rounded-md"
         />
       ))}

@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 import paths from "@/utils/paths";
 import Appearance from "@/models/appearance";
 import useTextSize from "@/hooks/useTextSize";
+import { useTranslation } from "react-i18next";
 
 export default function ChatHistory({
   history = [],
@@ -21,6 +22,7 @@ export default function ChatHistory({
   regenerateAssistantMessage,
   hasAttachments = false,
 }) {
+  const { t } = useTranslation();
   const lastScrollTopRef = useRef(0);
   const { user } = useUser();
   const { threadSlug = null } = useParams();
@@ -141,22 +143,22 @@ export default function ChatHistory({
       <div className="flex flex-col h-full md:mt-0 pb-44 md:pb-40 w-full justify-end items-center">
         <div className="flex flex-col items-center md:items-start md:max-w-[600px] w-full px-4">
           <p className="text-white/60 text-lg font-base py-4">
-            Welcome to your new workspace.
+            {t("chatHistory.welcomeMessage")}
           </p>
           {!user || user.role !== "default" ? (
             <p className="w-full items-center text-white/60 text-lg font-base flex flex-col md:flex-row gap-x-1">
-              To get started either{" "}
+              {t("chatHistory.getStartedUpload")}{" "}
               <span
                 className="underline font-medium cursor-pointer"
                 onClick={showModal}
               >
-                upload a document
-              </span>
-              or <b className="font-medium italic">send a chat.</b>
+                {t("chatHistory.uploadDocument")}
+              </span>{" "}
+              {t("chatHistory.orSendChat")}
             </p>
           ) : (
             <p className="w-full items-center text-white/60 text-lg font-base flex flex-col md:flex-row gap-x-1">
-              To get started <b className="font-medium italic">send a chat.</b>
+              {t("chatHistory.getStartedSendChat")}
             </p>
           )}
           <WorkspaceChatSuggestions
@@ -253,6 +255,7 @@ export default function ChatHistory({
 }
 
 function StatusResponse({ props }) {
+  const { t } = useTranslation();
   return (
     <div className="flex justify-center items-end w-full">
       <div className="py-2 px-4 w-full flex gap-x-5 md:max-w-[80%] flex-col">
@@ -260,7 +263,7 @@ function StatusResponse({ props }) {
           <span
             className={`text-xs inline-block p-2 rounded-lg text-white/60 font-mono whitespace-pre-line`}
           >
-            {props.content}
+            {t("chatHistory.statusResponse", { content: props.content })}
           </span>
         </div>
       </div>

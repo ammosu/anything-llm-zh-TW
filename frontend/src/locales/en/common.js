@@ -524,6 +524,36 @@ const TRANSLATIONS = {
     match: "match"
   },
 
+  // Historical Message
+  historicalMessage: {
+    errorMessage: "Could not respond to message.",
+    workspaceProfileImage: "Workspace profile picture",
+    attachmentImageAlt: "Attachment image: {{name}}"
+  },
+
+  // Prompt
+  promptReply: {
+    loading: "Loading...",
+    errorIcon: "Error icon",
+    errorMessage: "Could not respond to message.",
+    errorReason: "Reason: {{reason}}",
+    unknownReason: "unknown",
+    response: "Response from assistant"
+  },
+  workspaceProfileImage: {
+    alt: "Workspace profile picture"
+  },
+  
+  // Chat History
+  chatHistory: {
+    welcomeMessage: "Welcome to your new workspace.",
+    getStartedUpload: "To get started either",
+    uploadDocument: "upload a document",
+    orSendChat: "or send a chat.",
+    getStartedSendChat: "To get started send a chat.",
+    statusResponse: "{{content}}"
+  },
+
   // General Appearance
   general: {
     vector: {
