@@ -451,6 +451,57 @@ const TRANSLATIONS = {
     whisperModelOption: "Whisper Large"
   },
 
+  // User Menu
+  accountModal: {
+    title: "Edit Account",
+    pfp: {
+      "label": "Profile Picture",
+      "dimensions": "800 x 800",
+      "remove": "Remove Profile Picture",
+      "altText": "User profile picture"
+    },
+    form: {
+      "username": {
+        "label": "Username",
+        "placeholder": "User's username",
+        "helperText": "Username must only contain lowercase letters, numbers, underscores, and hyphens with no spaces"
+      },
+      "password": {
+        "label": "New Password",
+        "placeholder": "{{username}}'s new password",
+        "helperText": "Password must be at least 8 characters long"
+      }
+    },
+    buttons: {
+      "cancel": "Cancel",
+      "update": "Update Account"
+    },
+    errors: {
+      "uploadPfp": "Failed to upload profile picture: {{error}}",
+      "removePfp": "Failed to remove profile picture: {{error}}",
+      "updateProfile": "Failed to update user: {{error}}"
+    },
+    success: {
+      "uploadPfp": "Profile picture uploaded.",
+      "removePfp": "Profile picture removed.",
+      "updateProfile": "Profile updated."
+    },
+    languagePreference: {
+      "label": "Preferred Language"
+    },
+    themePreference: {
+      "label": "Theme Preference"
+    }
+  },
+  
+  userButton: {
+    account: "Account",
+    support: "Support",
+    signOut: "Sign out",
+    profilePictureAlt: "User profile picture",
+    defaultUsername: "AA"
+  },
+
   // General Appearance
   general: {
     vector: {
