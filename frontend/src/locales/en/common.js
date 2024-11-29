@@ -668,7 +668,128 @@ const TRANSLATIONS = {
     "confirmation": "Delete {{database_id}} from the list of available SQL connections? This cannot be undone.",
     "logoAlt": "{{engine}} logo",
   },
+
+  // agent web search
+  "agentWebSearch": {
+    "title": "Live web search and browsing",
+    "imageAlt": "Web Search",
+    "description": "Enable your agent to search the web to answer your questions by connecting to a web-search (SERP) provider. Web search during agent sessions will not work until this is set up.",
+    "searchPlaceholder": "Search available web-search providers"
+  },
+
+  "searchProviders": {
+    "none": {
+      "name": "Please make a selection",
+      "description": "Web search will be disabled until a provider and keys are provided."
+    },
+    "duckduckgo": {
+      "name": "DuckDuckGo",
+      "description": "Free and privacy-focused web search using DuckDuckGo's HTML interface."
+    },
+    "google": {
+      "name": "Google Search Engine",
+      "description": "Web search powered by a custom Google Search Engine. Free for 100 queries per day."
+    },
+    "searchApi": {
+      "name": "SearchApi",
+      "description": "SearchApi delivers structured data from multiple search engines. Free for 100 queries, but then paid."
+    },
+    "serper": {
+      "name": "Serper.dev",
+      "description": "Serper.dev web-search. Free account with 2,500 calls, but then paid."
+    },
+    "bing": {
+      "name": "Bing Search",
+      "description": "Web search powered by the Bing Search API. Free for 1000 queries per month."
+    },
+    "serply": {
+      "name": "Serply.io",
+      "description": "Serply.io web-search. Free account with 100 calls/month forever."
+    },
+    "searxng": {
+      "name": "SearXNG",
+      "description": "Free, open-source, internet meta-search engine with no tracking."
+    },
+    "tavily": {
+      "name": "Tavily Search",
+      "description": "Tavily Search API. Offers a free tier with 1000 queries per month."
+    }
+  },
+
+  agentWebSearchOptions: {
+    "googleSearch": {
+      "description": "You can get a free search engine & API key",
+      "linkText": "from Google here",
+      "engineIdLabel": "Search engine ID",
+      "engineIdPlaceholder": "Google Search Engine Id",
+      "apiKeyLabel": "Programmatic Access API Key",
+      "apiKeyPlaceholder": "Google Search Engine API Key"
+    },
+    "searchApi": {
+      "description": "You can get a free API key",
+      "linkText": "from SearchApi.",
+      "apiKeyLabel": "API Key",
+      "apiKeyPlaceholder": "SearchApi API Key",
+      "engineLabel": "Engine",
+      "engine": {
+        "googleSearch": "Google Search",
+        "googleMaps": "Google Maps",
+        "googleShopping": "Google Shopping",
+        "googleNews": "Google News",
+        "googleJobs": "Google Jobs",
+        "googleScholar": "Google Scholar",
+        "googleFinance": "Google Finance",
+        "googlePatents": "Google Patents",
+        "youtube": "YouTube",
+        "bing": "Bing",
+        "bingNews": "Bing News",
+        "amazonSearch": "Amazon Product Search",
+        "baidu": "Baidu"
+      }
+    },
+    "serper": {
+      "description": "You can get a free API key",
+      "linkText": "from Serper.dev.",
+      "apiKeyLabel": "API Key",
+      "apiKeyPlaceholder": "Serper.dev API Key"
+    },
+    "bing": {
+      "description": "You can get a Bing Web Search API subscription key",
+      "linkText": "from the Azure portal.",
+      "apiKeyLabel": "API Key",
+      "apiKeyPlaceholder": "Bing Web Search API Key",
+      "setupInstructions": "To set up a Bing Web Search API subscription:",
+      "step1": "Go to the Azure portal",
+      "step1Link": "https://portal.azure.com/",
+      "step2": "Create a new Azure account or sign in with an existing one.",
+      "step3": "Navigate to the 'Create a resource' section and search for 'Bing Search v7'.",
+      "step4": "Select the 'Bing Search v7' resource and create a new subscription.",
+      "step5": "Choose the pricing tier that suits your needs (free tier available).",
+      "step6": "Obtain the API key for your Bing Web Search subscription."
+    },
+    "serply": {
+      "description": "You can get a free API key",
+      "linkText": "from Serply.io.",
+      "apiKeyLabel": "API Key",
+      "apiKeyPlaceholder": "Serply API Key"
+    },
+    "searxng": {
+      "apiBaseUrlLabel": "SearXNG API base URL",
+      "apiBaseUrlPlaceholder": "SearXNG API Key"
+    },
+    "tavily": {
+      "description": "You can get an API key",
+      "linkText": "from Tavily.",
+      "apiKeyLabel": "API Key",
+      "apiKeyPlaceholder": "Tavily API Key"
+    },
+    "duckDuckGo": {
+      "readyToUse": "DuckDuckGo is ready to use without any additional configuration."
+    }
+  },
   
+  
+//////////////////////////////
 
   // ChangeWarning
   changeWarning: {
