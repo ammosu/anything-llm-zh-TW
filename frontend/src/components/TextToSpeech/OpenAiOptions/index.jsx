@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 function toProperCase(string) {
   return string.replace(/\w\S*/g, function (txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -5,19 +7,21 @@ function toProperCase(string) {
 }
 
 export default function OpenAiTextToSpeechOptions({ settings }) {
+  const { t } = useTranslation();
+
   const apiKey = settings?.TTSOpenAIKey;
 
   return (
     <div className="flex gap-x-4">
       <div className="flex flex-col w-60">
         <label className="text-white text-sm font-semibold block mb-3">
-          API Key
+          {t("openAiTTS.apiKeyLabel")}
         </label>
         <input
           type="password"
           name="TTSOpenAIKey"
           className="border-none bg-theme-settings-input-bg text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-          placeholder="OpenAI API Key"
+          placeholder={t("openAiTTS.apiKeyPlaceholder")}
           defaultValue={apiKey ? "*".repeat(20) : ""}
           required={true}
           autoComplete="off"
@@ -26,7 +30,7 @@ export default function OpenAiTextToSpeechOptions({ settings }) {
       </div>
       <div className="flex flex-col w-60">
         <label className="text-white text-sm font-semibold block mb-3">
-          Voice Model
+          {t("openAiTTS.voiceModelLabel")}
         </label>
         <select
           name="TTSOpenAIVoiceModel"

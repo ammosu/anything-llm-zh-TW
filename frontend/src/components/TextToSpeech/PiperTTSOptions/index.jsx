@@ -4,13 +4,14 @@ import { titleCase } from "text-case";
 import { humanFileSize } from "@/utils/numbers";
 import showToast from "@/utils/toast";
 import { CircleNotch, PauseCircle, PlayCircle } from "@phosphor-icons/react";
+import { useTranslation } from "react-i18next";
 
 export default function PiperTTSOptions({ settings }) {
+  const { t } = useTranslation();
   return (
     <>
       <p className="text-sm font-base text-white text-opacity-60 mb-4">
-        All PiperTTS models will run in your browser locally. This can be
-        resource intensive on lower-end devices.
+        {t("piperTTS.description")}
       </p>
       <div className="flex gap-x-4 items-center">
         <PiperTTSModelSelection settings={settings} />
@@ -33,10 +34,13 @@ function voiceDisplayName(voice) {
   const { is_stored, name, quality, files } = voice;
   const onnxFileKey = Object.keys(files).find((key) => key.endsWith(".onnx"));
   const fileSize = files?.[onnxFileKey]?.size_bytes || 0;
-  return `${is_stored ? "✔ " : ""}${titleCase(name)}-${quality === "low" ? "Low" : "HQ"} (${humanFileSize(fileSize)})`;
+  return `${is_stored ? "✔ " : ""}${titleCase(name)}-${
+    quality === "low" ? "Low" : "HQ"
+  } (${humanFileSize(fileSize)})`;
 }
 
 function PiperTTSModelSelection({ settings }) {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [voices, setVoices] = useState([]);
   const [selectedVoice, setSelectedVoice] = useState(
@@ -46,9 +50,7 @@ function PiperTTSModelSelection({ settings }) {
   function flushVoices() {
     PiperTTSClient.flush()
       .then(() =>
-        showToast("All voices flushed from browser storage", "info", {
-          clear: true,
-        })
+        showToast(t("piperTTS.flushSuccess"), "info", { clear: true })
       )
       .catch((e) => console.error(e));
   }
@@ -57,7 +59,7 @@ function PiperTTSModelSelection({ settings }) {
     PiperTTSClient.voices()
       .then((voices) => {
         if (voices?.length !== 0) return setVoices(voices);
-        throw new Error("Could not fetch voices from web worker.");
+        throw new Error(t("piperTTS.fetchError"));
       })
       .catch((e) => {
         console.error(e);
@@ -69,7 +71,7 @@ function PiperTTSModelSelection({ settings }) {
     return (
       <div className="flex flex-col w-60">
         <label className="text-white text-sm font-semibold block mb-3">
-          Voice Model Selection
+          {t("piperTTS.voiceSelection")}
         </label>
         <select
           name="TTSPiperTTSVoiceModel"
@@ -78,7 +80,7 @@ function PiperTTSModelSelection({ settings }) {
           className="border-none bg-theme-settings-input-bg border-gray-500 text-white text-sm rounded-lg block w-full p-2.5"
         >
           <option value="" disabled={true}>
-            -- loading available models --
+            {t("piperTTS.loadingModels")}
           </option>
         </select>
       </div>
@@ -89,7 +91,7 @@ function PiperTTSModelSelection({ settings }) {
     <div className="flex flex-col w-fit">
       <div className="flex flex-col w-60">
         <label className="text-white text-sm font-semibold block mb-3">
-          Voice Model Selection
+          {t("piperTTS.voiceSelection")}
         </label>
         <div className="flex items-center w-fit gap-x-4 mb-2">
           <select
@@ -114,8 +116,7 @@ function PiperTTSModelSelection({ settings }) {
           <DemoVoiceSample voiceId={selectedVoice} />
         </div>
         <p className="text-xs text-white/40">
-          The "✔" indicates this model is already stored locally and does not
-          need to be downloaded when run.
+          {t("piperTTS.storedModelInfo")}
         </p>
       </div>
       {!!voices.find((voice) => voice.is_stored) && (
@@ -124,7 +125,7 @@ function PiperTTSModelSelection({ settings }) {
           onClick={flushVoices}
           className="w-fit border-none hover:text-white hover:underline text-white/40 text-sm my-4"
         >
-          Flush voice cache
+          {t("piperTTS.flushCache")}
         </button>
       )}
     </div>
@@ -132,6 +133,7 @@ function PiperTTSModelSelection({ settings }) {
 }
 
 function DemoVoiceSample({ voiceId }) {
+  const { t } = useTranslation();
   const playerRef = useRef(null);
   const [speaking, setSpeaking] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -149,7 +151,7 @@ function DemoVoiceSample({ voiceId }) {
         setLoading(true);
         const client = new PiperTTSClient({ voiceId });
         const blobUrl = await client.getAudioBlobForText(
-          "Hello, welcome to AnythingLLM!"
+          t("piperTTS.demoMessage")
         );
         setAudioSrc(blobUrl);
         setLoading(false);
@@ -191,19 +193,21 @@ function DemoVoiceSample({ voiceId }) {
       {speaking ? (
         <>
           <PauseCircle size={20} className="flex-shrink-0" />
-          <p className="text-sm flex-shrink-0">Stop demo</p>
+          <p className="text-sm flex-shrink-0">{t("piperTTS.stopDemo")}</p>
         </>
       ) : (
         <>
           {loading ? (
             <>
               <CircleNotch size={20} className="animate-spin flex-shrink-0" />
-              <p className="text-sm flex-shrink-0">Loading voice</p>
+              <p className="text-sm flex-shrink-0">{t("piperTTS.loadingVoice")}</p>
             </>
           ) : (
             <>
               <PlayCircle size={20} className="flex-shrink-0 text-white" />
-              <p className="text-white text-sm flex-shrink-0">Play sample</p>
+              <p className="text-white text-sm flex-shrink-0">
+                {t("piperTTS.playSample")}
+              </p>
             </>
           )}
         </>

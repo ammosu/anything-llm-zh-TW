@@ -384,9 +384,54 @@ const TRANSLATIONS = {
     deleteError: "Thread could not be deleted!",
     deleteSuccess: "Thread deleted successfully!"
   },
-
-  browserNative: {
+  
+  // STT
+  browserNativeSTT: {
     noConfigurationNeeded: "There is no configuration needed for this provider."
+  },
+
+  // TTS
+  browserNativeTTS: {
+    noConfigurationNeeded: "There is no configuration needed for this provider."
+  },
+
+  elevenLabsTTS: {
+    apiKeyLabel: "API Key",
+    apiKeyPlaceholder: "ElevenLabs API Key",
+    modelSelectionLabel: "Chat Model Selection",
+    loadingModels: "-- loading available models --"
+  },
+
+  openAiGenericTTS: {
+    baseUrlLabel: "Base URL",
+    baseUrlPlaceholder: "http://localhost:7851/v1",
+    baseUrlDescription: "This should be the base URL of the OpenAI compatible TTS service you will generate TTS responses from.",
+    apiKeyLabel: "API Key",
+    apiKeyPlaceholder: "API Key",
+    apiKeyDescription: "Some TTS services require an API key to generate TTS responses - this is optional if your service does not require one.",
+    voiceModelLabel: "Voice Model",
+    voiceModelPlaceholder: "Your voice model identifier",
+    voiceModelDescription: "Most TTS services will have several voice models available, this is the identifier for the voice model you want to use."
+  },
+
+  openAiTTS: {
+    apiKeyLabel: "API Key",
+    apiKeyPlaceholder: "OpenAI API Key",
+    voiceModelLabel: "Voice Model",
+  }, 
+
+  piperTTS: {
+    description: "All PiperTTS models will run in your browser locally. This can be resource intensive on lower-end devices.",
+    voiceSelection: "Voice Model Selection",
+    loadingModels: "-- loading available models --",
+    fetchError: "Could not fetch voices from web worker.",
+    flushSuccess: "All voices flushed from browser storage",
+    storedModelInfo: "The '✔' indicates this model is already stored locally and does not need to be downloaded when run.",
+    flushCache: "Flush voice cache",
+    demoMessage: "Hello, welcome to AnythingLLM!",
+    stopDemo: "Stop demo",
+    loadingVoice: "Loading voice",
+    playSample: "Play sample"
   },
 
   // General Appearance
