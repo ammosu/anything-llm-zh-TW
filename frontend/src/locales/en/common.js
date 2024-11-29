@@ -201,7 +201,20 @@ const TRANSLATIONS = {
     },
     websiteDepth: {
       "name": "Bulk Link Scraper",
-      "description": "Scrape a website and its sub-links up to a certain depth."
+      "description": "Scrape a website and its sub-links up to a certain depth.",
+      "scrapingInfo": "Scraping website - this may take a while.",
+      "scrapingSuccess": "Successfully scraped {{count}} {{pages}}!",
+      "scrapingButtonSubmit": "Submit",
+      "scrapingButtonLoading": "Scraping website...",
+      "scrapingNote": "Once complete, all scraped pages will be available for embedding into workspaces in the document picker.",
+      "urlLabel": "Website URL",
+      "urlDescription": "URL of the website you want to scrape.",
+      "urlPlaceholder": "https://example.com",
+      "depthLabel": "Depth",
+      "depthDescription": "This is the number of child-links that the worker should follow from the origin URL.",
+      "maxLinksLabel": "Max Links",
+      "maxLinksDescription": "Maximum number of links to scrape.",
+      "page": "page"
     },
     confluence: {
       "name": "Confluence",
