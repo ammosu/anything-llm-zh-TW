@@ -560,6 +560,17 @@ const TRANSLATIONS = {
     "dropFile": "Drop your file here to embed it into your workspace automatically."
   },
 
+  // Attachments
+  attachment: {
+    uploading: "Uploading file of size {{size}}...",
+    failed: "{{error}}. This file failed to upload and will not be available in the workspace.",
+    defaultError: "An error occurred",
+    attached: "{{name}} will be attached to this prompt. It will not be embedded permanently.",
+    imageAttached: "Image attached!",
+    embedded: "{{name}} was uploaded and embedded into this workspace. It will be available for RAG chat now.",
+    fileEmbedded: "File embedded!"
+  },
+
   // General Appearance
   general: {
     vector: {
