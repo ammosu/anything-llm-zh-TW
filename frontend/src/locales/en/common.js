@@ -385,6 +385,10 @@ const TRANSLATIONS = {
     deleteSuccess: "Thread deleted successfully!"
   },
 
+  browserNative: {
+    noConfigurationNeeded: "There is no configuration needed for this provider."
+  },
+
   // General Appearance
   general: {
     vector: {
