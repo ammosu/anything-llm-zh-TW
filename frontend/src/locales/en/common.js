@@ -553,6 +553,12 @@ const TRANSLATIONS = {
     getStartedSendChat: "To get started send a chat.",
     statusResponse: "{{content}}"
   },
+  
+  // DnD Uploader
+  dndUploader: {
+    "addAnything": "Add anything",
+    "dropFile": "Drop your file here to embed it into your workspace automatically."
+  },
 
   // General Appearance
   general: {
