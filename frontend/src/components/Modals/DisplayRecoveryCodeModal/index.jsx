@@ -3,17 +3,19 @@ import { DownloadSimple, Key } from "@phosphor-icons/react";
 import { saveAs } from "file-saver";
 import { useState } from "react";
 import ModalWrapper from "@/components/ModalWrapper";
+import { useTranslation } from "react-i18next";
 
 export default function RecoveryCodeModal({
   recoveryCodes,
   onDownloadComplete,
   onClose,
 }) {
+  const { t } = useTranslation();
   const [downloadClicked, setDownloadClicked] = useState(false);
 
   const downloadRecoveryCodes = () => {
     const blob = new Blob([recoveryCodes.join("\n")], { type: "text/plain" });
-    saveAs(blob, "recovery_codes.txt");
+    saveAs(blob, t("recoveryCodes.fileName"));
     setDownloadClicked(true);
   };
 
@@ -26,7 +28,7 @@ export default function RecoveryCodeModal({
 
   const handleCopyToClipboard = () => {
     navigator.clipboard.writeText(recoveryCodes.join(",\n")).then(() => {
-      showToast("Recovery codes copied to clipboard", "success", {
+      showToast(t("recoveryCodes.copySuccessMessage"), "success", {
         clear: true,
       });
     });
@@ -39,7 +41,7 @@ export default function RecoveryCodeModal({
           <div className="w-full flex gap-x-2 items-center">
             <Key size={24} className="text-white" weight="bold" />
             <h3 className="text-xl font-semibold text-white overflow-hidden overflow-ellipsis whitespace-nowrap">
-              Recovery Codes
+              {t("recoveryCodes.title")}
             </h3>
           </div>
         </div>
@@ -49,10 +51,9 @@ export default function RecoveryCodeModal({
         >
           <div className="py-7 px-9 space-y-2 flex-col">
             <p className="text-sm text-white flex flex-col">
-              In order to reset your password in the future, you will need these
-              recovery codes. Download or copy your recovery codes to save them.{" "}
+              {t("recoveryCodes.description")}
               <br />
-              <b className="mt-4">These recovery codes are only shown once!</b>
+              <b className="mt-4">{t("recoveryCodes.warning")}</b>
             </p>
             <div
               className="border-none bg-theme-settings-input-bg text-white hover:text-primary-button
@@ -75,11 +76,11 @@ export default function RecoveryCodeModal({
               onClick={downloadClicked ? handleClose : downloadRecoveryCodes}
             >
               {downloadClicked ? (
-                "Close"
+                t("recoveryCodes.closeButton")
               ) : (
                 <>
                   <DownloadSimple weight="bold" size={18} />
-                  <p>Download</p>
+                  <p>{t("recoveryCodes.downloadButton")}</p>
                 </>
               )}
             </button>
