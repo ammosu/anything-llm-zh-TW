@@ -683,6 +683,15 @@ const TRANSLATIONS = {
     }
   },
 
+  themePreference: {
+    "title": "主題",
+    "description": "選擇您偏好的應用程式主題。",
+    "themes": {
+      "default": "預設",
+      "light": "淺色"
+    }
+  },
+
   // 更改警告
   "changeWarning": {
     "title": "警告",

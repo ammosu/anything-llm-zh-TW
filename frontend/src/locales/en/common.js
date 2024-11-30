@@ -1022,6 +1022,15 @@ const TRANSLATIONS = {
     "updateFailed": "Failed to update support email: {{error}}"
   },
 
+  themePreference: {
+    "title": "Theme",
+    "description": "Select your preferred theme for the application.",
+    "themes": {
+      "default": "Default",
+      "light": "Light"
+    }
+  },
+
 //////////////////////////////
 
   // ChangeWarning
