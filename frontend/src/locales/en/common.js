@@ -886,6 +886,35 @@ const TRANSLATIONS = {
     "updateButton": "Update user"
   },
 
+  // Admin workspace
+  adminWorkspaces: {
+    "title": "Instance Workspaces",
+    "description": "These are all the workspaces that exist on this instance. Removing a workspace will delete all of its associated chats and settings.",
+    "newWorkspaceButton": "New Workspace",
+    "tableHeaders": {
+      "name": "Name",
+      "link": "Link",
+      "users": "Users",
+      "createdOn": "Created On",
+      "actions": "Actions"
+    }
+  },
+
+  // Admin Workspace Row
+  adminWorkspaceRow: {
+    "deleteConfirmation": "Are you sure you want to delete {{name}}?\nAfter you do this it will be unavailable in this instance of AnythingLLM.\n\nThis action is irreversible.",
+  },
+
+  // Admin Workspace Modal
+  adminNewWorkspaceModal: {
+    "title": "Create new workspace",
+    "workspaceNameLabel": "Workspace Name",
+    "workspaceNamePlaceholder": "My workspace",
+    "errorMessage": "Error: {{error}}",
+    "infoMessage": "After creating this workspace only admins will be able to see it. You can add users after it has been created.",
+    "createButton": "Create workspace"
+  },
+  
 
 
 //////////////////////////////

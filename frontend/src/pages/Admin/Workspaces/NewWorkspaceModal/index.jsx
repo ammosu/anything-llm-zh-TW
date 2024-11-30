@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 export default function NewWorkspaceModal({ closeModal }) {
   const [error, setError] = useState(null);
   const { t } = useTranslation();
+
   const handleCreate = async (e) => {
     setError(null);
     e.preventDefault();
@@ -21,7 +22,7 @@ export default function NewWorkspaceModal({ closeModal }) {
         <div className="relative p-6 border-b rounded-t border-theme-modal-border">
           <div className="w-full flex gap-x-2 items-center">
             <h3 className="text-xl font-semibold text-white overflow-hidden overflow-ellipsis whitespace-nowrap">
-              Create new workspace
+              {t("adminNewWorkspaceModal.title")}
             </h3>
           </div>
           <button
@@ -40,22 +41,25 @@ export default function NewWorkspaceModal({ closeModal }) {
                   htmlFor="name"
                   className="block mb-2 text-sm font-medium text-white"
                 >
-                  {t("common.workspaces-name")}
+                  {t("adminNewWorkspaceModal.workspaceNameLabel")}
                 </label>
                 <input
                   name="name"
                   type="text"
                   className="border-none bg-theme-settings-input-bg w-full text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                  placeholder="My workspace"
+                  placeholder={t("adminNewWorkspaceModal.workspaceNamePlaceholder")}
                   minLength={4}
                   required={true}
                   autoComplete="off"
                 />
               </div>
-              {error && <p className="text-red-400 text-sm">Error: {error}</p>}
+              {error && (
+                <p className="text-red-400 text-sm">
+                  {t("adminNewWorkspaceModal.errorMessage", { error })}
+                </p>
+              )}
               <p className="text-white text-opacity-60 text-xs md:text-sm">
-                After creating this workspace only admins will be able to see
-                it. You can add users after it has been created.
+                {t("adminNewWorkspaceModal.infoMessage")}
               </p>
             </div>
             <div className="flex justify-between items-center mt-6 pt-6 border-t border-theme-modal-border">
@@ -64,13 +68,13 @@ export default function NewWorkspaceModal({ closeModal }) {
                 type="button"
                 className="transition-all duration-300 text-white hover:bg-zinc-700 px-4 py-2 rounded-lg text-sm"
               >
-                Cancel
+                {t("common.cancel")}
               </button>
               <button
                 type="submit"
                 className="transition-all duration-300 bg-white text-black hover:opacity-60 px-4 py-2 rounded-lg text-sm"
               >
-                Create workspace
+                {t("adminNewWorkspaceModal.createButton")}
               </button>
             </div>
           </form>
