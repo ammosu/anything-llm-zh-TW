@@ -1065,6 +1065,14 @@ const TRANSLATIONS = {
     }
   },
 
+  // Settings Chats
+  settingsChats: {
+    "viewingText": "Viewing Text",
+    "promptModalTitle": "Viewing Prompt",
+    "responseModalTitle": "Viewing Response",
+    "confirmDelete": "Are you sure you want to delete this chat?\n\nThis action is irreversible."
+  },
+
 //////////////////////////////
 
   // ChangeWarning
@@ -1228,6 +1236,17 @@ const TRANSLATIONS = {
     description:
       "These are all the recorded chats and messages that have been sent by users ordered by their creation date.",
     export: "Export",
+    ////
+    "exportSuccess": "Chats exported successfully as {{name}}.",
+    "exportFail": "Failed to export chats.",
+    "clearChats": "Clear Chats",
+    "clearConfirm": "Are you sure you want to clear all chats?\n\nThis action is irreversible.",
+    "clearSuccess": "Cleared all chats.",
+    "description": "Here is the list of your recorded chats. You can export them or clear them as needed.",
+    "orderFineTune": "Order Fine-Tune Model",
+    "previousPage": "Previous Page",
+    "nextPage": "Next Page",
+    ////
     table: {
       id: "Id",
       by: "Sent By",
