@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { X } from "@phosphor-icons/react";
 import Admin from "@/models/admin";
 import Workspace from "@/models/workspace";
+import { useTranslation } from "react-i18next";
 
 export default function NewInviteModal({ closeModal }) {
+  const { t } = useTranslation();
   const [invite, setInvite] = useState(null);
   const [error, setError] = useState(null);
   const [copied, setCopied] = useState(false);
@@ -63,7 +65,7 @@ export default function NewInviteModal({ closeModal }) {
         <div className="relative p-6 border-b rounded-t border-theme-modal-border">
           <div className="w-full flex gap-x-2 items-center">
             <h3 className="text-xl font-semibold text-white overflow-hidden overflow-ellipsis whitespace-nowrap">
-              Create new invite
+              {t("adminInviteModal.createTitle")}
             </h3>
           </div>
           <button
@@ -77,7 +79,9 @@ export default function NewInviteModal({ closeModal }) {
         <div className="p-6">
           <form onSubmit={handleCreate}>
             <div className="space-y-4">
-              {error && <p className="text-red-400 text-sm">Error: {error}</p>}
+              {error && (
+                <p className="text-red-400 text-sm">{t("adminInviteModal.error", { error })}</p>
+              )}
               {invite && (
                 <input
                   type="url"
@@ -87,10 +91,7 @@ export default function NewInviteModal({ closeModal }) {
                 />
               )}
               <p className="text-white text-opacity-60 text-xs md:text-sm">
-                After creation you will be able to copy the invite and send it
-                to a new user where they can create an account as the{" "}
-                <b>default</b> role and automatically be added to workspaces
-                selected.
+                {t("adminInviteModal.description")}
               </p>
             </div>
 
@@ -102,13 +103,10 @@ export default function NewInviteModal({ closeModal }) {
                       htmlFor="workspaces"
                       className="block text-sm font-medium text-white"
                     >
-                      Auto-add invitee to workspaces
+                      {t("adminInviteModal.workspaceLabel")}
                     </label>
                     <p className="text-white text-opacity-60 text-xs">
-                      You can optionally automatically assign the user to the
-                      workspaces below by selecting them. By default, the user
-                      will not have any workspaces visible. You can assign
-                      workspaces later post-invite acceptance.
+                      {t("adminInviteModal.workspaceDescription")}
                     </p>
                   </div>
 
@@ -134,13 +132,13 @@ export default function NewInviteModal({ closeModal }) {
                     type="button"
                     className="transition-all duration-300 text-white hover:bg-zinc-700 px-4 py-2 rounded-lg text-sm"
                   >
-                    Cancel
+                    {t("common.cancel")}
                   </button>
                   <button
                     type="submit"
                     className="transition-all duration-300 bg-white text-black hover:opacity-60 px-4 py-2 rounded-lg text-sm"
                   >
-                    Create Invite
+                    {t("adminInviteModal.createButton")}
                   </button>
                 </>
               ) : (
@@ -150,7 +148,7 @@ export default function NewInviteModal({ closeModal }) {
                   disabled={copied}
                   className="w-full transition-all duration-300 bg-white text-black hover:opacity-60 px-4 py-2 rounded-lg text-sm"
                 >
-                  {copied ? "Copied Link" : "Copy Invite Link"}
+                  {copied ? t("adminInviteModal.linkCopied") : t("adminInviteModal.copyButton")}
                 </button>
               )}
             </div>
@@ -162,6 +160,7 @@ export default function NewInviteModal({ closeModal }) {
 }
 
 function WorkspaceOption({ workspace, selected, toggleSelection }) {
+  const { t } = useTranslation();
   return (
     <button
       type="button"

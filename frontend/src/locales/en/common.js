@@ -788,6 +788,29 @@ const TRANSLATIONS = {
     }
   },
   
+  // Admin invitation
+  adminInvites: {
+    "title": "Invitations",
+    "description": "Create invitation links for people in your organization to accept and sign up with. Invitations can only be used by a single user.",
+    "createInviteButton": "Create Invite Link",
+    "table": {
+      "status": "Status",
+      "acceptedBy": "Accepted By",
+      "createdBy": "Created By",
+      "created": "Created"
+    }
+  },
+
+  adminInviteModal: {
+    "createTitle": "Create new invite",
+    "error": "Error: {{error}}",
+    "description": "After creation you will be able to copy the invite and send it to a new user where they can create an account as the <b>default</b> role and automatically be added to workspaces selected.",
+    "workspaceLabel": "Auto-add invitee to workspaces",
+    "workspaceDescription": "You can optionally automatically assign the user to the workspaces below by selecting them. By default, the user will not have any workspaces visible. You can assign workspaces later post-invite acceptance.",
+    "createButton": "Create Invite",
+    "copyButton": "Copy Invite Link",
+    "linkCopied": "Copied Link"
+  },
   
 //////////////////////////////
 
