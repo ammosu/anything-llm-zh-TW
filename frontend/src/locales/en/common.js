@@ -937,6 +937,19 @@ const TRANSLATIONS = {
     "copy": "Copy API Key"
   },
 
+  // Custom APP Name
+  customAppName: {
+    "title": "Custom App Name",
+    "description": "Set a custom app name that is displayed on the login page.",
+    "placeholder": "AnythingLLM",
+    "clearButton": "Clear",
+    "saveButton": "Save",
+    "updateSuccess": "Successfully updated custom app name.",
+    "updateError": "Failed to update custom app name: {{error}}"
+  },
+
+  
+
 //////////////////////////////
 
   // ChangeWarning
