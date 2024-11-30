@@ -3,8 +3,10 @@ import Admin from "@/models/admin";
 import System from "@/models/system";
 import showToast from "@/utils/toast";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function SupportEmail() {
+  const { t } = useTranslation();
   const { user } = useUser();
   const [loading, setLoading] = useState(true);
   const [hasChanges, setHasChanges] = useState(false);
@@ -34,10 +36,10 @@ export default function SupportEmail() {
     });
 
     if (!success) {
-      showToast(`Failed to update support email: ${error}`, "error");
+      showToast(t("supportEmail.updateFailed", { error }), "error");
       return;
     } else {
-      showToast("Successfully updated support email.", "success");
+      showToast(t("supportEmail.updateSuccess"), "success");
       window.localStorage.removeItem(System.cacheKeys.supportEmail);
       setSupportEmail(support_email);
       setOriginalEmail(support_email);
@@ -55,11 +57,10 @@ export default function SupportEmail() {
     <form className="mb-6" onSubmit={updateSupportEmail}>
       <div className="flex flex-col gap-y-1">
         <h2 className="text-base leading-6 font-bold text-white">
-          Support Email
+          {t("supportEmail.title")}
         </h2>
         <p className="text-xs leading-[18px] font-base text-white/60">
-          Set the support email address that shows up in the user menu while
-          logged into this instance.
+          {t("supportEmail.description")}
         </p>
       </div>
       <div className="flex items-center gap-x-4">
@@ -67,7 +68,7 @@ export default function SupportEmail() {
           name="supportEmail"
           type="email"
           className="border-none bg-theme-settings-input-bg mt-3 text-white text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5 max-w-[275px] placeholder:text-theme-settings-input-placeholder"
-          placeholder="support@mycompany.com"
+          placeholder={t("supportEmail.placeholder")}
           required={true}
           autoComplete="off"
           onChange={handleChange}
@@ -79,7 +80,7 @@ export default function SupportEmail() {
             onClick={(e) => updateSupportEmail(e, "")}
             className="mt-4 text-white text-base font-medium hover:text-opacity-60"
           >
-            Clear
+            {t("supportEmail.clearButton")}
           </button>
         )}
       </div>
@@ -88,7 +89,7 @@ export default function SupportEmail() {
           type="submit"
           className="transition-all mt-6 w-fit duration-300 border border-slate-200 px-5 py-2.5 rounded-lg text-white text-sm items-center flex gap-x-2 hover:bg-slate-200 hover:text-slate-800 focus:ring-gray-800"
         >
-          Save
+          {t("supportEmail.saveButton")}
         </button>
       )}
     </form>

@@ -1012,6 +1012,16 @@ const TRANSLATIONS = {
     "fetchError": "Failed to fetch appearance settings"
   },
 
+  supportEmail: {
+    "title": "Support Email",
+    "description": "Set the support email address that shows up in the user menu while logged into this instance.",
+    "placeholder": "support@mycompany.com",
+    "clearButton": "Clear",
+    "saveButton": "Save",
+    "updateSuccess": "Successfully updated support email.",
+    "updateFailed": "Failed to update support email: {{error}}"
+  },
+
 //////////////////////////////
 
   // ChangeWarning
