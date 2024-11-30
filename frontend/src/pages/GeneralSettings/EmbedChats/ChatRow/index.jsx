@@ -4,8 +4,11 @@ import ModalWrapper from "@/components/ModalWrapper";
 import { useModal } from "@/hooks/useModal";
 import paths from "@/utils/paths";
 import Embed from "@/models/embed";
+import { useTranslation } from "react-i18next";
 
 export default function ChatRow({ chat, onDelete }) {
+  const { t } = useTranslation();
+
   const {
     isOpen: isPromptOpen,
     openModal: openPromptModal,
@@ -24,9 +27,7 @@ export default function ChatRow({ chat, onDelete }) {
 
   const handleDelete = async () => {
     if (
-      !window.confirm(
-        `Are you sure you want to delete this chat?\n\nThis action is irreversible.`
-      )
+      !window.confirm(t("embedChatRow.confirmDelete"))
     )
       return false;
     await Embed.deleteChat(chat.id);
@@ -110,7 +111,9 @@ const TextPreview = ({ text, closeModal }) => {
     <div className="relative w-full md:max-w-2xl max-h-full">
       <div className="w-full max-w-2xl bg-theme-bg-secondary rounded-lg shadow border-2 border-theme-modal-border overflow-hidden">
         <div className="flex items-center justify-between p-6 border-b rounded-t border-theme-modal-border">
-          <h3 className="text-xl font-semibold text-white">Viewing Text</h3>
+          <h3 className="text-xl font-semibold text-white">
+            {t("embedChatRow.viewingText")}
+          </h3>
           <button
             onClick={closeModal}
             type="button"
@@ -134,6 +137,7 @@ const ConnectionDetails = ({
   verbose = false,
   connection_information,
 }) => {
+  const { t } = useTranslation();
   let details = {};
   try {
     details = JSON.parse(connection_information);
@@ -145,21 +149,21 @@ const ConnectionDetails = ({
     return (
       <>
         <p className="text-xs text-theme-text-secondary">
-          sessionID: {sessionId}
+          {t("chatRow.connectionDetails.sessionId")}: {sessionId}
         </p>
         {details.username && (
           <p className="text-xs text-theme-text-secondary">
-            username: {details.username}
+            {t("chatRow.connectionDetails.username")}: {details.username}
           </p>
         )}
         {details.ip && (
           <p className="text-xs text-theme-text-secondary">
-            client ip address: {details.ip}
+            {t("chatRow.connectionDetails.ip")}: {details.ip}
           </p>
         )}
         {details.host && (
           <p className="text-xs text-theme-text-secondary">
-            client host URL: {details.host}
+            {t("chatRow.connectionDetails.host")}: {details.host}
           </p>
         )}
       </>

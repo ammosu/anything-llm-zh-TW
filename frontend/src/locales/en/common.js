@@ -1073,6 +1073,11 @@ const TRANSLATIONS = {
     "confirmDelete": "Are you sure you want to delete this chat?\n\nThis action is irreversible."
   },
 
+  embedChatRow: {
+    "confirmDelete": "Are you sure you want to delete this chat?\n\nThis action is irreversible.",
+    "viewingText": "Viewing Text",
+  },
+
 //////////////////////////////
 
   // ChangeWarning
@@ -1462,6 +1467,10 @@ const TRANSLATIONS = {
   "embed-chats": {
     title: "Embed Chats",
     export: "Export",
+    ////
+    exportSuccess: "Embed chats exported successfully as {{name}}.",
+    exportFailure: "Failed to export embed chats.",
+    ////
     description:
       "These are all the recorded chats and messages from any embed that you have published.",
     table: {
