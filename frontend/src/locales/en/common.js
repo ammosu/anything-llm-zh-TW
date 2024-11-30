@@ -811,6 +811,21 @@ const TRANSLATIONS = {
     "copyButton": "Copy Invite Link",
     "linkCopied": "Copied Link"
   },
+
+  // Log row
+  logRow: {
+    "metadata": {
+      "title": "Event Metadata",
+      "show": "Show",
+      "hide": "Hide"
+    },
+    "events": {
+      "login_event": "Login Event",
+      "update": "Update Event",
+      "failed_event": "Failed Event",
+      "deleted_event": "Deleted Event"
+    }
+  },
   
 //////////////////////////////
 
