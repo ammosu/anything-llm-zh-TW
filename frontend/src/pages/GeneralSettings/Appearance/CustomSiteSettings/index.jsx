@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import Admin from "@/models/admin";
 import showToast from "@/utils/toast";
+import { useTranslation } from "react-i18next";
 
 export default function CustomSiteSettings() {
+  const { t } = useTranslation();
   const [hasChanges, setHasChanges] = useState(false);
   const [settings, setSettings] = useState({
     title: null,
@@ -24,11 +26,7 @@ export default function CustomSiteSettings() {
       meta_page_title: settings.title ?? null,
       meta_page_favicon: settings.faviconUrl ?? null,
     });
-    showToast(
-      "Site preferences updated! They will reflect on page reload.",
-      "success",
-      { clear: true }
-    );
+    showToast(t("customSiteSettings.toast.sitePreferencesUpdated"), "success", { clear: true });
     setHasChanges(false);
     return;
   }
@@ -42,19 +40,18 @@ export default function CustomSiteSettings() {
       <div className="flex flex-col border-t border-white/30 pt-4 gap-y-2">
         <div className="flex flex-col gap-y-1">
           <h2 className="text-base leading-6 font-bold text-white">
-            Custom Site Settings
+            {t("customSiteSettings.title")}
           </h2>
           <p className="text-xs leading-[18px] font-base text-white/60">
-            Change the content of the browser tab for customization and
-            branding.
+            {t("customSiteSettings.description")}
           </p>
         </div>
 
         <div className="w-fit">
           <div className="flex flex-col gap-y-1">
-            <h2 className="text-sm leading-6 text-white">Tab Title</h2>
+            <h2 className="text-sm leading-6 text-white">{t("customSiteSettings.tabTitle.title")}</h2>
             <p className="text-xs leading-[18px] font-base text-white/60">
-              Set a custom tab title when the app is open in a browser.
+              {t("customSiteSettings.tabTitle.description")}
             </p>
           </div>
           <div className="flex items-center gap-x-4">
@@ -62,26 +59,23 @@ export default function CustomSiteSettings() {
               name="meta_page_title"
               type="text"
               className="border-none bg-theme-settings-input-bg mt-3 text-white text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5 max-w-[400px] placeholder:text-theme-settings-input-placeholder"
-              placeholder="AnythingLLM | Your personal LLM trained on anything"
+              placeholder={t("customSiteSettings.tabTitle.placeholder")}
               autoComplete="off"
               onChange={(e) => {
                 setSettings((prev) => {
                   return { ...prev, title: e.target.value };
                 });
               }}
-              value={
-                settings.title ??
-                "AnythingLLM | Your personal LLM trained on anything"
-              }
+              value={settings.title ?? t("customSiteSettings.tabTitle.placeholder")}
             />
           </div>
         </div>
 
         <div className="w-fit">
           <div className="flex flex-col gap-y-1">
-            <h2 className="text-sm leading-6 text-white">Tab Favicon</h2>
+            <h2 className="text-sm leading-6 text-white">{t("customSiteSettings.tabFavicon.title")}</h2>
             <p className="text-xs leading-[18px] font-base text-white/60">
-              Define a url to an image to use for your favicon
+              {t("customSiteSettings.tabFavicon.description")}
             </p>
           </div>
           <div className="flex items-center gap-x-2">
@@ -94,7 +88,7 @@ export default function CustomSiteSettings() {
               name="meta_page_favicon"
               type="url"
               className="border-none bg-theme-settings-input-bg mt-3 text-white text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5 max-w-[400px] placeholder:text-theme-settings-input-placeholder"
-              placeholder="url to your image"
+              placeholder={t("customSiteSettings.tabFavicon.placeholder")}
               onChange={(e) => {
                 setSettings((prev) => {
                   return { ...prev, faviconUrl: e.target.value };
@@ -111,7 +105,7 @@ export default function CustomSiteSettings() {
             type="submit"
             className="transition-all mt-6 w-fit duration-300 border border-slate-200 px-5 py-2.5 rounded-lg text-white text-sm items-center flex gap-x-2 hover:bg-slate-200 hover:text-slate-800 focus:ring-gray-800"
           >
-            Save
+            {t("customSiteSettings.saveButton")}
           </button>
         )}
       </div>

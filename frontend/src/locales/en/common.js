@@ -948,7 +948,26 @@ const TRANSLATIONS = {
     "updateError": "Failed to update custom app name: {{error}}"
   },
 
-
+  // Custom site settings
+  customSiteSettings: {
+    "title": "Custom Site Settings",
+    "description": "Change the content of the browser tab for customization and branding.",
+    "saveButton": "Save",
+    tabTitle: {
+      "title": "Tab Title",
+      "description": "Set a custom tab title when the app is open in a browser.",
+      "placeholder": "AnythingLLM | Your personal LLM trained on anything"
+    },
+    tabFavicon: {
+      "title": "Tab Favicon",
+      "description": "Define a URL to an image to use for your favicon.",
+      "placeholder": "URL to your image"
+    },
+    toast: {
+      "sitePreferencesUpdated": "Site preferences updated! They will reflect on page reload."
+    }
+  },
+  
 
 //////////////////////////////
 
