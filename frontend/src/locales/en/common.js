@@ -1005,6 +1005,13 @@ const TRANSLATIONS = {
     }
   },
 
+  showScrollbar: {
+    "title": "Show chat window scrollbar",
+    "description": "Enable or disable the scrollbar in the chat window",
+    "updateError": "Failed to update appearance settings",
+    "fetchError": "Failed to fetch appearance settings"
+  },
+
 //////////////////////////////
 
   // ChangeWarning
