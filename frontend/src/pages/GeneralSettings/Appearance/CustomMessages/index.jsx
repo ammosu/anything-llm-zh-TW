@@ -22,12 +22,12 @@ export default function CustomMessages() {
     if (type === "user") {
       setMessages([
         ...messages,
-        { user: t("appearance.message.double-click"), response: "" },
+        { user: t("appearance.message.doubleClick"), response: "" },
       ]);
     } else {
       setMessages([
         ...messages,
-        { user: "", response: t("appearance.message.double-click") },
+        { user: "", response: t("appearance.message.doubleClick") },
       ]);
     }
   };
@@ -47,10 +47,10 @@ export default function CustomMessages() {
   const handleMessageSave = async () => {
     const { success, error } = await System.setWelcomeMessages(messages);
     if (!success) {
-      showToast(`Failed to update welcome messages: ${error}`, "error");
+      showToast(t("appearance.message.error", { error }), "error");
       return;
     }
-    showToast("Successfully updated welcome messages.", "success");
+    showToast(t("appearance.message.success"), "success");
     setHasChanges(false);
   };
 

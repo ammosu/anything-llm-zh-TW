@@ -948,7 +948,7 @@ const TRANSLATIONS = {
     "updateError": "Failed to update custom app name: {{error}}"
   },
 
-  
+
 
 //////////////////////////////
 
@@ -1152,6 +1152,11 @@ const TRANSLATIONS = {
       assistant: "AnythingLLM Chat Assistant",
       "double-click": "Double click to edit...",
       save: "Save Messages",
+      ////
+      "doubleClick": "Double-click to edit this message.",
+      "success": "Welcome messages updated successfully.",
+      "error": "Failed to update welcome messages: {{error}}"
+      ////
     },
     icons: {
       title: "Custom Footer Icons",
