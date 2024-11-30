@@ -1,8 +1,10 @@
 import { ICON_COMPONENTS } from "@/components/Footer";
 import React, { useEffect, useRef, useState } from "react";
 import { Plus, X } from "@phosphor-icons/react";
+import { useTranslation } from "react-i18next";
 
 export default function NewIconForm({ icon, url, onSave, onRemove }) {
+  const { t } = useTranslation();
   const [selectedIcon, setSelectedIcon] = useState(icon || "Plus");
   const [selectedUrl, setSelectedUrl] = useState(url || "");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -58,6 +60,7 @@ export default function NewIconForm({ icon, url, onSave, onRemove }) {
         <div
           className="h-[34px] w-[34px] bg-theme-settings-input-bg rounded-full flex items-center justify-center cursor-pointer hover:outline-primary-button hover:outline"
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          title={t("newIconForm.iconSelector.tooltip")}
         >
           {React.createElement(ICON_COMPONENTS[selectedIcon] || Plus, {
             className: "h-5 w-5",
@@ -66,13 +69,17 @@ export default function NewIconForm({ icon, url, onSave, onRemove }) {
           })}
         </div>
         {isDropdownOpen && (
-          <div className="absolute z-10 grid grid-cols-4 bg-theme-settings-input-bg mt-2 rounded-md w-[150px] h-[78px] overflow-y-auto border border-white/20 shadow-lg">
+          <div
+            className="absolute z-10 grid grid-cols-4 bg-theme-settings-input-bg mt-2 rounded-md w-[150px] h-[78px] overflow-y-auto border border-white/20 shadow-lg"
+            aria-label={t("newIconForm.iconSelector.dropdown")}
+          >
             {Object.keys(ICON_COMPONENTS).map((iconName) => (
               <button
                 key={iconName}
                 type="button"
                 className="flex justify-center items-center border border-transparent hover:bg-theme-sidebar-footer-icon-hover hover:border-slate-100 light:hover:border-black/80 rounded-full p-2"
                 onClick={() => handleIconChange(iconName)}
+                title={t("newIconForm.iconSelector.option", { iconName })}
               >
                 {React.createElement(ICON_COMPONENTS[iconName], {
                   className: "h-5 w-5",
@@ -88,9 +95,10 @@ export default function NewIconForm({ icon, url, onSave, onRemove }) {
         type="url"
         value={selectedUrl}
         onChange={handleUrlChange}
-        placeholder="https://example.com"
+        placeholder={t("newIconForm.urlInput.placeholder")}
         className="border-none bg-theme-settings-input-bg text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-md p-2.5 w-[300px] h-[32px] focus:outline-primary-button active:outline-primary-button outline-none"
         required
+        aria-label={t("newIconForm.urlInput.label")}
       />
       {selectedIcon !== "Plus" && (
         <>
@@ -99,13 +107,14 @@ export default function NewIconForm({ icon, url, onSave, onRemove }) {
               type="submit"
               className="text-sky-400 px-2 py-2 rounded-md text-sm font-bold hover:text-sky-500"
             >
-              Save
+              {t("newIconForm.actions.save")}
             </button>
           ) : (
             <button
               type="button"
               onClick={handleRemove}
               className="hover:text-red-500 text-white/80 px-2 py-2 rounded-md text-sm font-bold"
+              aria-label={t("newIconForm.actions.remove")}
             >
               <X size={20} />
             </button>

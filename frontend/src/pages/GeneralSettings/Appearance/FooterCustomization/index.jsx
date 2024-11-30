@@ -32,15 +32,17 @@ export default function FooterCustomization() {
     });
 
     if (!success) {
-      showToast(`Failed to update footer icons - ${error}`, "error", {
-        clear: true,
-      });
+      showToast(
+        t("appearance.icons.updateError", { error }),
+        "error",
+        { clear: true }
+      );
       return;
     }
 
     window.localStorage.removeItem(System.cacheKeys.footerIcons);
     setFooterIcons(updatedIcons);
-    showToast("Successfully updated footer icons.", "success", { clear: true });
+    showToast(t("appearance.icons.updateSuccess"), "success", { clear: true });
   };
 
   const handleRemoveIcon = (index) => {

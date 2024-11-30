@@ -967,6 +967,23 @@ const TRANSLATIONS = {
       "sitePreferencesUpdated": "Site preferences updated! They will reflect on page reload."
     }
   },
+
+  // New Icon Form
+  newIconForm: {
+    "iconSelector": {
+      "tooltip": "Select an icon",
+      "dropdown": "Icon selection dropdown",
+      "option": "Choose the icon: {{iconName}}"
+    },
+    "urlInput": {
+      "placeholder": "https://example.com",
+      "label": "Enter URL"
+    },
+    "actions": {
+      "save": "Save",
+      "remove": "Remove"
+    }
+  },
   
 
 //////////////////////////////
@@ -1183,6 +1200,10 @@ const TRANSLATIONS = {
         "Customize the footer icons displayed on the bottom of the sidebar.",
       icon: "Icon",
       link: "Link",
+      ////
+      "updateSuccess": "Successfully updated footer icons.",
+      "updateError": "Failed to update footer icons - {{error}}"
+      ////
     },
   },
 
