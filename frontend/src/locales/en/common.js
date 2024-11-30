@@ -1031,6 +1031,40 @@ const TRANSLATIONS = {
     }
   },
 
+  // STT
+  audioPreference: {
+    speechToText: {
+      "title": "Speech-to-text Preference",
+      "description": "Here you can specify what kind of text-to-speech and speech-to-text providers you would want to use in your AnythingLLM experience. By default, we use the browser's built-in support for these services, but you may want to use others.",
+      "saving": "Saving...",
+      "saveChanges": "Save changes",
+      "saveSuccess": "Speech-to-text preferences saved successfully.",
+      "saveError": "Failed to save preferences: {{error}}",
+      "provider": "Provider",
+      "searchPlaceholder": "Search speech-to-text providers"
+    },
+    textToSpeech: {
+      "preferenceTitle": "Text-to-speech Preference",
+      "preferenceDescription": "Here you can specify what kind of text-to-speech providers you would want to use in your AnythingLLM experience. By default, we use the browser's built in support for these services, but you may want to use others.",
+      "providerLabel": "Provider",
+      "saveChanges": "Save changes",
+      "saving": "Saving...",
+      "saveSuccess": "Text-to-speech preferences saved successfully.",
+      "saveError": "Failed to save preferences: {{error}}",
+      "searchPlaceholder": "Search text to speech providers",
+      "native": "System native",
+      "nativeDescription": "Uses your browser's built in TTS service if supported.",
+      "openai": "OpenAI",
+      "openaiDescription": "Use OpenAI's text to speech voices.",
+      "elevenlabs": "ElevenLabs",
+      "elevenlabsDescription": "Use ElevenLabs's text to speech voices and technology.",
+      "piper_local": "PiperTTS",
+      "piperDescription": "Run TTS models locally in your browser privately.",
+      "generic-openai": "OpenAI Compatible",
+      "genericOpenAiDescription": "Connect to an OpenAI compatible TTS service running locally or remotely."
+    }
+  },
+
 //////////////////////////////
 
   // ChangeWarning
