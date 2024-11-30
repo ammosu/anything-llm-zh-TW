@@ -135,6 +135,26 @@ const TRANSLATIONS = {
     },
   },
 
+  languagePreference: {
+    "title": "显示语言",
+    "description": "选择首选语言以渲染 AnythingLLM 的界面（如果适用）。",
+    "languages": {
+      "en": "英语",
+      "zh": "中文",
+      "zh-tw": "繁体中文",
+      "es": "西班牙语",
+      "de": "德语",
+      "fr": "法语",
+      "ko": "韩语",
+      "ru": "俄语",
+      "it": "意大利语",
+      "pt": "葡萄牙语",
+      "he": "希伯来语",
+      "nl": "荷兰语",
+      "vi": "越南语"
+    }
+  },
+
   // Chat Settings
   chat: {
     llm: {

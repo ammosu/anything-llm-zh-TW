@@ -984,7 +984,26 @@ const TRANSLATIONS = {
       "remove": "Remove"
     }
   },
-  
+
+  languagePreference: {
+    "title": "Display Language",
+    "description": "Select the preferred language to render AnythingLLM's UI in, when applicable.",
+    "languages": {
+      "en": "English",
+      "zh": "Simplified Chinese",
+      "zh-tw": "Traditional Chinese",
+      "es": "Spanish",
+      "de": "German",
+      "fr": "French",
+      "ko": "Korean",
+      "ru": "Russian",
+      "it": "Italian",
+      "pt": "Portuguese",
+      "he": "Hebrew",
+      "nl": "Dutch",
+      "vi": "Vietnamese"
+    }
+  },
 
 //////////////////////////////
 

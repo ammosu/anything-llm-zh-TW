@@ -663,6 +663,26 @@ const TRANSLATIONS = {
     },
   },
 
+  languagePreference: {
+    "title": "顯示語言",
+    "description": "選擇偏好的語言來渲染 AnythingLLM 的界面（如果適用）。",
+    "languages": {
+      "en": "英語",
+      "zh": "簡體中文",
+      "zh-tw": "繁體中文",
+      "es": "西班牙語",
+      "de": "德語",
+      "fr": "法語",
+      "ko": "韓語",
+      "ru": "俄語",
+      "it": "意大利語",
+      "pt": "葡萄牙語",
+      "he": "希伯來語",
+      "nl": "荷蘭語",
+      "vi": "越南語"
+    }
+  },
+
   // 更改警告
   "changeWarning": {
     "title": "警告",
