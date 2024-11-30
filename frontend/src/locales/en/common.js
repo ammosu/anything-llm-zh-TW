@@ -897,6 +897,32 @@ const TRANSLATIONS = {
       "off": "Off"
     },
   },
+
+  "agentSql": {
+    "newConnectionTitle": "New SQL Connection",
+    "addConnectionInfo": "Add the connection information for your database below and it will be available for future SQL agent calls.",
+    "warningMessage": "<b>WARNING:</b> The SQL agent has been <i>instructed</i> to only perform non-modifying queries. This <b>does not</b> prevent a hallucination from still deleting data. Only connect with a user who has <b>READ_ONLY</b> permissions.",
+    "selectEngine": "Select your SQL engine",
+    "connectionName": "Connection name",
+    "connectionNamePlaceholder": "a unique name to identify this SQL connection",
+    "dbUser": "Database user",
+    "dbUserPlaceholder": "root",
+    "dbPassword": "Database user password",
+    "dbPasswordPlaceholder": "password123",
+    "serverEndpoint": "Server endpoint",
+    "serverEndpointPlaceholder": "the hostname or endpoint for your database",
+    "port": "Port",
+    "portPlaceholder": "3306",
+    "database": "Database",
+    "databasePlaceholder": "the database the agent will interact with",
+    "cancel": "Cancel",
+    "saveConnection": "Save connection",
+    "engine": {
+      "postgresql": "PostgreSQL",
+      "mysql": "MySQL",
+      "sql-server": "SQL Server"
+    }
+  },
   
   ///////////////////////////////////////////////////////
 

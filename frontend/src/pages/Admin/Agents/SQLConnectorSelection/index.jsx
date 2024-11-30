@@ -5,6 +5,7 @@ import NewSQLConnection from "./NewConnectionModal";
 import { useModal } from "@/hooks/useModal";
 import SQLAgentImage from "@/media/agents/sql-agent.png";
 import Admin from "@/models/admin";
+import { useTranslation } from "react-i18next";
 
 export default function AgentSQLConnectorSelection({
   skill,
@@ -13,8 +14,10 @@ export default function AgentSQLConnectorSelection({
   enabled = false,
   setHasChanges,
 }) {
+  const { t } = useTranslation();
   const { isOpen, openModal, closeModal } = useModal();
   const [connections, setConnections] = useState([]);
+
   useEffect(() => {
     Admin.systemPreferencesByFields(["agent_sql_connections"])
       .then((res) => setConnections(res?.settings?.agent_sql_connections ?? []))
@@ -35,7 +38,7 @@ export default function AgentSQLConnectorSelection({
               htmlFor="name"
               className="text-theme-text-primary text-md font-bold"
             >
-              SQL Agent
+              {t("sqlAgent.title")}
             </label>
             <label className="border-none relative inline-flex items-center ml-auto cursor-pointer">
               <input
@@ -50,12 +53,11 @@ export default function AgentSQLConnectorSelection({
           </div>
           <img
             src={SQLAgentImage}
-            alt="SQL Agent"
+            alt={t("sqlAgent.imageAlt")}
             className="w-full rounded-md"
           />
           <p className="text-theme-text-secondary text-opacity-60 text-xs font-medium py-1.5">
-            Enable your agent to be able to leverage SQL to answer you questions
-            by connecting to various SQL database providers.
+            {t("sqlAgent.description")}
           </p>
           {enabled && (
             <>
@@ -72,7 +74,7 @@ export default function AgentSQLConnectorSelection({
               />
               <div className="flex flex-col mt-2 gap-y-2">
                 <p className="text-theme-text-primary font-semibold text-sm">
-                  Your database connections
+                  {t("sqlAgent.connectionsTitle")}
                 </p>
                 <div className="flex flex-col gap-y-3">
                   {connections
@@ -107,7 +109,7 @@ export default function AgentSQLConnectorSelection({
                         />
                       </div>
                       <p className="text-left text-theme-text-primary text-sm">
-                        New SQL connection
+                        {t("sqlAgent.newConnection")}
                       </p>
                     </div>
                   </button>
