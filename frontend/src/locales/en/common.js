@@ -827,6 +827,67 @@ const TRANSLATIONS = {
     }
   },
   
+  // Admin User
+  adminUsers: {
+    "usersTitle": "Users",
+    "usersDescription": "These are all the accounts which have an account on this instance. Removing an account will instantly remove their access to this instance.",
+    "addUser": "Add user",
+    "username": "Username",
+    "role": "Role",
+    "dateAdded": "Date Added",
+    "permissionsTitle": "Permissions",
+    "roleHint": {
+      "default1": "Can only send chats with workspaces they are added to by admin or managers.",
+      "default2": "Cannot modify any settings at all.",
+      "manager1": "Can view, create, and delete any workspaces and modify workspace-specific settings.",
+      "manager2": "Can create, update and invite new users to the instance.",
+      "manager3": "Cannot modify LLM, vectorDB, embedding, or other connections.",
+      "admin1": "Highest user level privilege. Can see and do everything across the system."
+    },
+    "limitMessagesTitle": "Limit messages per day",
+    "limitMessagesDescription": "Restrict this user to a number of successful queries or chats within a 24 hour window.",
+    "messageLimitLabel": "Message limit per day"
+  },
+
+  // Admin User Row
+  adminUserRow: {
+    "confirmSuspend": "Are you sure you want to suspend {{username}}?\\nAfter you do this they will be logged out and unable to log back into this instance of AnythingLLM until unsuspended by an admin.",
+    "suspendSuccess": "User has been suspended.",
+    "unsuspendSuccess": "User is no longer suspended.",
+    "confirmDelete": "Are you sure you want to delete {{username}}?\\nAfter you do this they will be logged out and unable to use this instance of AnythingLLM.\\n\\nThis action is irreversible.",
+    "deleteSuccess": "User deleted from system.",
+    "editButton": "Edit",
+    "suspendButton": "Suspend",
+    "unsuspendButton": "Unsuspend",
+    "deleteButton": "Delete"
+  },
+
+  // Edit User Modal
+  editUserModal: {
+    "title": "Edit {{username}}",
+    "username": {
+      "label": "Username",
+      "placeholder": "User's username",
+      "hint": "Username must only contain lowercase letters, numbers, underscores, and hyphens with no spaces"
+    },
+    "password": {
+      "label": "New Password",
+      "placeholder": "{{username}}'s new password",
+      "hint": "Password must be at least 8 characters long"
+    },
+    "role": {
+      "label": "Role",
+      "default": "Default",
+      "manager": "Manager",
+      "admin": "Administrator"
+    },
+    "error": "Error: {{error}}",
+    "cancelButton": "Cancel",
+    "updateButton": "Update user"
+  },
+
+
+
 //////////////////////////////
 
   // ChangeWarning
