@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { CheckCircle, CopySimple, X } from "@phosphor-icons/react";
 import showToast from "@/utils/toast";
 import hljs from "highlight.js";
+import { useTranslation } from "react-i18next";
 import "@/utils/chat/themes/github-dark.css";
 import "@/utils/chat/themes/github.css";
 
 export default function CodeSnippetModal({ embed, closeModal }) {
+  const { t } = useTranslation();
   return (
     <div className="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
       <div className="relative w-full max-w-2xl bg-theme-bg-secondary rounded-lg shadow border-2 border-theme-modal-border">
         <div className="relative p-6 border-b rounded-t border-theme-modal-border">
           <div className="w-full flex gap-x-2 items-center">
             <h3 className="text-xl font-semibold text-white overflow-hidden overflow-ellipsis whitespace-nowrap">
-              Copy your embed code
+              {t("codeSnippetModal.title")}
             </h3>
           </div>
           <button
@@ -33,7 +35,7 @@ export default function CodeSnippetModal({ embed, closeModal }) {
               type="button"
               className="transition-all duration-300 text-white hover:bg-zinc-700 px-4 py-2 rounded-lg text-sm"
             >
-              Close
+              {t("codeSnippetModal.closeButton")}
             </button>
             <div hidden={true} />
           </div>
@@ -59,6 +61,7 @@ https://github.com/Mintplex-Labs/anything-llm/tree/master/embed/README.md
 }
 
 const ScriptTag = ({ embed }) => {
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const scriptHost = import.meta.env.DEV
     ? "http://localhost:3000"
@@ -76,25 +79,24 @@ const ScriptTag = ({ embed }) => {
     setTimeout(() => {
       setCopied(false);
     }, 2500);
-    showToast("Snippet copied to clipboard!", "success", { clear: true });
+    showToast(t("codeSnippetModal.copiedMessage"), "success", { clear: true });
   };
 
   return (
     <div>
       <div className="flex flex-col mb-2">
         <label className="block text-sm font-medium text-white">
-          HTML Script Tag Embed Code
+          {t("codeSnippetModal.embedCodeLabel")}
         </label>
         <p className="text-theme-text-secondary text-xs">
-          Have your workspace chat embed function like a help desk chat bottom
-          in the corner of your website.
+          {t("codeSnippetModal.embedCodeDescription")}
         </p>
         <a
           href="https://github.com/Mintplex-Labs/anything-llm/tree/master/embed/README.md"
           target="_blank"
           className="text-blue-300 light:text-blue-500 hover:underline"
         >
-          View all style and configuration options &rarr;
+          {t("codeSnippetModal.viewDocsLink")} &rarr;
         </a>
       </div>
       <button

@@ -1078,6 +1078,107 @@ const TRANSLATIONS = {
     "viewingText": "Viewing Text",
   },
 
+  // New Embed Modal
+  newEmbedModal: {
+    "title": "Create new embed for workspace",
+    "info": "After creating an embed you will be provided a link that you can publish on your website with a simple",
+    "inputs": {
+      "maxChatsPerDay": {
+        "title": "Max chats per day",
+        "hint": "Limit the amount of chats this embedded chat can process in a 24 hour period. Zero is unlimited."
+      },
+      "maxChatsPerSession": {
+        "title": "Max chats per session",
+        "hint": "Limit the amount of chats a session user can send with this embed in a 24 hour period. Zero is unlimited."
+      },
+      "allowModelOverride": {
+        "title": "Enable dynamic model use",
+        "hint": "Allow setting of the preferred LLM model to override the workspace default."
+      },
+      "allowTemperatureOverride": {
+        "title": "Enable dynamic LLM temperature",
+        "hint": "Allow setting of the LLM temperature to override the workspace default."
+      },
+      "allowPromptOverride": {
+        "title": "Enable Prompt Override",
+        "hint": "Allow setting of the system prompt to override the workspace default."
+      }
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "createEmbed": "Create embed"
+    },
+    "workspaceSelection": {
+      "label": "Workspace",
+      "description": "This is the workspace your chat window will be based on. All defaults will be inherited from the workspace unless overridden by this config."
+    },
+    "chatModeSelection": {
+      "label": "Allowed chat method",
+      "description": "Set how your chatbot should operate. Query means it will only respond if a document helps answer the query. Chat opens the chat to even general questions and can answer totally unrelated queries to your workspace.",
+      "chatOption": "Chat: Respond to all questions regardless of context",
+      "queryOption": "Query: Only respond to chats related to documents in workspace"
+    },
+    "permittedDomains": {
+      "label": "Restrict requests from domains",
+      "description": "This filter will block any requests that come from a domain other than the list below. Leaving this empty means anyone can use your embed on any site.",
+      "placeholder": "https://mysite.com, https://anythingllm.com"
+    }
+  },
+
+  embedRow: {
+    "confirmDisable": "Are you sure you want to disable this embed '{{embedName}}'?\nOnce disabled, the embed will no longer respond to any chat requests.",
+    "disabledSuccess": "Embed has been disabled.",
+    "enabledSuccess": "Embed is active.",
+    "confirmDelete": "Are you sure you want to delete this embed '{{embedName}}'?\nOnce deleted, this embed will no longer respond to chats or be active.\n\nThis action is irreversible.",
+    "deleteSuccess": "Embed deleted from system.",
+    "showCode": "Show Code",
+    "disable": "Disable",
+    "enable": "Enable",
+    "delete": "Delete",
+    "allDomains": "All"
+  },
+  
+  editEmbed: {
+    "title": "Update embed #{{id}}",
+    "toast": {
+      "success": "Embed updated successfully."
+    },
+    "maxChatsPerDay": {
+      "title": "Max chats per day",
+      "hint": "Limit the amount of chats this embedded chat can process in a 24 hour period. Zero is unlimited."
+    },
+    "maxChatsPerSession": {
+      "title": "Max chats per session",
+      "hint": "Limit the amount of chats a session user can send with this embed in a 24 hour period. Zero is unlimited."
+    },
+    "allowModelOverride": {
+      "title": "Enable dynamic model use",
+      "hint": "Allow setting of the preferred LLM model to override the workspace default."
+    },
+    "allowTemperatureOverride": {
+      "title": "Enable dynamic LLM temperature",
+      "hint": "Allow setting of the LLM temperature to override the workspace default."
+    },
+    "allowPromptOverride": {
+      "title": "Enable Prompt Override",
+      "hint": "Allow setting of the system prompt to override the workspace default."
+    },
+    "error": "Error: {{error}}",
+    "info": "After creating an embed you will be provided a link that you can publish on your website with a simple",
+    "infoCode": "tag.",
+    "cancelButton": "Cancel",
+    "updateButton": "Update embed"
+  },
+
+  codeSnippetModal: {
+    "title": "Copy your embed code",
+    "closeButton": "Close",
+    "embedCodeLabel": "HTML Script Tag Embed Code",
+    "embedCodeDescription": "Have your workspace chat embed function like a help desk chat bottom in the corner of your website.",
+    "viewDocsLink": "View all style and configuration options",
+    "copiedMessage": "Snippet copied to clipboard!"
+  },
+
 //////////////////////////////
 
   // ChangeWarning
