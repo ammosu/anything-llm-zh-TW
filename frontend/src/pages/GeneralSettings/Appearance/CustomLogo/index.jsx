@@ -10,6 +10,7 @@ export default function CustomLogo() {
   const [logo, setLogo] = useState("");
   const [isDefaultLogo, setIsDefaultLogo] = useState(true);
   const fileInputRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function logoInit() {
@@ -31,7 +32,7 @@ export default function CustomLogo() {
     formData.append("logo", file);
     const { success, error } = await System.uploadLogo(formData);
     if (!success) {
-      showToast(`Failed to upload logo: ${error}`, "error");
+      showToast(t("appearance.logo.uploadFailed", { error }), "error");
       setLogo(_initLogo);
       return;
     }
@@ -39,7 +40,7 @@ export default function CustomLogo() {
     const { logoURL } = await System.fetchLogo();
     _setLogo(logoURL);
 
-    showToast("Image uploaded successfully.", "success");
+    showToast(t("appearance.logo.uploadSuccess"), "success");
     setIsDefaultLogo(false);
   };
 
@@ -49,8 +50,8 @@ export default function CustomLogo() {
 
     const { success, error } = await System.removeCustomLogo();
     if (!success) {
-      console.error("Failed to remove logo:", error);
-      showToast(`Failed to remove logo: ${error}`, "error");
+      console.error(t("appearance.logo.removeFailed", { error }));
+      showToast(t("appearance.logo.removeFailed", { error }), "error");
       const { logoURL } = await System.fetchLogo();
       setLogo(logoURL);
       setIsDefaultLogo(false);
@@ -60,13 +61,12 @@ export default function CustomLogo() {
     const { logoURL } = await System.fetchLogo();
     _setLogo(logoURL);
 
-    showToast("Image successfully removed.", "success");
+    showToast(t("appearance.logo.removeSuccess"), "success");
   };
 
   const triggerFileInputClick = () => {
     fileInputRef.current?.click();
   };
-  const { t } = useTranslation();
 
   return (
     <div className="mt-6 mb-8">
@@ -116,7 +116,7 @@ export default function CustomLogo() {
           <div className="group w-80 h-[130px] mt-3 overflow-hidden">
             <img
               src={logo}
-              alt="Uploaded Logo"
+              alt={t("appearance.logo.uploaded")}
               className="w-full h-full object-cover border-2 border-theme-text-secondary border-opacity-60 p-1 rounded-2xl"
             />
 

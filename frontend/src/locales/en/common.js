@@ -1134,6 +1134,13 @@ const TRANSLATIONS = {
       recommended: "Recommended size: 800 x 200",
       remove: "Remove",
       replace: "Replace",
+      ////
+      uploaded: "Uploaded Logo",
+      uploadFailed: "Failed to upload logo: {{error}}",
+      uploadSuccess: "Image uploaded successfully.",
+      removeFailed: "Failed to remove logo: {{error}}",
+      removeSuccess: "Image successfully removed."
+      ////
     },
     message: {
       title: "Customize Messages",
