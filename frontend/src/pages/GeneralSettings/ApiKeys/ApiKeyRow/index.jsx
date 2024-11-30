@@ -4,14 +4,19 @@ import showToast from "@/utils/toast";
 import { Trash } from "@phosphor-icons/react";
 import { userFromStorage } from "@/utils/request";
 import System from "@/models/system";
+import { useTranslation } from "react-i18next";
 
 export default function ApiKeyRow({ apiKey }) {
+  const { t } = useTranslation();
   const rowRef = useRef(null);
   const [copied, setCopied] = useState(false);
   const handleDelete = async () => {
     if (
       !window.confirm(
-        `Are you sure you want to deactivate this api key?\nAfter you do this it will not longer be useable.\n\nThis action is irreversible.`
+        t(
+          "apiKey.confirmDelete",
+          "Are you sure you want to deactivate this API key?\nAfter you do this it will no longer be usable.\n\nThis action is irreversible."
+        )
       )
     )
       return false;
@@ -22,13 +27,13 @@ export default function ApiKeyRow({ apiKey }) {
     const user = userFromStorage();
     const Model = !!user ? Admin : System;
     await Model.deleteApiKey(apiKey.id);
-    showToast("API Key permanently deleted", "info");
+    showToast(t("apiKey.deletedMessage", "API Key permanently deleted"), "info");
   };
 
   const copyApiKey = () => {
     if (!apiKey) return false;
     window.navigator.clipboard.writeText(apiKey.secret);
-    showToast("API Key copied to clipboard", "success");
+    showToast(t("apiKey.copiedMessage", "API Key copied to clipboard"), "success");
     setCopied(true);
   };
 
@@ -52,7 +57,7 @@ export default function ApiKeyRow({ apiKey }) {
           {apiKey.secret}
         </td>
         <td className="px-6 py-4 text-center">
-          {apiKey.createdBy?.username || "--"}
+          {apiKey.createdBy?.username || t("apiKey.anonymousUser", "--")}
         </td>
         <td className="px-6 py-4">{apiKey.createdAt}</td>
         <td className="px-6 py-4 flex items-center gap-x-6">
@@ -61,7 +66,7 @@ export default function ApiKeyRow({ apiKey }) {
             disabled={copied}
             className="border-none font-medium text-blue-300 rounded-lg hover:text-white hover:light:text-blue-500 hover:text-opacity-60 hover:underline"
           >
-            {copied ? "Copied" : "Copy API Key"}
+            {copied ? t("apiKey.copied", "Copied") : t("apiKey.copy", "Copy API Key")}
           </button>
           <button
             onClick={handleDelete}

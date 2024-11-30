@@ -915,7 +915,27 @@ const TRANSLATIONS = {
     "createButton": "Create workspace"
   },
   
+  // API key modal
+  newApiKeyModal: {
+    "title": "Create new API key",
+    "description": "Once created the API key can be used to programmatically access and configure this AnythingLLM instance.",
+    "readDocs": "Read the API documentation",
+    "cancel": "Cancel",
+    "create": "Create API key",
+    "copy": "Copy API key",
+    "copied": "Copied API key",
+    "error": "Error: {{error}}"
+  },
 
+  // API Keys
+  apiKey: {
+    "confirmDelete": "Are you sure you want to deactivate this API key?\nAfter you do this it will no longer be usable.\n\nThis action is irreversible.",
+    "deletedMessage": "API Key permanently deleted",
+    "copiedMessage": "API Key copied to clipboard",
+    "anonymousUser": "--",
+    "copied": "Copied",
+    "copy": "Copy API Key"
+  },
 
 //////////////////////////////
 
