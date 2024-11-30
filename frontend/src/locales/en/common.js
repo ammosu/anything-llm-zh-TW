@@ -1017,6 +1017,66 @@ const TRANSLATIONS = {
     },
   },
 
+  //////////////// pages /////////////////
+  // Agents Badge
+  "defaultBadge": {
+    "tooltip": "This skill is enabled by default and cannot be turned off.",
+    "label": "Default"
+  },
+
+  // Skills
+  "skills": {
+    "activated": "Skill activated.",
+    "deactivated": "Skill deactivated.",
+    "errorRequired": "{{key}} is required to have a value.",
+    "errorType": "{{key}} must be of type {{type}}.",
+    "success": "Skill config updated successfully.",
+    "name": "{{name}}",
+    "description": "{{description}} by {{author}}",
+    "fieldLabel": "{{key}}",
+    "saveButton": "Save",
+    "noOptions": "There are no options to modify for this skill.",
+    "confirmDelete": "Are you sure you want to delete this skill? This action cannot be undone.",
+    "deleteSuccess": "Skill deleted successfully.",
+    "deleteFailure": "Failed to delete skill.",
+    "deleteButton": "Delete Skill",
+    "noImportedSkills": "No imported skills found",
+    "learnAboutAgentSkills": "Learn about agent skills in the",
+    "agentDocs": "AnythingLLM Agent Docs",
+    "status": {
+      "on": "On",
+      "off": "Off"
+    },
+  },
+
+  "agentSql": {
+    "newConnectionTitle": "New SQL Connection",
+    "addConnectionInfo": "Add the connection information for your database below and it will be available for future SQL agent calls.",
+    "warningMessage": "<b>WARNING:</b> The SQL agent has been <i>instructed</i> to only perform non-modifying queries. This <b>does not</b> prevent a hallucination from still deleting data. Only connect with a user who has <b>READ_ONLY</b> permissions.",
+    "selectEngine": "Select your SQL engine",
+    "connectionName": "Connection name",
+    "connectionNamePlaceholder": "a unique name to identify this SQL connection",
+    "dbUser": "Database user",
+    "dbUserPlaceholder": "root",
+    "dbPassword": "Database user password",
+    "dbPasswordPlaceholder": "password123",
+    "serverEndpoint": "Server endpoint",
+    "serverEndpointPlaceholder": "the hostname or endpoint for your database",
+    "port": "Port",
+    "portPlaceholder": "3306",
+    "database": "Database",
+    "databasePlaceholder": "the database the agent will interact with",
+    "cancel": "Cancel",
+    "saveConnection": "Save connection",
+    "engine": {
+      "postgresql": "PostgreSQL",
+      "mysql": "MySQL",
+      "sql-server": "SQL Server"
+    }
+  },
+  
+  ///////////////////////////////////////////////////////
+
   // API Keys
   api: {
     title: "API Keys",

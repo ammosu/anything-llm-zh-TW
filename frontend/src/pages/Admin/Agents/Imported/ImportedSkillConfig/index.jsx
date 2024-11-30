@@ -2,7 +2,7 @@ import System from "@/models/system";
 import showToast from "@/utils/toast";
 import { Gear, Plug } from "@phosphor-icons/react";
 import { useEffect, useState, useRef } from "react";
-import { sentenceCase } from "text-case";
+import { useTranslation } from "react-i18next";
 
 /**
  * Converts setup_args to inputs for the form builder
@@ -35,6 +35,7 @@ export default function ImportedSkillConfig({
   selectedSkill, // imported skill config object
   setImportedSkills, // function to set imported skills since config is file-write
 }) {
+  const { t } = useTranslation();
   const [config, setConfig] = useState(selectedSkill);
   const [hasChanges, setHasChanges] = useState(false);
   const [inputs, setInputs] = useState(
@@ -56,7 +57,7 @@ export default function ImportedSkillConfig({
     );
     setConfig(updatedConfig);
     showToast(
-      `Skill ${updatedConfig.active ? "activated" : "deactivated"}.`,
+      t(`skills.${updatedConfig.active ? "activated" : "deactivated"}`),
       "success",
       { clear: true }
     );
@@ -70,11 +71,11 @@ export default function ImportedSkillConfig({
     for (const [key, value] of Object.entries(inputs)) {
       const settings = config.setup_args[key];
       if (settings.required && !value) {
-        errors.push(`${key} is required to have a value.`);
+        errors.push(t("skills.errorRequired", { key }));
         continue;
       }
       if (typeof value !== settings.type) {
-        errors.push(`${key} must be of type ${settings.type}.`);
+        errors.push(t("skills.errorType", { key, type: settings.type }));
         continue;
       }
       updatedConfig.setup_args[key].value = value;
@@ -95,7 +96,7 @@ export default function ImportedSkillConfig({
         skill.hubId === config.hubId ? updatedConfig : skill
       )
     );
-    showToast("Skill config updated successfully.", "success");
+    showToast(t("skills.success"), "success");
     setHasChanges(false);
   }
 
@@ -113,7 +114,7 @@ export default function ImportedSkillConfig({
           <div className="flex items-center gap-x-2">
             <Plug size={24} weight="bold" className="text-white" />
             <label htmlFor="name" className="text-white text-md font-bold">
-              {sentenceCase(config.name)}
+              {t("skills.name", { name: config.name })}
             </label>
             <label className="border-none relative inline-flex items-center ml-auto cursor-pointer">
               <input
@@ -131,7 +132,10 @@ export default function ImportedSkillConfig({
             />
           </div>
           <p className="text-white text-opacity-60 text-xs font-medium py-1.5">
-            {config.description} by{" "}
+            {t("skills.description", {
+              description: config.description,
+              author: config.author,
+            })}{" "}
             <a
               href={config.author_url}
               target="_blank"
@@ -147,7 +151,7 @@ export default function ImportedSkillConfig({
               {Object.entries(config.setup_args).map(([key, props]) => (
                 <div key={key} className="flex flex-col gap-y-1">
                   <label htmlFor={key} className="text-white text-sm font-bold">
-                    {key}
+                    {t("skills.fieldLabel", { key })}
                   </label>
                   <input
                     type={props?.input?.type || "text"}
@@ -164,7 +168,7 @@ export default function ImportedSkillConfig({
                     className="border-solid bg-transparent border border-white light:border-black rounded-md p-2 text-white text-sm"
                   />
                   <p className="text-white text-opacity-60 text-xs font-medium py-1.5">
-                    {props?.input?.hint}
+                    {props?.input?.hint || ""}
                   </p>
                 </div>
               ))}
@@ -174,13 +178,13 @@ export default function ImportedSkillConfig({
                   type="button"
                   className="bg-blue-500 text-white light:text-white rounded-md p-2"
                 >
-                  Save
+                  {t("skills.saveButton")}
                 </button>
               )}
             </div>
           ) : (
             <p className="text-white text-opacity-60 text-sm font-medium py-1.5">
-              There are no options to modify for this skill.
+              {t("skills.noOptions")}
             </p>
           )}
         </div>
@@ -190,25 +194,21 @@ export default function ImportedSkillConfig({
 }
 
 function ManageSkillMenu({ config, setImportedSkills }) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
 
   async function deleteSkill() {
-    if (
-      !window.confirm(
-        "Are you sure you want to delete this skill? This action cannot be undone."
-      )
-    )
-      return;
+    if (!window.confirm(t("skills.confirmDelete"))) return;
     const success = await System.experimentalFeatures.agentPlugins.deletePlugin(
       config.hubId
     );
     if (success) {
       setImportedSkills((prev) => prev.filter((s) => s.hubId !== config.hubId));
-      showToast("Skill deleted successfully.", "success");
+      showToast(t("skills.deleteSuccess"), "success");
       setOpen(false);
     } else {
-      showToast("Failed to delete skill.", "error");
+      showToast(t("skills.deleteFailure"), "error");
     }
   }
 
@@ -242,7 +242,7 @@ function ManageSkillMenu({ config, setImportedSkills }) {
             onClick={deleteSkill}
             className="border-none flex items-center rounded-lg gap-x-2 hover:bg-theme-action-menu-item-hover py-1.5 px-2 transition-colors duration-200 w-full text-left"
           >
-            <span className="text-sm">Delete Skill</span>
+            <span className="text-sm">{t("skills.deleteButton")}</span>
           </button>
         </div>
       )}
