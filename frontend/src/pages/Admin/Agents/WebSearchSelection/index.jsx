@@ -27,79 +27,71 @@ import {
   TavilySearchOptions,
   DuckDuckGoOptions,
 } from "./SearchProviderOptions";
+import { useTranslation } from "react-i18next";
 
 const SEARCH_PROVIDERS = [
   {
-    name: "Please make a selection",
+    name: "searchProviders.none.name",
     value: "none",
     logo: AnythingLLMIcon,
     options: () => <React.Fragment />,
-    description:
-      "Web search will be disabled until a provider and keys are provided.",
+    description: "searchProviders.none.description",
   },
   {
-    name: "DuckDuckGo",
+    name: "searchProviders.duckduckgo.name",
     value: "duckduckgo-engine",
     logo: DuckDuckGoIcon,
     options: () => <DuckDuckGoOptions />,
-    description:
-      "Free and privacy-focused web search using DuckDuckGo's HTML interface.",
+    description: "searchProviders.duckduckgo.description",
   },
   {
-    name: "Google Search Engine",
+    name: "searchProviders.google.name",
     value: "google-search-engine",
     logo: GoogleSearchIcon,
     options: (settings) => <GoogleSearchOptions settings={settings} />,
-    description:
-      "Web search powered by a custom Google Search Engine. Free for 100 queries per day.",
+    description: "searchProviders.google.description",
   },
   {
-    name: "SearchApi",
+    name: "searchProviders.searchApi.name",
     value: "searchapi",
     logo: SearchApiIcon,
     options: (settings) => <SearchApiOptions settings={settings} />,
-    description:
-      "SearchApi delivers structured data from multiple search engines. Free for 100 queries, but then paid. ",
+    description: "searchProviders.searchApi.description",
   },
   {
-    name: "Serper.dev",
+    name: "searchProviders.serper.name",
     value: "serper-dot-dev",
     logo: SerperDotDevIcon,
     options: (settings) => <SerperDotDevOptions settings={settings} />,
-    description:
-      "Serper.dev web-search. Free account with a 2,500 calls, but then paid.",
+    description: "searchProviders.serper.description",
   },
   {
-    name: "Bing Search",
+    name: "searchProviders.bing.name",
     value: "bing-search",
     logo: BingSearchIcon,
     options: (settings) => <BingSearchOptions settings={settings} />,
-    description:
-      "Web search powered by the Bing Search API. Free for 1000 queries per month.",
+    description: "searchProviders.bing.description",
   },
   {
-    name: "Serply.io",
+    name: "searchProviders.serply.name",
     value: "serply-engine",
     logo: SerplySearchIcon,
     options: (settings) => <SerplySearchOptions settings={settings} />,
-    description:
-      "Serply.io web-search. Free account with a 100 calls/month forever.",
+    description: "searchProviders.serply.description",
   },
   {
-    name: "SearXNG",
+    name: "searchProviders.searxng.name",
     value: "searxng-engine",
     logo: SearXNGSearchIcon,
     options: (settings) => <SearXNGOptions settings={settings} />,
-    description:
-      "Free, open-source, internet meta-search engine with no tracking.",
+    description: "searchProviders.searxng.description",
   },
   {
-    name: "Tavily Search",
+    name: "searchProviders.tavily.name",
     value: "tavily-search",
     logo: TavilySearchIcon,
     options: (settings) => <TavilySearchOptions settings={settings} />,
-    description:
-      "Tavily Search API. Offers a free tier with 1000 queries per month.",
+    description: "searchProviders.tavily.description",
   },
 ];
 
@@ -110,6 +102,7 @@ export default function AgentWebSearchSelection({
   enabled = false,
   setHasChanges,
 }) {
+  const { t } = useTranslation();
   const searchInputRef = useRef(null);
   const [filteredResults, setFilteredResults] = useState([]);
   const [selectedProvider, setSelectedProvider] = useState("none");
@@ -134,7 +127,7 @@ export default function AgentWebSearchSelection({
 
   useEffect(() => {
     const filtered = SEARCH_PROVIDERS.filter((provider) =>
-      provider.name.toLowerCase().includes(searchQuery.toLowerCase())
+      t(provider.name).toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredResults(filtered);
   }, [searchQuery, selectedProvider]);
@@ -164,7 +157,7 @@ export default function AgentWebSearchSelection({
             htmlFor="name"
             className="text-theme-text-primary text-md font-bold"
           >
-            Live web search and browsing
+            {t("agentWebSearch.title")}
           </label>
           <label className="border-none relative inline-flex items-center ml-auto cursor-pointer">
             <input
@@ -179,13 +172,11 @@ export default function AgentWebSearchSelection({
         </div>
         <img
           src={WebSearchImage}
-          alt="Web Search"
+          alt={t("agentWebSearch.imageAlt")}
           className="w-full rounded-md"
         />
         <p className="text-theme-text-secondary text-opacity-60 text-xs font-medium py-1.5">
-          Enable your agent to search the web to answer your questions by
-          connecting to a web-search (SERP) provider. Web search during agent
-          sessions will not work until this is set up.
+          {t("agentWebSearch.description")}
         </p>
         <div hidden={!enabled}>
           <div className="relative">
@@ -213,7 +204,7 @@ export default function AgentWebSearchSelection({
                       type="text"
                       name="web-provider-search"
                       autoComplete="off"
-                      placeholder="Search available web-search providers"
+                      placeholder={t("agentWebSearch.searchPlaceholder")}
                       className="border-none -ml-4 my-2 bg-transparent z-20 pl-12 h-[38px] w-full px-4 py-1 text-sm outline-none text-theme-text-primary placeholder:text-theme-text-primary placeholder:font-medium"
                       onChange={(e) => setSearchQuery(e.target.value)}
                       ref={searchInputRef}
@@ -232,7 +223,11 @@ export default function AgentWebSearchSelection({
                     {filteredResults.map((provider) => {
                       return (
                         <SearchProviderItem
-                          provider={provider}
+                          provider={{
+                            ...provider,
+                            name: t(provider.name),
+                            description: t(provider.description),
+                          }}
                           key={provider.name}
                           checked={selectedProvider === provider.value}
                           onClick={() => updateChoice(provider.value)}
@@ -251,15 +246,15 @@ export default function AgentWebSearchSelection({
                 <div className="flex gap-x-4 items-center">
                   <img
                     src={selectedSearchProviderObject.logo}
-                    alt={`${selectedSearchProviderObject.name} logo`}
+                    alt={`${t(selectedSearchProviderObject.name)} logo`}
                     className="w-10 h-10 rounded-md"
                   />
                   <div className="flex flex-col text-left">
                     <div className="text-sm font-semibold text-white">
-                      {selectedSearchProviderObject.name}
+                      {t(selectedSearchProviderObject.name)}
                     </div>
                     <div className="mt-1 text-xs text-description">
-                      {selectedSearchProviderObject.description}
+                      {t(selectedSearchProviderObject.description)}
                     </div>
                   </div>
                 </div>
