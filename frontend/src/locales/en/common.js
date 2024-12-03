@@ -1233,6 +1233,12 @@ const TRANSLATIONS = {
     },
   },
   
+  // onboarding
+  onboarding: {
+    "welcomeMessage": "Welcome to",
+    "logoAlt": "AnythingLLM Logo",
+    "getStartedButton": "Get started"
+  },
 
 //////////////////////////////
 
