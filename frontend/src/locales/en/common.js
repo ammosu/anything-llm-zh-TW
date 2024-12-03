@@ -1527,17 +1527,29 @@ const TRANSLATIONS = {
     "warn-start": "Changes here will only apply to",
     "warn-center": "newly embedded documents",
     "warn-end": ", not existing documents.",
+    error: {
+      "overlapGreaterSize": "Chunk overlap cannot be larger or equal to chunk size."
+    },
+    success: {
+      "save": "Text chunking strategy settings saved."
+    },
     size: {
       title: "Text Chunk Size",
       description:
         "This is the maximum length of characters that can be present in a single vector.",
       recommend: "Embed model maximum length is",
+      ////
+      "placeholder": "Enter the maximum length",
+      ////
     },
 
     overlap: {
       title: "Text Chunk Overlap",
       description:
         "This is the maximum overlap of characters that occurs during chunking between two adjacent text chunks.",
+      ////
+      "placeholder": "Enter the overlap size"
+      ////
     },
   },
 

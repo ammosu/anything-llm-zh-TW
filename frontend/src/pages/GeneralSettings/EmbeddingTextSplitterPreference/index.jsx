@@ -28,10 +28,7 @@ export default function EmbeddingTextSplitterPreference() {
       Number(form.get("text_splitter_chunk_overlap")) >=
       Number(form.get("text_splitter_chunk_size"))
     ) {
-      showToast(
-        "Chunk overlap cannot be larger or equal to chunk size.",
-        "error"
-      );
+      showToast(t("text.error.overlapGreaterSize"), "error");
       return;
     }
 
@@ -50,7 +47,7 @@ export default function EmbeddingTextSplitterPreference() {
     });
     setSaving(false);
     setHasChanges(false);
-    showToast("Text chunking strategy settings saved.", "success");
+    showToast(t("text.success.save"), "success");
   };
 
   useEffect(() => {
@@ -92,12 +89,12 @@ export default function EmbeddingTextSplitterPreference() {
                   </p>
                 </div>
                 <p className="text-xs leading-[18px] font-base text-white text-opacity-60">
-                  {t("text.desc-start")} <br />
-                  {t("text.desc-end")}
+                  {t("text.descStart")} <br />
+                  {t("text.descEnd")}
                 </p>
                 <p className="text-xs leading-[18px] font-semibold text-white/80">
-                  {t("text.warn-start")} <i>{t("text.warn-center")}</i>
-                  {t("text.warn-end")}
+                  {t("text.warnStart")} <i>{t("text.warnCenter")}</i>
+                  {t("text.warnEnd")}
                 </p>
               </div>
               <div className="w-full justify-end flex">
@@ -125,7 +122,7 @@ export default function EmbeddingTextSplitterPreference() {
                     max={settings?.max_embed_chunk_size || 1000}
                     onWheel={(e) => e?.currentTarget?.blur()}
                     className="border-none bg-theme-settings-input-bg text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                    placeholder="maximum length of vectorized text"
+                    placeholder={t("text.size.placeholder")}
                     defaultValue={
                       isNullOrNaN(settings?.text_splitter_chunk_size)
                         ? 1000
@@ -157,7 +154,7 @@ export default function EmbeddingTextSplitterPreference() {
                     min={0}
                     onWheel={(e) => e?.currentTarget?.blur()}
                     className="border-none bg-theme-settings-input-bg text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                    placeholder="maximum length of vectorized text"
+                    placeholder={t("text.overlap.placeholder")}
                     defaultValue={
                       isNullOrNaN(settings?.text_splitter_chunk_overlap)
                         ? 20
