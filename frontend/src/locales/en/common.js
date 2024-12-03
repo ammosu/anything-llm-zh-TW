@@ -1264,6 +1264,13 @@ const TRANSLATIONS = {
 
 ////////////////////// test
 
+  vectorDatabase: {
+    "updateSuccess": "Workspace updated successfully!",
+    "updateError": "Error: {{message}}",
+    "updating": "Updating...",
+    "updateWorkspace": "Update workspace"
+  },
+
 
   // ChangeWarning
   changeWarning: {

@@ -7,8 +7,10 @@ import MaxContextSnippets from "./MaxContextSnippets";
 import DocumentSimilarityThreshold from "./DocumentSimilarityThreshold";
 import ResetDatabase from "./ResetDatabase";
 import VectorCount from "./VectorCount";
+import { useTranslation } from "react-i18next";
 
 export default function VectorDatabase({ workspace }) {
+  const { t } = useTranslation();
   const [hasChanges, setHasChanges] = useState(false);
   const [saving, setSaving] = useState(false);
   const formEl = useRef(null);
@@ -24,9 +26,11 @@ export default function VectorDatabase({ workspace }) {
       data
     );
     if (!!updatedWorkspace) {
-      showToast("Workspace updated!", "success", { clear: true });
+      showToast(t("vectorDatabase.updateSuccess"), "success", { clear: true });
     } else {
-      showToast(`Error: ${message}`, "error", { clear: true });
+      showToast(t("vectorDatabase.updateError", { message }), "error", {
+        clear: true,
+      });
     }
     setSaving(false);
     setHasChanges(false);
@@ -54,7 +58,9 @@ export default function VectorDatabase({ workspace }) {
           type="submit"
           className="w-fit transition-all duration-300 border border-slate-200 px-5 py-2.5 rounded-lg text-white text-sm items-center flex gap-x-2 hover:bg-slate-200 hover:text-slate-800 focus:ring-gray-800"
         >
-          {saving ? "Updating..." : "Update workspace"}
+          {saving
+            ? t("vectorDatabase.updating")
+            : t("vectorDatabase.updateWorkspace")}
         </button>
       )}
     </form>
