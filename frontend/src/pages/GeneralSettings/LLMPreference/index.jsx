@@ -315,9 +315,9 @@ export default function GeneralLLMPreference() {
     setSaving(true);
 
     if (error) {
-      showToast(`Failed to save LLM settings: ${error}`, "error");
+      showToast(t("llm.toastSaveError", { error }), "error");
     } else {
-      showToast("LLM preferences saved successfully.", "success");
+      showToast(t("llm.toastSaveSuccess"), "success");
     }
     setSaving(false);
     setHasChanges(!!error);
@@ -394,7 +394,7 @@ export default function GeneralLLMPreference() {
                     onClick={() => handleSubmit()}
                     className="mt-3 mr-0 -mb-14 z-10"
                   >
-                    {saving ? "Saving..." : "Save changes"}
+                    {saving ? t("common.saving") : t("common.save")}
                   </CTAButton>
                 )}
               </div>
@@ -421,7 +421,7 @@ export default function GeneralLLMPreference() {
                           type="text"
                           name="llm-search"
                           autoComplete="off"
-                          placeholder="Search all LLM providers"
+                          placeholder={t("llm.searchPlaceholder")}
                           className="border-none -ml-4 my-2 bg-transparent z-20 pl-12 h-[38px] w-full px-4 py-1 text-sm outline-none text-theme-text-primary placeholder:text-theme-text-primary placeholder:font-medium"
                           onChange={(e) => setSearchQuery(e.target.value)}
                           ref={searchInputRef}
@@ -468,11 +468,11 @@ export default function GeneralLLMPreference() {
                       />
                       <div className="flex flex-col text-left">
                         <div className="text-sm font-semibold text-white">
-                          {selectedLLMObject?.name || "None selected"}
+                          {selectedLLMObject?.name || t("llm.noneSelected")}
                         </div>
                         <div className="mt-1 text-xs text-description">
                           {selectedLLMObject?.description ||
-                            "You need to select an LLM"}
+                            t("llm.noProviderSelected")}
                         </div>
                       </div>
                     </div>

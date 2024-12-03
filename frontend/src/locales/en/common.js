@@ -1490,6 +1490,13 @@ const TRANSLATIONS = {
     description:
       "These are the credentials and settings for your preferred LLM chat & embedding provider. Its important these keys are current and correct or else AnythingLLM will not function properly.",
     provider: "LLM Provider",
+    ////
+    toastSaveSuccess: "LLM preferences saved successfully.",
+    toastSaveError: "Failed to save LLM settings: {{error}}",
+    searchPlaceholder: "Search all LLM providers",
+    noneSelected: "None selected",
+    noProviderSelected: "You need to select an LLM"
+    ////
   },
 
   transcription: {
