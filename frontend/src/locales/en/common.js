@@ -1586,6 +1586,44 @@ const TRANSLATIONS = {
       title: "Vector Database Provider",
       description: "There is no configuration needed for LanceDB.",
     },
+    ////
+    "saveError": "Failed to save vector database settings: {{error}}",
+    "saveSuccess": "Vector database preferences saved successfully.",
+    "providers": {
+      "lancedb": {
+        "name": "LanceDB",
+        "description": "100% local vector DB that runs on the same instance as AnythingLLM."
+      },
+      "chroma": {
+        "name": "Chroma",
+        "description": "Open source vector database you can host yourself or on the cloud."
+      },
+      "pinecone": {
+        "name": "Pinecone",
+        "description": "100% cloud-based vector database for enterprise use cases."
+      },
+      "zilliz": {
+        "name": "Zilliz Cloud",
+        "description": "Cloud hosted vector database built for enterprise with SOC 2 compliance."
+      },
+      "qdrant": {
+        "name": "QDrant",
+        "description": "Open source local and distributed cloud vector database."
+      },
+      "weaviate": {
+        "name": "Weaviate",
+        "description": "Open source local and cloud hosted multi-modal vector database."
+      },
+      "milvus": {
+        "name": "Milvus",
+        "description": "Open-source, highly scalable, and blazing fast."
+      },
+      "astra": {
+        "name": "AstraDB",
+        "description": "Vector Search for Real-world GenAI."
+      }
+    }
+    ////
   },
 
   // Embeddable Chat Widgets

@@ -61,10 +61,10 @@ export default function GeneralVectorDatabase() {
 
     const { error } = await System.updateSystem(settingsData);
     if (error) {
-      showToast(`Failed to save vector database settings: ${error}`, "error");
+      showToast(t("vector.saveError", { error }), "error");
       setHasChanges(true);
     } else {
-      showToast("Vector database preferences saved successfully.", "success");
+      showToast(t("vector.saveSuccess"), "success");
       setHasChanges(false);
     }
     setSaving(false);
@@ -107,64 +107,60 @@ export default function GeneralVectorDatabase() {
 
   const VECTOR_DBS = [
     {
-      name: "LanceDB",
+      name: t("vector.providers.lancedb.name"),
       value: "lancedb",
       logo: LanceDbLogo,
       options: <LanceDBOptions />,
-      description:
-        "100% local vector DB that runs on the same instance as AnythingLLM.",
+      description: t("vector.providers.lancedb.description"),
     },
     {
-      name: "Chroma",
+      name: t("vector.providers.chroma.name"),
       value: "chroma",
       logo: ChromaLogo,
       options: <ChromaDBOptions settings={settings} />,
-      description:
-        "Open source vector database you can host yourself or on the cloud.",
+      description: t("vector.providers.chroma.description"),
     },
     {
-      name: "Pinecone",
+      name: t("vector.providers.pinecone.name"),
       value: "pinecone",
       logo: PineconeLogo,
       options: <PineconeDBOptions settings={settings} />,
-      description: "100% cloud-based vector database for enterprise use cases.",
+      description: t("vector.providers.pinecone.description"),
     },
     {
-      name: "Zilliz Cloud",
+      name: t("vector.providers.zilliz.name"),
       value: "zilliz",
       logo: ZillizLogo,
       options: <ZillizCloudOptions settings={settings} />,
-      description:
-        "Cloud hosted vector database built for enterprise with SOC 2 compliance.",
+      description: t("vector.providers.zilliz.description"),
     },
     {
-      name: "QDrant",
+      name: t("vector.providers.qdrant.name"),
       value: "qdrant",
       logo: QDrantLogo,
       options: <QDrantDBOptions settings={settings} />,
-      description: "Open source local and distributed cloud vector database.",
+      description: t("vector.providers.qdrant.description"),
     },
     {
-      name: "Weaviate",
+      name: t("vector.providers.weaviate.name"),
       value: "weaviate",
       logo: WeaviateLogo,
       options: <WeaviateDBOptions settings={settings} />,
-      description:
-        "Open source local and cloud hosted multi-modal vector database.",
+      description: t("vector.providers.weaviate.description"),
     },
     {
-      name: "Milvus",
+      name: t("vector.providers.milvus.name"),
       value: "milvus",
       logo: MilvusLogo,
       options: <MilvusDBOptions settings={settings} />,
-      description: "Open-source, highly scalable, and blazing fast.",
+      description: t("vector.providers.milvus.description"),
     },
     {
-      name: "AstraDB",
+      name: t("vector.providers.astra.name"),
       value: "astra",
       logo: AstraDBLogo,
       options: <AstraDBOptions settings={settings} />,
-      description: "Vector Search for Real-world GenAI.",
+      description: t("vector.providers.astra.description"),
     },
   ];
 
