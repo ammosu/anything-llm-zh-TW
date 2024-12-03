@@ -4,8 +4,10 @@ import paths from "@/utils/paths";
 import { useParams } from "react-router-dom";
 import { AUTH_TOKEN, AUTH_USER } from "@/utils/constants";
 import System from "@/models/system";
+import { useTranslation } from "react-i18next";
 
 export default function NewUserModal() {
+  const { t } = useTranslation();
   const { code } = useParams();
   const [error, setError] = useState(null);
 
@@ -35,7 +37,7 @@ export default function NewUserModal() {
       <div className="relative w-full max-w-2xl bg-theme-bg-secondary rounded-lg shadow border-2 border-theme-modal-border">
         <div className="flex items-start justify-between p-4 border-b rounded-t border-theme-modal-border">
           <h3 className="text-xl font-semibold text-theme-text-primary">
-            Create a new account
+            {t("newUserModal.title")}
           </h3>
         </div>
         <form onSubmit={handleCreate}>
@@ -46,13 +48,13 @@ export default function NewUserModal() {
                   htmlFor="username"
                   className="block mb-2 text-sm font-medium text-theme-text-primary"
                 >
-                  Username
+                  {t("newUserModal.usernameLabel")}
                 </label>
                 <input
                   name="username"
                   type="text"
                   className="border-none bg-theme-settings-input-bg text-theme-text-primary placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                  placeholder="My username"
+                  placeholder={t("newUserModal.usernamePlaceholder")}
                   minLength={2}
                   required={true}
                   autoComplete="off"
@@ -63,22 +65,25 @@ export default function NewUserModal() {
                   htmlFor="password"
                   className="block mb-2 text-sm font-medium text-theme-text-primary"
                 >
-                  Password
+                  {t("newUserModal.passwordLabel")}
                 </label>
                 <input
                   name="password"
                   type="password"
                   className="border-none bg-theme-settings-input-bg text-theme-text-primary placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                  placeholder="Your password"
+                  placeholder={t("newUserModal.passwordPlaceholder")}
                   required={true}
                   minLength={8}
                   autoComplete="off"
                 />
               </div>
-              {error && <p className="text-red-400 text-sm">Error: {error}</p>}
+              {error && (
+                <p className="text-red-400 text-sm">
+                  {t("newUserModal.error", { error })}
+                </p>
+              )}
               <p className="text-theme-text-secondary text-xs md:text-sm">
-                After creating your account you will be able to login with these
-                credentials and start using workspaces.
+                {t("newUserModal.description")}
               </p>
             </div>
           </div>
@@ -87,7 +92,7 @@ export default function NewUserModal() {
               type="submit"
               className="w-full transition-all duration-300 border border-theme-text-primary px-4 py-2 rounded-lg text-theme-text-primary text-sm items-center flex gap-x-2 hover:bg-theme-text-primary hover:text-theme-bg-primary focus:ring-gray-800 text-center justify-center"
             >
-              Accept Invitation
+              {t("newUserModal.submitButton")}
             </button>
           </div>
         </form>

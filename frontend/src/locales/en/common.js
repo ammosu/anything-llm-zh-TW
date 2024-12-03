@@ -1179,6 +1179,22 @@ const TRANSLATIONS = {
     "copiedMessage": "Snippet copied to clipboard!"
   },
 
+  invite: {
+    "noCodeProvided": "No invite code provided.",
+    "invalidCode": "The invite code is invalid. Error: {{error}}"
+  },
+
+  newUserModal: {
+    "title": "Create a new account",
+    "usernameLabel": "Username",
+    "usernamePlaceholder": "My username",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Your password",
+    "error": "Error: {{error}}",
+    "description": "After creating your account you will be able to login with these credentials and start using workspaces.",
+    "submitButton": "Accept Invitation"
+  },
+
 //////////////////////////////
 
   // ChangeWarning

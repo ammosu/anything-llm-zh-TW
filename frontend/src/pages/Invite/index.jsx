@@ -4,8 +4,10 @@ import { FullScreenLoader } from "@/components/Preloader";
 import Invite from "@/models/invite";
 import NewUserModal from "./NewUserModal";
 import ModalWrapper from "@/components/ModalWrapper";
+import { useTranslation } from "react-i18next";
 
 export default function InvitePage() {
+  const { t } = useTranslation();
   const { code } = useParams();
   const [result, setResult] = useState({
     status: "loading",
@@ -17,18 +19,18 @@ export default function InvitePage() {
       if (!code) {
         setResult({
           status: "invalid",
-          message: "No invite code provided.",
+          message: t("invite.noCodeProvided"),
         });
         return;
       }
       const { invite, error } = await Invite.checkInvite(code);
       setResult({
         status: invite ? "valid" : "invalid",
-        message: error,
+        message: error ? t("invite.invalidCode", { error }) : null,
       });
     }
     checkInvite();
-  }, []);
+  }, [code, t]);
 
   if (result.status === "loading") {
     return (
