@@ -1649,6 +1649,32 @@ const TRANSLATIONS = {
     embedding: "Embedding Preference",
     vector: "Vector Database",
     anonymous: "Anonymous Telemetry Enabled",
+    ////
+    "llmLogoAlt": "LLM Logo",
+    "llmDescription": {
+      "desc1": "Your data is securely processed.",
+      "desc2": "Supports advanced language models.",
+      "desc3": "No data is stored beyond processing."
+    },
+    "embeddingLogoAlt": "Embedding Engine Logo",
+    "embeddingDescription": {
+      "desc1": "Embedding is used for vectorizing text.",
+      "desc2": "Efficient and scalable processing.",
+      "desc3": "Supports integration with various tools."
+    },
+    "vectorLogoAlt": "Vector Database Logo",
+    "vectorDescription": {
+      "desc1": "Stores embeddings for fast retrieval.",
+      "desc2": "Highly optimized for AI workloads.",
+      "desc3": "Privacy-focused and secure."
+    },
+    telemetryToast: {
+      "enabled": "Anonymous Telemetry has been enabled.",
+      "disabled": "Anonymous Telemetry has been disabled."
+    },
+    "telemetryDescription": "All events do not record IP-address and contain no identifying content. See the list of event tags collected on GitHub.",
+    "feedbackRequest": "If you turn off telemetry, consider sending feedback to help us improve."
+    ////
   },
 };
 
