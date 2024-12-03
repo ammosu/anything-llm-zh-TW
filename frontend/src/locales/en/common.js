@@ -1204,6 +1204,36 @@ const TRANSLATIONS = {
     "contactAdmin": "Please contact the system administrator about this error."
   },
 
+  "userSetup": {
+    "title": "User Setup",
+    "description": "Configure your user settings.",
+    "question": "How many people will be using your instance?",
+    "just_Me": "Just me",
+    "my_Team": "My team",
+
+    justMe: {
+      "passwordSetupQuestion": "Would you like to set up a password?",
+      "passwordLabel": "Instance Password",
+      "passwordPlaceholder": "Your admin password",
+      "passwordRequirement": "Passwords must be at least 8 characters.",
+      "errorSettingPassword": "Failed to set password: {{error}}"
+    },
+    "yes": "Yes",
+    "no": "No",
+  
+    myTeam: {
+      "usernameLabel": "Admin account username",
+      "usernamePlaceholder": "Your admin username",
+      "usernameRequirement": "Username must be at least 6 characters long and only contain lowercase letters, numbers, underscores, and hyphens with no spaces.",
+      "passwordLabel": "Admin account password",
+      "passwordPlaceholder": "Your admin password",
+      "passwordRequirement": "Password must be at least 8 characters long.",
+      "additionalInfo": "By default, you will be the only admin. Once onboarding is completed you can create and invite others to be users or admins. Do not lose your password as only admins can reset passwords.",
+      "error": "Error: {{error}}"
+    },
+  },
+  
+
 //////////////////////////////
 
   // ChangeWarning

@@ -5,11 +5,10 @@ import debounce from "lodash.debounce";
 import paths from "@/utils/paths";
 import { useNavigate } from "react-router-dom";
 import { AUTH_TIMESTAMP, AUTH_TOKEN, AUTH_USER } from "@/utils/constants";
-
-const TITLE = "User Setup";
-const DESCRIPTION = "Configure your user settings.";
+import { useTranslation } from "react-i18next";
 
 export default function UserSetup({ setHeader, setForwardBtn, setBackBtn }) {
+  const { t } = useTranslation();
   const [selectedOption, setSelectedOption] = useState("");
   const [singleUserPasswordValid, setSingleUserPasswordValid] = useState(false);
   const [multiUserLoginValid, setMultiUserLoginValid] = useState(false);
@@ -55,8 +54,8 @@ export default function UserSetup({ setHeader, setForwardBtn, setBackBtn }) {
   return (
     <div className="w-full flex items-center justify-center flex-col gap-y-6">
       <div className="flex flex-col border rounded-lg border-white/20 light:border-theme-sidebar-border p-8 items-center gap-y-4 w-full max-w-[600px]">
-        <div className=" text-white text-sm font-semibold md:-ml-44">
-          How many people will be using your instance?
+        <div className="text-white text-sm font-semibold md:-ml-44">
+          {t("userSetup.question")}
         </div>
         <div className="flex flex-col md:flex-row gap-6 w-full justify-center">
           <button
@@ -67,7 +66,9 @@ export default function UserSetup({ setHeader, setForwardBtn, setBackBtn }) {
                 : "text-theme-text-primary border-theme-sidebar-border"
             } min-w-[230px] h-11 p-4 rounded-[10px] border-2  justify-center items-center gap-[100px] inline-flex hover:border-sky-400/70 hover:text-sky-400 transition-all duration-300`}
           >
-            <div className="text-center text-sm font-bold">Just me</div>
+            <div className="text-center text-sm font-bold">
+              {t("userSetup.just_Me")}
+            </div>
           </button>
           <button
             onClick={() => setSelectedOption("my_team")}
@@ -77,7 +78,9 @@ export default function UserSetup({ setHeader, setForwardBtn, setBackBtn }) {
                 : "text-theme-text-primary border-theme-sidebar-border"
             } min-w-[230px] h-11 p-4 rounded-[10px] border-2  justify-center items-center gap-[100px] inline-flex hover:border-sky-400/70 hover:text-sky-400 transition-all duration-300`}
           >
-            <div className="text-center text-sm font-bold">My team</div>
+            <div className="text-center text-sm font-bold">
+              {t("userSetup.my_Team")}
+            </div>
           </button>
         </div>
       </div>
@@ -108,6 +111,7 @@ const JustMe = ({
   justMeSubmitRef,
   navigate,
 }) => {
+  const { t } = useTranslation();
   const [itemSelected, setItemSelected] = useState(false);
   const [password, setPassword] = useState("");
   const handleSubmit = async (e) => {
@@ -120,7 +124,7 @@ const JustMe = ({
     });
 
     if (error) {
-      showToast(`Failed to set password: ${error}`, "error");
+      showToast(t("userSetup.justMe.errorSettingPassword", { error }), "error");
       return;
     }
 
@@ -161,8 +165,8 @@ const JustMe = ({
   return (
     <div className="w-full flex items-center justify-center flex-col gap-y-6">
       <div className="flex flex-col border rounded-lg border-white/20 light:border-theme-sidebar-border p-8 items-center gap-y-4 w-full max-w-[600px]">
-        <div className=" text-white text-sm font-semibold md:-ml-56">
-          Would you like to set up a password?
+        <div className="text-white text-sm font-semibold md:-ml-56">
+          {t("userSetup.justMe.passwordSetupQuestion")}
         </div>
         <div className="flex flex-col md:flex-row gap-6 w-full justify-center">
           <button
@@ -173,7 +177,7 @@ const JustMe = ({
                 : "text-theme-text-primary border-theme-sidebar-border"
             } min-w-[230px] h-11 p-4 rounded-[10px] border-2  justify-center items-center gap-[100px] inline-flex hover:border-sky-400/70 hover:text-sky-400 transition-all duration-300`}
           >
-            <div className="text-center text-sm font-bold">Yes</div>
+            <div className="text-center text-sm font-bold">{t("userSetup.yes")}</div>
           </button>
           <button
             onClick={handleNo}
@@ -183,34 +187,25 @@ const JustMe = ({
                 : "text-theme-text-primary border-theme-sidebar-border"
             } min-w-[230px] h-11 p-4 rounded-[10px] border-2  justify-center items-center gap-[100px] inline-flex hover:border-sky-400/70 hover:text-sky-400 transition-all duration-300`}
           >
-            <div className="text-center text-sm font-bold">No</div>
+            <div className="text-center text-sm font-bold">{t("userSetup.no")}</div>
           </button>
         </div>
         {enablePassword && (
           <form className="w-full mt-4" onSubmit={handleSubmit}>
-            <label
-              htmlFor="name"
-              className="block mb-3 text-sm font-medium text-white"
-            >
-              Instance Password
+            <label htmlFor="name" className="block mb-3 text-sm font-medium text-white">
+              {t("userSetup.justMe.passwordLabel")}
             </label>
             <input
               name="password"
               type="password"
-              className="border-none bg-theme-settings-input-bg text-white text-sm rounded-lg block w-full p-2.5 focus:outline-primary-button active:outline-primary-button outline-none placeholder:text-theme-text-secondary"
-              placeholder="Your admin password"
+              className="border-none bg-theme-settings-input-bg text-white text-sm rounded-lg block w-full p-2.5"
+              placeholder={t("userSetup.justMe.passwordPlaceholder")}
               minLength={6}
               required={true}
-              autoComplete="off"
-              onChange={handlePasswordChange}
+              onChange={setNewPassword}
             />
             <div className="mt-4 text-white text-opacity-80 text-xs font-base -mb-2">
-              Passwords must be at least 8 characters.
-              <br />
-              <i>
-                It's important to save this password because there is no
-                recovery method.
-              </i>{" "}
+              {t("userSetup.justMe.passwordRequirement")}
             </div>
             <button
               type="submit"
@@ -226,6 +221,7 @@ const JustMe = ({
 };
 
 const MyTeam = ({ setMultiUserLoginValid, myTeamSubmitRef, navigate }) => {
+  const { t } = useTranslation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -239,7 +235,7 @@ const MyTeam = ({ setMultiUserLoginValid, myTeamSubmitRef, navigate }) => {
     };
     const { success, error } = await System.setupMultiUser(data);
     if (!success) {
-      showToast(`Error: ${error}`, "error");
+      showToast(t("userSetup.myTeam.error", { error }), "error");
       return;
     }
 
@@ -275,53 +271,49 @@ const MyTeam = ({ setMultiUserLoginValid, myTeamSubmitRef, navigate }) => {
                   htmlFor="name"
                   className="block mb-3 text-sm font-medium text-white"
                 >
-                  Admin account username
+                  {t("userSetup.myTeam.usernameLabel")}
                 </label>
                 <input
                   name="username"
                   type="text"
                   className="border-none bg-theme-settings-input-bg text-white text-sm rounded-lg block w-full p-2.5 focus:outline-primary-button active:outline-primary-button placeholder:text-theme-text-secondary outline-none"
-                  placeholder="Your admin username"
+                  placeholder={t("userSetup.myTeam.usernamePlaceholder")}
                   minLength={6}
                   required={true}
                   autoComplete="off"
                   onChange={handleUsernameChange}
                 />
               </div>
-              <p className=" text-white text-opacity-80 text-xs font-base">
-                Username must be at least 6 characters long and only contain
-                lowercase letters, numbers, underscores, and hyphens with no
-                spaces.
+              <p className="text-white text-opacity-80 text-xs font-base">
+                {t("myTeam.usernameRequirement")}
               </p>
               <div className="mt-4">
                 <label
-                  htmlFor="name"
+                  htmlFor="password"
                   className="block mb-3 text-sm font-medium text-white"
                 >
-                  Admin account password
+                  {t("myTeam.passwordLabel")}
                 </label>
                 <input
                   name="password"
                   type="password"
                   className="border-none bg-theme-settings-input-bg text-white text-sm rounded-lg block w-full p-2.5 focus:outline-primary-button active:outline-primary-button placeholder:text-theme-text-secondary outline-none"
-                  placeholder="Your admin password"
+                  placeholder={t("userSetup.myTeam.passwordPlaceholder")}
                   minLength={8}
                   required={true}
                   autoComplete="off"
                   onChange={handlePasswordChange}
                 />
               </div>
-              <p className=" text-white text-opacity-80 text-xs font-base">
-                Password must be at least 8 characters long.
+              <p className="text-white text-opacity-80 text-xs font-base">
+                {t("userSetup.myTeam.passwordRequirement")}
               </p>
             </div>
           </div>
         </div>
         <div className="flex w-full justify-between items-center px-6 py-4 space-x-6 border-t rounded-b border-theme-sidebar-border">
           <div className="text-theme-text-secondary text-opacity-80 text-xs font-base">
-            By default, you will be the only admin. Once onboarding is completed
-            you can create and invite others to be users or admins. Do not lose
-            your password as only admins can reset passwords.
+            {t("userSetup.myTeam.additionalInfo")}
           </div>
         </div>
         <button
