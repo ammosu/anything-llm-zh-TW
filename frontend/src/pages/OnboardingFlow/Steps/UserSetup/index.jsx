@@ -47,7 +47,7 @@ export default function UserSetup({ setHeader, setForwardBtn, setBackBtn }) {
   }, [selectedOption, singleUserPasswordValid, multiUserLoginValid]);
 
   useEffect(() => {
-    setHeader({ title: TITLE, description: DESCRIPTION });
+    setHeader({ title: t("userSetup.title"), description: t("userSetup.description") });
     setBackBtn({ showing: true, disabled: false, onClick: handleBack });
   }, []);
 
@@ -285,14 +285,14 @@ const MyTeam = ({ setMultiUserLoginValid, myTeamSubmitRef, navigate }) => {
                 />
               </div>
               <p className="text-white text-opacity-80 text-xs font-base">
-                {t("myTeam.usernameRequirement")}
+                {t("userSetup.myTeam.usernameRequirement")}
               </p>
               <div className="mt-4">
                 <label
                   htmlFor="password"
                   className="block mb-3 text-sm font-medium text-white"
                 >
-                  {t("myTeam.passwordLabel")}
+                  {t("userSetup.myTeam.passwordLabel")}
                 </label>
                 <input
                   name="password"
