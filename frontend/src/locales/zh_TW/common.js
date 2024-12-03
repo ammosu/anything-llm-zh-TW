@@ -1272,6 +1272,15 @@ const TRANSLATIONS = {
     "errorToast": "創建工作區失敗：{{error}}"
   },
 
+  // Vector Database
+  "vectorDatabase": {
+    "updateSuccess": "工作區已成功更新！",
+    "updateError": "錯誤：{{message}}",
+    "updating": "正在更新...",
+    "updateWorkspace": "更新工作區"
+  },
+
+
 
   // 更改警告
   "changeWarning": {
