@@ -10,6 +10,7 @@ import CTAButton from "@/components/lib/CTAButton";
 import { useTranslation } from "react-i18next";
 
 export default function GeneralSecurity() {
+  const { t } = useTranslation();
   return (
     <div className="w-screen h-screen overflow-hidden bg-theme-bg-container flex">
       <Sidebar />
@@ -45,7 +46,7 @@ function MultiUserMode() {
 
       const { success, error } = await System.setupMultiUser(data);
       if (success) {
-        showToast("Multi-User mode enabled successfully.", "success");
+        showToast(t("multi.success"), "success");
         setSaving(false);
         setTimeout(() => {
           window.localStorage.removeItem(AUTH_USER);
@@ -56,7 +57,7 @@ function MultiUserMode() {
         return;
       }
 
-      showToast(`Failed to enable Multi-User mode: ${error}`, "error");
+      showToast(t("multi.failure", { error }), "error");
       setSaving(false);
       return;
     }
@@ -117,7 +118,7 @@ function MultiUserMode() {
                 <div className="">
                   <label className="mb-2.5 block font-medium text-white">
                     {multiUserModeEnabled
-                      ? t("multi.enable.is-enable")
+                      ? t("multi.enable.isEnabled")
                       : t("multi.enable.enable")}
                   </label>
 
@@ -147,7 +148,7 @@ function MultiUserMode() {
                         name="username"
                         type="text"
                         className="border-none bg-theme-settings-input-bg text-white text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5 placeholder:text-theme-settings-input-placeholder focus:ring-blue-500"
-                        placeholder="Your admin username"
+                        placeholder={t("multi.enable.usernamePlaceholder")}
                         minLength={2}
                         required={true}
                         autoComplete="off"
@@ -166,7 +167,7 @@ function MultiUserMode() {
                         name="password"
                         type="text"
                         className="border-none bg-theme-settings-input-bg text-white text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5 placeholder:text-theme-settings-input-placeholder focus:ring-blue-500"
-                        placeholder="Your admin password"
+                        placeholder={t("multi.enable.passwordPlaceholder")}
                         minLength={8}
                         required={true}
                         autoComplete="off"

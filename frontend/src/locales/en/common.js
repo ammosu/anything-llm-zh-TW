@@ -1613,11 +1613,23 @@ const TRANSLATIONS = {
         "By default, you will be the only admin. As an admin you will need to create accounts for all new users or admins. Do not lose your password as only an Admin user can reset passwords.",
       username: "Admin account username",
       password: "Admin account password",
+      ////
+      "isEnabled": "Multi-User Mode is Enabled",
+      "usernamePlaceholder": "Enter admin username",
+      "passwordPlaceholder": "Enter admin password",
+      ////
     },
     password: {
       title: "Password Protection",
       description:
         "Protect your AnythingLLM instance with a password. If you forget this there is no recovery method so ensure you save this password.",
+      ////
+      "instance": {
+        "title": "Instance Password",
+        "password": "System Password",
+        "description": "Protect your system with a password to restrict unauthorized access."
+      }
+      ////
     },
     instance: {
       title: "Password Protect Instance",
@@ -1625,6 +1637,11 @@ const TRANSLATIONS = {
         "By default, you will be the only admin. As an admin you will need to create accounts for all new users or admins. Do not lose your password as only an Admin user can reset passwords.",
       password: "Instance password",
     },
+    ////
+    "success": "Multi-User mode enabled successfully.",
+    "failure": "Failed to enable Multi-User mode: {{error}}",
+
+    ////
   },
 
   // Event Logs
