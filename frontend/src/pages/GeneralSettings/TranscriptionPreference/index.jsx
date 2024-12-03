@@ -19,14 +19,14 @@ const PROVIDERS = [
     value: "openai",
     logo: OpenAiLogo,
     options: (settings) => <OpenAiWhisperOptions settings={settings} />,
-    description: "Leverage the OpenAI Whisper-large model using your API key.",
+    description: "transcription.providers.openai.description",
   },
   {
     name: "AnythingLLM Built-In",
     value: "local",
     logo: AnythingLLMIcon,
     options: (settings) => <NativeTranscriptionOptions settings={settings} />,
-    description: "Run a built-in whisper model on this instance privately.",
+    description: "transcription.providers.local.description",
   },
 ];
 
@@ -53,9 +53,9 @@ export default function TranscriptionModelPreference() {
     setSaving(true);
 
     if (error) {
-      showToast(`Failed to save preferences: ${error}`, "error");
+      showToast(t("transcription.toast.error", { error }), "error");
     } else {
-      showToast("Transcription preferences saved successfully.", "success");
+      showToast(t("transcription.toast.success"), "success");
     }
     setSaving(false);
     setHasChanges(!!error);
@@ -89,10 +89,10 @@ export default function TranscriptionModelPreference() {
 
   useEffect(() => {
     const filtered = PROVIDERS.filter((provider) =>
-      provider.name.toLowerCase().includes(searchQuery.toLowerCase())
+      t(provider.name).toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredProviders(filtered);
-  }, [searchQuery, selectedProvider]);
+  }, [searchQuery, selectedProvider, t]);
 
   const selectedProviderObject = PROVIDERS.find(
     (provider) => provider.value === selectedProvider
@@ -133,7 +133,7 @@ export default function TranscriptionModelPreference() {
                     onClick={() => handleSubmit()}
                     className="mt-3 mr-0 -mb-14 z-10"
                   >
-                    {saving ? "Saving..." : "Save changes"}
+                    {saving ? t("common.saving") : t("common.saveChanges")}
                   </CTAButton>
                 )}
               </div>
@@ -160,7 +160,7 @@ export default function TranscriptionModelPreference() {
                           type="text"
                           name="provider-search"
                           autoComplete="off"
-                          placeholder="Search audio transcription providers"
+                          placeholder={t("transcription.searchPlaceholder")}
                           className="border-none -ml-4 my-2 bg-transparent z-20 pl-12 h-[38px] w-full px-4 py-1 text-sm outline-none focus:outline-primary-button active:outline-primary-button outline-none text-theme-text-primary placeholder:text-theme-text-primary placeholder:font-medium"
                           onChange={(e) => setSearchQuery(e.target.value)}
                           ref={searchInputRef}
@@ -179,10 +179,10 @@ export default function TranscriptionModelPreference() {
                         {filteredProviders.map((provider) => (
                           <LLMItem
                             key={provider.name}
-                            name={provider.name}
+                            name={t(`transcription.providers.${provider.value}.name`)}
                             value={provider.value}
                             image={provider.logo}
-                            description={provider.description}
+                            description={t(provider.description)}
                             checked={selectedProvider === provider.value}
                             onClick={() => updateProviderChoice(provider.value)}
                           />
@@ -199,15 +199,19 @@ export default function TranscriptionModelPreference() {
                     <div className="flex gap-x-4 items-center">
                       <img
                         src={selectedProviderObject.logo}
-                        alt={`${selectedProviderObject.name} logo`}
+                        alt={`${t(
+                          `transcription.providers.${selectedProviderObject.value}.name`
+                        )} logo`}
                         className="w-10 h-10 rounded-md"
                       />
                       <div className="flex flex-col text-left">
                         <div className="text-sm font-semibold text-white">
-                          {selectedProviderObject.name}
+                          {t(
+                            `transcription.providers.${selectedProviderObject.value}.name`
+                          )}
                         </div>
                         <div className="mt-1 text-xs text-description">
-                          {selectedProviderObject.description}
+                          {t(selectedProviderObject.description)}
                         </div>
                       </div>
                     </div>

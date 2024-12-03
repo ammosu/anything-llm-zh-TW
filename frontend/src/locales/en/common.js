@@ -1510,6 +1510,23 @@ const TRANSLATIONS = {
       "We recommend at least 2GB of RAM and upload files <10Mb.",
     "warn-end":
       "The built-in model will automatically download on the first use.",
+    ////
+    "toast": {
+      "success": "Transcription preferences saved successfully.",
+      "error": "Failed to save preferences: {{error}}"
+    },
+    "searchPlaceholder": "Search audio transcription providers",
+    "providers": {
+      "openai": {
+        "name": "OpenAI",
+        "description": "Leverage the OpenAI Whisper-large model using your API key."
+      },
+      "local": {
+        "name": "AnythingLLM Built-In",
+        "description": "Run a built-in whisper model on this instance privately."
+      }
+    }
+    ////
   },
 
   embedding: {
