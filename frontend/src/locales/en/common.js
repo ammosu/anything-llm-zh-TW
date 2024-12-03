@@ -1195,6 +1195,15 @@ const TRANSLATIONS = {
     "submitButton": "Accept Invitation"
   },
 
+  sso: {
+    "errors": {
+      "noToken": "No token provided.",
+      "loginFailed": "SSO login failed. Please try again.",
+      "unknownError": "An unknown error occurred."
+    },
+    "contactAdmin": "Please contact the system administrator about this error."
+  },
+
 //////////////////////////////
 
   // ChangeWarning

@@ -5,8 +5,10 @@ import paths from "@/utils/paths";
 import useQuery from "@/hooks/useQuery";
 import System from "@/models/system";
 import { AUTH_TIMESTAMP, AUTH_TOKEN, AUTH_USER } from "@/utils/constants";
+import { useTranslation } from "react-i18next";
 
 export default function SimpleSSOPassthrough() {
+  const { t } = useTranslation();
   const query = useQuery();
   const redirectPath = query.get("redirectTo") || paths.home();
   const [ready, setReady] = useState(false);
@@ -14,7 +16,7 @@ export default function SimpleSSOPassthrough() {
 
   useEffect(() => {
     try {
-      if (!query.get("token")) throw new Error("No token provided.");
+      if (!query.get("token")) throw new Error(t("sso.errors.noToken"));
 
       // Clear any existing auth data
       window.localStorage.removeItem(AUTH_USER);
@@ -31,10 +33,10 @@ export default function SimpleSSOPassthrough() {
           setReady(res.valid);
         })
         .catch((e) => {
-          setError(e.message);
+          setError(e.message || t("sso.errors.loginFailed"));
         });
     } catch (e) {
-      setError(e.message);
+      setError(e.message || t("sso.errors.unknownError"));
     }
   }, []);
 
@@ -43,7 +45,7 @@ export default function SimpleSSOPassthrough() {
       <div className="w-screen h-screen overflow-hidden bg-sidebar flex items-center justify-center flex-col gap-4">
         <p className="text-white font-mono text-lg">{error}</p>
         <p className="text-white/80 font-mono text-sm">
-          Please contact the system administrator about this error.
+          {t("sso.contactAdmin")}
         </p>
       </div>
     );
