@@ -518,7 +518,7 @@ const TRANSLATIONS = {
     "show": "顯示引用",
     "hide": "隱藏引用",
     "referenced": "被引用 {{count}} 次。",
-    "similarityTooltip": "這是此段文字與您查詢之間的語義相似度分數，由向量數據庫計算。",
+    "similarityTooltip": "這是此段文字與您查詢之間的語義相似度分數，由向量資料庫計算。",
     "match": "匹配"
   },
 
@@ -663,6 +663,326 @@ const TRANSLATIONS = {
     },
   },
 
+  "agentDbConnection": {
+    "confirmation": "確定要從可用的 SQL 連線列表中刪除 {{database_id}}？此操作無法撤銷。",
+    "logoAlt": "{{engine}} 標誌"
+  },
+
+  "agentWebSearch": {
+    "title": "即時網路搜尋與瀏覽",
+    "imageAlt": "網路搜尋",
+    "description": "通過連接到網路搜尋（SERP）供應商，啟用您的代理以搜尋網路回答您的問題。在設置完成之前，代理會話期間無法使用網路搜尋。",
+    "searchPlaceholder": "搜尋可用的網路搜尋供應商"
+  },
+
+  "searchProviders": {
+    "none": {
+      "name": "請選擇一個選項",
+      "description": "提供者和金鑰未設置前，網路搜尋將被禁用。"
+    },
+    "duckduckgo": {
+      "name": "DuckDuckGo",
+      "description": "免費且注重隱私的 DuckDuckGo HTML 界面網路搜尋。"
+    },
+    "google": {
+      "name": "Google 搜尋引擎",
+      "description": "由自訂的 Google 搜尋引擎提供支持，每天免費 100 次查詢。"
+    },
+    "searchApi": {
+      "name": "SearchApi",
+      "description": "SearchApi 提供來自多個搜尋引擎的結構化資料，免費提供 100 次查詢，之後需付費。"
+    },
+    "serper": {
+      "name": "Serper.dev",
+      "description": "Serper.dev 網路搜尋，免費帳戶提供 2,500 次查詢，之後需付費。"
+    },
+    "bing": {
+      "name": "Bing 搜尋",
+      "description": "由 Bing 搜尋 API 提供支持，每月免費 1000 次查詢。"
+    },
+    "serply": {
+      "name": "Serply.io",
+      "description": "Serply.io 網路搜尋，永久免費帳戶提供每月 100 次查詢。"
+    },
+    "searxng": {
+      "name": "SearXNG",
+      "description": "免費、開源的網路元搜尋引擎，無跟蹤功能。"
+    },
+    "tavily": {
+      "name": "Tavily 搜尋",
+      "description": "Tavily 搜尋 API，免費層提供每月 1000 次查詢。"
+    }
+  },
+
+  "agentWebSearchOptions": {
+    "googleSearch": {
+      "description": "您可以免費獲取搜尋引擎和 API 金鑰",
+      "linkText": "從 Google 獲取",
+      "engineIdLabel": "搜尋引擎 ID",
+      "engineIdPlaceholder": "Google 搜尋引擎 ID",
+      "apiKeyLabel": "程式化訪問 API 金鑰",
+      "apiKeyPlaceholder": "Google 搜尋引擎 API 金鑰"
+    },
+    "searchApi": {
+      "description": "您可以免費獲取 API 金鑰",
+      "linkText": "從 SearchApi 獲取。",
+      "apiKeyLabel": "API 金鑰",
+      "apiKeyPlaceholder": "SearchApi API 金鑰",
+      "engineLabel": "引擎",
+      "engine": {
+        "googleSearch": "Google 搜尋",
+        "googleMaps": "Google 地圖",
+        "googleShopping": "Google 購物",
+        "googleNews": "Google 新聞",
+        "googleJobs": "Google 工作",
+        "googleScholar": "Google 學術搜尋",
+        "googleFinance": "Google 財經",
+        "googlePatents": "Google 專利",
+        "youtube": "YouTube",
+        "bing": "Bing",
+        "bingNews": "Bing 新聞",
+        "amazonSearch": "Amazon 產品搜尋",
+        "baidu": "百度"
+      }
+    },
+    "serper": {
+      "description": "您可以免費獲取 API 金鑰",
+      "linkText": "從 Serper.dev 獲取。",
+      "apiKeyLabel": "API 金鑰",
+      "apiKeyPlaceholder": "Serper.dev API 金鑰"
+    },
+    "bing": {
+      "description": "您可以從 Azure 入口獲取 Bing 網路搜尋 API 訂閱金鑰",
+      "linkText": "從 Azure 獲取。",
+      "apiKeyLabel": "API 金鑰",
+      "apiKeyPlaceholder": "Bing 網路搜尋 API 金鑰",
+      "setupInstructions": "設置 Bing 網路搜尋 API 訂閱的步驟：",
+      "step1": "進入 Azure 入口",
+      "step1Link": "https://portal.azure.com/",
+      "step2": "創建一個新的 Azure 帳戶或使用現有帳戶登入。",
+      "step3": "導航至「創建資源」部分，搜尋「Bing 搜尋 v7」。",
+      "step4": "選擇「Bing 搜尋 v7」資源並創建新訂閱。",
+      "step5": "選擇適合您需求的定價層（提供免費層）。",
+      "step6": "獲取您的 Bing 網路搜尋訂閱 API 金鑰。"
+    },
+    "serply": {
+      "description": "您可以免費獲取 API 金鑰",
+      "linkText": "從 Serply.io 獲取。",
+      "apiKeyLabel": "API 金鑰",
+      "apiKeyPlaceholder": "Serply API 金鑰"
+    },
+    "searxng": {
+      "apiBaseUrlLabel": "SearXNG API 基本 URL",
+      "apiBaseUrlPlaceholder": "SearXNG API 金鑰"
+    },
+    "tavily": {
+      "description": "您可以獲取 API 金鑰",
+      "linkText": "從 Tavily 獲取。",
+      "apiKeyLabel": "API 金鑰",
+      "apiKeyPlaceholder": "Tavily API 金鑰"
+    },
+    "duckDuckGo": {
+      "readyToUse": "DuckDuckGo 可直接使用，無需額外配置。"
+    },
+  },
+
+  // Admin invitation
+  "adminInvites": {
+    "title": "邀請",
+    "description": "為組織中的人員創建邀請連結，供他們接受並註冊。每個邀請只能被單一用戶使用。",
+    "createInviteButton": "創建邀請連結",
+    "table": {
+      "status": "狀態",
+      "acceptedBy": "接受者",
+      "createdBy": "創建者",
+      "created": "創建時間"
+    }
+  },
+
+  "adminInviteModal": {
+    "createTitle": "創建新邀請",
+    "error": "錯誤：{{error}}",
+    "description": "創建後，您可以複製邀請並發送給新用戶，讓他們以<b>預設</b>角色創建帳號，並自動加入所選工作區。",
+    "workspaceLabel": "自動將受邀者加入工作區",
+    "workspaceDescription": "您可以選擇性地將用戶自動分配到以下工作區。預設情況下，用戶將無法查看任何工作區。接受邀請後，您也可以分配工作區。",
+    "createButton": "創建邀請",
+    "copyButton": "複製邀請連結",
+    "linkCopied": "連結已複製"
+  },
+
+  // Log row
+  logRow: {
+    "metadata": {
+      "title": "事件元資料",
+      "show": "顯示",
+      "hide": "隱藏"
+    },
+    "events": {
+      "login_event": "登入事件",
+      "update": "更新事件",
+      "failed_event": "失敗事件",
+      "deleted_event": "刪除事件"
+    }
+  },
+
+  // Admin User
+  "adminUsers": {
+    "usersTitle": "用戶",
+    "usersDescription": "這些是此實例中所有的帳號。刪除帳號將立即移除其對此實例的訪問權限。",
+    "addUser": "添加用戶",
+    "username": "用戶名",
+    "role": "角色",
+    "dateAdded": "添加日期",
+    "permissionsTitle": "權限",
+    "roleHint": {
+      "default1": "僅能向其被管理員或管理者添加到的工作區發送訊息。",
+      "default2": "無法修改任何設置。",
+      "manager1": "可以查看、創建和刪除任何工作區，並修改工作區特定設置。",
+      "manager2": "可以創建、更新並邀請新用戶加入此實例。",
+      "manager3": "無法修改 LLM、向量資料庫、嵌入或其他連線。",
+      "admin1": "最高權限用戶等級。可以查看並操作系統中的所有功能。"
+    },
+    "limitMessagesTitle": "每日訊息限制",
+    "limitMessagesDescription": "限制該用戶在 24 小時內的成功查詢或對話數量。",
+    "messageLimitLabel": "每日訊息限制"
+  },
+
+  // Admin User Row
+  "adminUserRow": {
+    "confirmSuspend": "確定要暫停 {{username}} 嗎？\\n此操作完成後，他們將被登出，且無法重新登入此 AnythingLLM 實例，直至由管理員取消暫停。",
+    "suspendSuccess": "用戶已被暫停。",
+    "unsuspendSuccess": "用戶已恢復正常狀態。",
+    "confirmDelete": "確定要刪除 {{username}} 嗎？\\n此操作完成後，他們將被登出，且無法使用此 AnythingLLM 實例。\\n\\n此操作無法撤銷。",
+    "deleteSuccess": "用戶已從系統中刪除。",
+    "editButton": "編輯",
+    "suspendButton": "暫停",
+    "unsuspendButton": "取消暫停",
+    "deleteButton": "刪除"
+  },
+
+  // Edit User Modal
+  "editUserModal": {
+    "title": "編輯 {{username}}",
+    "username": {
+      "label": "用戶名",
+      "placeholder": "用戶名",
+      "hint": "用戶名只能包含小寫字母、數字、底線和連字號，且不能包含空格"
+    },
+    "password": {
+      "label": "新密碼",
+      "placeholder": "{{username}} 的新密碼",
+      "hint": "密碼必須至少包含 8 個字符"
+    },
+    "role": {
+      "label": "角色",
+      "default": "預設",
+      "manager": "管理者",
+      "admin": "管理員"
+    },
+    "error": "錯誤：{{error}}",
+    "cancelButton": "取消",
+    "updateButton": "更新用戶"
+  },
+
+  // Admin workspace
+  "adminWorkspaces": {
+    "title": "實例工作區",
+    "description": "這些是此實例中所有存在的工作區。刪除工作區將刪除其所有相關的對話和設置。",
+    "newWorkspaceButton": "新建工作區",
+    "tableHeaders": {
+      "name": "名稱",
+      "link": "連結",
+      "users": "用戶數量",
+      "createdOn": "創建日期",
+      "actions": "操作"
+    }
+  },
+
+  // Admin Workspace Row
+  "adminWorkspaceRow": {
+    "deleteConfirmation": "確定要刪除 {{name}} 嗎？\\n此操作完成後，該工作區將無法在此 AnythingLLM 實例中使用。\\n\\n此操作無法撤銷。"
+  },
+
+  // Admin Workspace Modal
+  "adminNewWorkspaceModal": {
+    "title": "創建新工作區",
+    "workspaceNameLabel": "工作區名稱",
+    "workspaceNamePlaceholder": "我的工作區",
+    "errorMessage": "錯誤：{{error}}",
+    "infoMessage": "創建此工作區後，只有管理員可以查看。您可以在創建後添加用戶。",
+    "createButton": "創建工作區"
+  },
+
+  // API key modal
+  "newApiKeyModal": {
+    "title": "創建新 API 金鑰",
+    "description": "創建後，API 金鑰可用於以程式化方式訪問和配置此 AnythingLLM 實例。",
+    "readDocs": "閱讀 API 文件",
+    "cancel": "取消",
+    "create": "創建 API 金鑰",
+    "copy": "複製 API 金鑰",
+    "copied": "API 金鑰已複製",
+    "error": "錯誤：{{error}}"
+  },
+
+  // API Keys
+  "apiKey": {
+    "confirmDelete": "確定要停用此 API 金鑰嗎？\\n此操作完成後，它將無法再使用。\\n\\n此操作無法撤銷。",
+    "deletedMessage": "API 金鑰已永久刪除",
+    "copiedMessage": "API 金鑰已複製到剪貼板",
+    "anonymousUser": "--",
+    "copied": "已複製",
+    "copy": "複製 API 金鑰"
+  },
+
+  // Custom APP Name
+  "customAppName": {
+    "title": "自訂應用程式名稱",
+    "description": "設定在登入頁面顯示的自訂應用名稱。",
+    "placeholder": "AnythingLLM",
+    "clearButton": "清除",
+    "saveButton": "儲存",
+    "updateSuccess": "已成功更新應用名稱。",
+    "updateError": "更新應用名稱失敗：{{error}}"
+  },
+
+  // Custom site settings
+  "customSiteSettings": {
+    "title": "自訂網站設定",
+    "description": "更改瀏覽器標籤內容以進行自訂與品牌化。",
+    "saveButton": "儲存",
+    "tabTitle": {
+      "title": "標籤標題",
+      "description": "設定當應用程式在瀏覽器中打開時的自訂標籤標題。",
+      "placeholder": "AnythingLLM | 您的專屬 LLM 訓練工具"
+    },
+    "tabFavicon": {
+      "title": "標籤 Favicon",
+      "description": "定義用於 favicon 的圖片 URL。",
+      "placeholder": "圖片的 URL"
+    },
+    "toast": {
+      "sitePreferencesUpdated": "網站偏好已更新！重新載入頁面後即可生效。"
+    }
+  },
+
+  // New Icon Form
+  "newIconForm": {
+    "iconSelector": {
+      "tooltip": "選擇一個圖示",
+      "dropdown": "圖示選擇下拉菜單",
+      "option": "選擇圖示：{{iconName}}"
+    },
+    "urlInput": {
+      "placeholder": "https://example.com",
+      "label": "輸入 URL"
+    },
+    "actions": {
+      "save": "儲存",
+      "remove": "移除"
+    }
+  },
+
   languagePreference: {
     "title": "顯示語言",
     "description": "選擇偏好的語言來渲染 AnythingLLM 的界面（如果適用）。",
@@ -683,6 +1003,26 @@ const TRANSLATIONS = {
     }
   },
 
+  // Show scrollbar
+  "showScrollbar": {
+    "title": "顯示聊天窗口滾動條",
+    "description": "啟用或禁用聊天窗口中的滾動條",
+    "updateError": "更新外觀設置失敗",
+    "fetchError": "獲取外觀設置失敗"
+  },
+
+  // Support email
+  "supportEmail": {
+    "title": "支援電子郵件",
+    "description": "設置在用戶登入此實例時，顯示於用戶菜單中的支援電子郵件地址。",
+    "placeholder": "support@mycompany.com",
+    "clearButton": "清除",
+    "saveButton": "儲存",
+    "updateSuccess": "支援電子郵件已成功更新。",
+    "updateFailed": "更新支援電子郵件失敗：{{error}}"
+  },
+
+  // Theme preference
   themePreference: {
     "title": "主題",
     "description": "選擇您偏好的應用程式主題。",
@@ -691,6 +1031,247 @@ const TRANSLATIONS = {
       "light": "淺色"
     }
   },
+
+  // Speech-to-text and text-to-speech
+  "audioPreference": {
+    "speechToText": {
+      "title": "語音轉文字偏好設定",
+      "description": "在這裡您可以指定想要使用的語音轉文字提供商。在預設情況下，我們使用瀏覽器內建的服務，但您也可以選擇其他服務。",
+      "saving": "正在儲存...",
+      "saveChanges": "儲存更改",
+      "saveSuccess": "語音轉文字偏好已成功儲存。",
+      "saveError": "儲存偏好失敗：{{error}}",
+      "provider": "提供商",
+      "searchPlaceholder": "搜尋語音轉文字提供商"
+    },
+    "textToSpeech": {
+      "preferenceTitle": "文字轉語音偏好設定",
+      "preferenceDescription": "在這裡您可以指定想要使用的文字轉語音提供商。在預設情況下，我們使用瀏覽器內建的服務，但您也可以選擇其他服務。",
+      "providerLabel": "提供商",
+      "saveChanges": "儲存更改",
+      "saving": "正在儲存...",
+      "saveSuccess": "文字轉語音偏好已成功儲存。",
+      "saveError": "儲存偏好失敗：{{error}}",
+      "searchPlaceholder": "搜尋文字轉語音提供商",
+      "native": "系統原生",
+      "nativeDescription": "使用瀏覽器內建的文字轉語音服務（如支援）。",
+      "openai": "OpenAI",
+      "openaiDescription": "使用 OpenAI 的文字轉語音服務。",
+      "elevenlabs": "ElevenLabs",
+      "elevenlabsDescription": "使用 ElevenLabs 的文字轉語音技術。",
+      "piper_local": "PiperTTS",
+      "piperDescription": "在瀏覽器中本地運行文字轉語音模型，保持隱私。",
+      "generic-openai": "OpenAI 相容",
+      "genericOpenAiDescription": "連接到本地或遠端運行的 OpenAI 相容 TTS 服務。"
+    }
+  },
+
+    // Settings Chats
+  "settingsChats": {
+    "viewingText": "檢視文字",
+    "promptModalTitle": "檢視提示",
+    "responseModalTitle": "檢視回應",
+    "confirmDelete": "確定要刪除此聊天嗎？\\n\\n此操作無法撤銷。"
+  },
+
+  // Embed Chat Row
+  "embedChatRow": {
+    "confirmDelete": "確定要刪除此聊天嗎？\\n\\n此操作無法撤銷。",
+    "viewingText": "檢視文字"
+  },
+
+  // New Embed Modal
+  "newEmbedModal": {
+    "title": "為工作區創建新嵌入",
+    "info": "創建嵌入後，您將獲得一個連結，您可以將其發布在網站上，作為簡單的聊天窗口。",
+    "inputs": {
+      "maxChatsPerDay": {
+        "title": "每日最大聊天次數",
+        "hint": "限制此嵌入在 24 小時內可以處理的聊天次數。0 表示無限制。"
+      },
+      "maxChatsPerSession": {
+        "title": "每次會話最大聊天次數",
+        "hint": "限制此嵌入在 24 小時內每個會話用戶可以發送的聊天次數。0 表示無限制。"
+      },
+      "allowModelOverride": {
+        "title": "啟用動態模型使用",
+        "hint": "允許設置首選的 LLM 模型以覆蓋工作區的預設值。"
+      },
+      "allowTemperatureOverride": {
+        "title": "啟用動態 LLM 溫度",
+        "hint": "允許設置 LLM 的溫度以覆蓋工作區的預設值。"
+      },
+      "allowPromptOverride": {
+        "title": "啟用提示覆蓋",
+        "hint": "允許設置系統提示以覆蓋工作區的預設值。"
+      }
+    },
+    "buttons": {
+      "cancel": "取消",
+      "createEmbed": "創建嵌入"
+    },
+    "workspaceSelection": {
+      "label": "工作區",
+      "description": "此嵌入的聊天窗口將基於此工作區。所有預設值將繼承自工作區，除非在此配置中覆蓋。"
+    },
+    "chatModeSelection": {
+      "label": "允許的聊天方式",
+      "description": "設置您的聊天機器人的運行方式。「查詢」模式僅在文檔有助於回答問題時響應。「聊天」模式可以回答與工作區無關的問題。",
+      "chatOption": "聊天：回應所有問題，不論是否相關",
+      "queryOption": "查詢：僅回應與工作區文檔相關的問題"
+    },
+    "permittedDomains": {
+      "label": "限制請求的來源域名",
+      "description": "此過濾器將阻止來自下列域名以外的請求。若保持空白，表示任何人都可以在任何網站上使用您的嵌入。",
+      "placeholder": "https://mysite.com, https://anythingllm.com"
+    }
+  },
+
+  // Embed Row
+  "embedRow": {
+    "confirmDisable": "確定要禁用嵌入 '{{embedName}}' 嗎？\\n禁用後，此嵌入將不再響應任何聊天請求。",
+    "disabledSuccess": "嵌入已禁用。",
+    "enabledSuccess": "嵌入已啟用。",
+    "confirmDelete": "確定要刪除嵌入 '{{embedName}}' 嗎？\\n刪除後，此嵌入將不再響應聊天或被啟用。\\n\\n此操作無法撤銷。",
+    "deleteSuccess": "嵌入已從系統中刪除。",
+    "showCode": "顯示程式碼",
+    "disable": "禁用",
+    "enable": "啟用",
+    "delete": "刪除",
+    "allDomains": "所有"
+  },
+
+  // Edit Embed
+  "editEmbed": {
+    "title": "更新嵌入 #{{id}}",
+    "toast": {
+      "success": "嵌入已成功更新。"
+    },
+    "maxChatsPerDay": {
+      "title": "每日最大聊天次數",
+      "hint": "限制此嵌入在 24 小時內可以處理的聊天次數。0 表示無限制。"
+    },
+    "maxChatsPerSession": {
+      "title": "每次會話最大聊天次數",
+      "hint": "限制此嵌入在 24 小時內每個會話用戶可以發送的聊天次數。0 表示無限制。"
+    },
+    "allowModelOverride": {
+      "title": "啟用動態模型使用",
+      "hint": "允許設置首選的 LLM 模型以覆蓋工作區的預設值。"
+    },
+    "allowTemperatureOverride": {
+      "title": "啟用動態 LLM 溫度",
+      "hint": "允許設置 LLM 的溫度以覆蓋工作區的預設值。"
+    },
+    "allowPromptOverride": {
+      "title": "啟用提示覆蓋",
+      "hint": "允許設置系統提示以覆蓋工作區的預設值。"
+    },
+    "error": "錯誤：{{error}}",
+    "info": "創建嵌入後，您將獲得一個連結，您可以將其發布在網站上，作為簡單的聊天窗口。",
+    "infoCode": "標籤。",
+    "cancelButton": "取消",
+    "updateButton": "更新嵌入"
+  },
+
+  // Code Snippet Modal
+  "codeSnippetModal": {
+    "title": "複製嵌入程式碼",
+    "closeButton": "關閉",
+    "embedCodeLabel": "HTML Script 標籤嵌入程式碼",
+    "embedCodeDescription": "將您的工作區聊天嵌入設置為網站角落的幫助台聊天窗口。",
+    "viewDocsLink": "查看所有樣式和配置選項",
+    "copiedMessage": "程式碼片段已複製到剪貼板！"
+  },
+
+  // Invite
+  "invite": {
+    "noCodeProvided": "未提供邀請代碼。",
+    "invalidCode": "邀請代碼無效。錯誤：{{error}}"
+  },
+
+  // New User Modal
+  "newUserModal": {
+    "title": "創建新帳號",
+    "usernameLabel": "用戶名",
+    "usernamePlaceholder": "我的用戶名",
+    "passwordLabel": "密碼",
+    "passwordPlaceholder": "您的密碼",
+    "error": "錯誤：{{error}}",
+    "description": "創建帳號後，您可以使用這些憑據登入並開始使用工作區。",
+    "submitButton": "接受邀請"
+  },
+
+  // SSO
+  "sso": {
+    "errors": {
+      "noToken": "未提供令牌。",
+      "loginFailed": "SSO 登入失敗，請重試。",
+      "unknownError": "發生未知錯誤。"
+    },
+    "contactAdmin": "請聯繫系統管理員以了解此錯誤的相關資訊。"
+  },
+
+  "userSetup": {
+    "title": "用戶設置",
+    "description": "配置您的用戶設置。",
+    "question": "此實例將由多少人使用？",
+    "just_Me": "只有我",
+    "my_Team": "我的團隊",
+
+    "justMe": {
+      "passwordSetupQuestion": "您是否希望設置密碼？",
+      "passwordLabel": "實例密碼",
+      "passwordPlaceholder": "您的管理員密碼",
+      "passwordRequirement": "密碼必須至少包含 8 個字符。",
+      "errorSettingPassword": "設置密碼失敗：{{error}}"
+    },
+    "yes": "是",
+    "no": "否",
+
+    "myTeam": {
+      "usernameLabel": "管理員帳號用戶名",
+      "usernamePlaceholder": "您的管理員用戶名",
+      "usernameRequirement": "用戶名必須至少 6 個字符，僅能包含小寫字母、數字、底線和連字號，且不得包含空格。",
+      "passwordLabel": "管理員帳號密碼",
+      "passwordPlaceholder": "您的管理員密碼",
+      "passwordRequirement": "密碼必須至少包含 8 個字符。",
+      "additionalInfo": "預設情況下，您將是唯一的管理員。完成設置後，您可以創建並邀請其他人成為用戶或管理員。請勿遺失密碼，因為只有管理員可以重置密碼。",
+      "error": "錯誤：{{error}}"
+    }
+  },
+
+  // Onboarding
+  "onboarding": {
+    "welcomeMessage": "歡迎使用",
+    "logoAlt": "AnythingLLM 標誌",
+    "getStartedButton": "開始使用"
+  },
+
+  // Data Handling
+  "dataHandling": {
+    "llmSelection": "LLM 選擇",
+    "embeddingPreference": "嵌入偏好",
+    "vectorDatabase": "向量資料庫",
+    "footer": "您可以隨時在設置中重新配置這些設置。",
+    "alt": {
+      "llmLogo": "LLM 標誌",
+      "embeddingLogo": "嵌入引擎標誌",
+      "vectorDbLogo": "向量資料庫標誌"
+    }
+  },
+
+  // Create Workspace
+  "createWorkspace": {
+    "title": "創建您的第一個工作區",
+    "description": "創建您的第一個工作區並開始使用 AnythingLLM。",
+    "illustrationAlt": "創建工作區插圖",
+    "inputLabel": "工作區名稱",
+    "inputPlaceholder": "我的工作區",
+    "successToast": "工作區創建成功！正在跳轉到首頁...",
+    "errorToast": "創建工作區失敗：{{error}}"
+  },
+
 
   // 更改警告
   "changeWarning": {
@@ -853,6 +1434,15 @@ const TRANSLATIONS = {
     description:
       "這些是所有已記錄的對話和訊息，依建立日期排序。",
     export: "匯出",
+    "exportSuccess": "聊天成功匯出為 {{name}}。",
+    "exportFail": "聊天匯出失敗。",
+    "clearChats": "清除聊天",
+    "clearConfirm": "確定要清除所有聊天嗎？\\n\\n此操作無法撤銷。",
+    "clearSuccess": "已清除所有聊天。",
+    "description": "這是您記錄的聊天列表。您可以根據需要匯出或清除它們。",
+    "orderFineTune": "訂購微調模型",
+    "previousPage": "上一頁",
+    "nextPage": "下一頁",
     table: {
       id: "編號",
       by: "傳送者",
@@ -874,6 +1464,11 @@ const TRANSLATIONS = {
       recommended: "建議尺寸：800 x 200",
       remove: "移除",
       replace: "取代",
+      uploaded: "標誌已上傳",
+      uploadFailed: "標誌上傳失敗：{{error}}",
+      uploadSuccess: "圖片上傳成功。",
+      removeFailed: "移除標誌失敗：{{error}}",
+      removeSuccess: "圖片已成功移除。"
     },
     message: {
       title: "自訂訊息",
@@ -885,13 +1480,76 @@ const TRANSLATIONS = {
       assistant: "AnythingLLM 對話助理",
       "double-click": "點兩下以編輯...",
       save: "儲存訊息",
+      "doubleClick": "雙擊以編輯此訊息。",
+      "success": "歡迎訊息已成功更新。",
+      "error": "更新歡迎訊息失敗：{{error}}"
     },
     icons: {
       title: "自訂頁尾圖示",
-      description: "自訂顯示在側邊欄底端的頁尾圖示。",
+      description: "自訂顯示在側邊欄緯底端的頁尾圖示。",
       icon: "圖示",
       link: "連結",
+      updateSuccess: "頁尾圖示更新成功。",
+      updateError: "頁尾圖示更新失敗：{{error}}"
     },
+  },
+
+  // Agents Badge
+  "defaultBadge": {
+    "tooltip": "此技能為預設啟用，無法關閉。",
+    "label": "預設"
+  },
+
+  // Skills
+  "skills": {
+    "activated": "技能已啟用。",
+    "deactivated": "技能已停用。",
+    "errorRequired": "{{key}} 必須有一個值。",
+    "errorType": "{{key}} 必須是 {{type}} 類型。",
+    "success": "技能配置已成功更新。",
+    "name": "{{name}}",
+    "description": "{{description}}，作者：{{author}}",
+    "fieldLabel": "{{key}}",
+    "saveButton": "儲存",
+    "noOptions": "此技能無可修改的選項。",
+    "confirmDelete": "確定要刪除此技能嗎？此操作無法撤銷。",
+    "deleteSuccess": "技能已成功刪除。",
+    "deleteFailure": "刪除技能失敗。",
+    "deleteButton": "刪除技能",
+    "noImportedSkills": "未找到已導入的技能",
+    "learnAboutAgentSkills": "在以下文件中了解代理技能：",
+    "agentDocs": "AnythingLLM 代理文件",
+    "status": {
+      "on": "開啟",
+      "off": "關閉"
+    }
+  },
+
+  // Agent SQL
+  "agentSql": {
+    "newConnectionTitle": "新 SQL 連接",
+    "addConnectionInfo": "在下方添加您的資料庫連接資訊，之後可用於 SQL 代理呼叫。",
+    "warningMessage": "<b>警告：</b> SQL 代理被<i>指示</i>僅執行非修改性查詢。這<b>無法</b>防止因錯誤行為而刪除資料。僅連接具有<b>唯讀</b>權限的用戶。",
+    "selectEngine": "選擇您的 SQL 引擎",
+    "connectionName": "連接名稱",
+    "connectionNamePlaceholder": "用於識別此 SQL 連接的唯一名稱",
+    "dbUser": "資料庫用戶",
+    "dbUserPlaceholder": "root",
+    "dbPassword": "資料庫用戶密碼",
+    "dbPasswordPlaceholder": "password123",
+    "serverEndpoint": "伺服器端點",
+    "serverEndpointPlaceholder": "您的資料庫的主機名稱或端點",
+    "port": "端口",
+    "portPlaceholder": "3306",
+    "database": "資料庫",
+    "databasePlaceholder": "代理將與之交互的資料庫",
+    "cancel": "取消",
+    "saveConnection": "儲存連接",
+    "engine": {
+      "postgresql": "PostgreSQL",
+      "mysql": "MySQL",
+      "sql-server": "SQL Server"
+    }
   },
 
   // API 金鑰
@@ -913,6 +1571,11 @@ const TRANSLATIONS = {
     description:
       "這些是您偏好的 LLM 對話與嵌入提供者的憑證和設定。確保這些金鑰是最新且正確的，否則 AnythingLLM 將無法正常運作。",
     provider: "LLM 提供者",
+    toastSaveSuccess: "LLM 偏好設定已成功儲存。",
+    toastSaveError: "儲存 LLM 設置失敗：{{error}}",
+    searchPlaceholder: "搜尋所有 LLM 提供商",
+    noneSelected: "尚未選擇",
+    noProviderSelected: "您需要選擇一個 LLM"
   },
 
   transcription: {
@@ -926,6 +1589,21 @@ const TRANSLATIONS = {
       "我們建議至少 2GB 的記憶體，並且上傳小於 10MB 的檔案。",
     "warn-end":
       "內建模型將會在第一次使用時自動下載。",
+    "toast": {
+      "success": "轉錄偏好設定已成功儲存。",
+      "error": "儲存偏好設定失敗：{{error}}"
+    },
+    "searchPlaceholder": "搜尋音訊轉錄服務提供商",
+    "providers": {
+      "openai": {
+        "name": "OpenAI",
+        "description": "使用您的 API 金鑰利用 OpenAI Whisper-large 模型。"
+      },
+      "local": {
+        "name": "AnythingLLM 內建",
+        "description": "在此實例上私密地運行內建的 Whisper 模型。"
+      }
+    }
   },
 
   embedding: {
@@ -953,11 +1631,13 @@ const TRANSLATIONS = {
       title: "文字區塊大小",
       description: "這是單一向量中可包含的最大字元長度。",
       recommend: "嵌入模型的最大長度為",
+      placeholder: "輸入最大長度",
     },
 
     overlap: {
       title: "文字區塊重疊",
       description: "這是區塊化過程中，兩個相鄰文字區塊之間的最大字元重疊數。",
+      placeholder: "輸入最大重疊大小"
     },
   },
 
@@ -970,6 +1650,42 @@ const TRANSLATIONS = {
       title: "向量資料庫提供者",
       description: "使用 LanceDB 不需要任何設定。",
     },
+    "saveError": "儲存向量資料庫設置失敗：{{error}}",
+    "saveSuccess": "向量資料庫偏好設定已成功儲存。",
+    "providers": {
+      "lancedb": {
+        "name": "LanceDB",
+        "description": "100% 本地化的向量資料庫，與 AnythingLLM 運行於同一實例上。"
+      },
+      "chroma": {
+        "name": "Chroma",
+        "description": "開源向量資料庫，可自行托管或使用雲端服務。"
+      },
+      "pinecone": {
+        "name": "Pinecone",
+        "description": "100% 雲端向量資料庫，適用於企業用例。"
+      },
+      "zilliz": {
+        "name": "Zilliz Cloud",
+        "description": "專為企業設計的雲端託管向量資料庫，符合 SOC 2 規範。"
+      },
+      "qdrant": {
+        "name": "QDrant",
+        "description": "開源本地及分佈式雲端向量資料庫。"
+      },
+      "weaviate": {
+        "name": "Weaviate",
+        "description": "開源本地及雲端托管的多模態向量資料庫。"
+      },
+      "milvus": {
+        "name": "Milvus",
+        "description": "開源、高度可擴展且速度極快的向量資料庫。"
+      },
+      "astra": {
+        "name": "AstraDB",
+        "description": "為真實世界生成式 AI 提供向量搜索功能。"
+      }
+    }
   },
 
   // 可嵌入對話小工具
@@ -988,6 +1704,8 @@ const TRANSLATIONS = {
   "embed-chats": {
     title: "嵌入對話",
     export: "匯出",
+    exportSuccess: "嵌入對話已成功匯出為 {{name}}。",
+    exportFailure: "嵌入對話匯出失敗。",
     description: "這些是來自您已發布的任何嵌入內容的所有已記錄對話和訊息。",
     table: {
       embed: "嵌入",
@@ -1008,11 +1726,19 @@ const TRANSLATIONS = {
         "預設情況下，您將是唯一的管理員。身為管理員，您需要為所有新使用者或管理員建立帳號。請勿遺失您的密碼，因為只有管理員使用者可以重設密碼。",
       username: "管理員帳號使用者名稱",
       password: "管理員帳號密碼",
+      "isEnabled": "多用戶模式已啟用",
+      "usernamePlaceholder": "輸入管理員用戶名",
+      "passwordPlaceholder": "輸入管理員密碼"
     },
     password: {
       title: "密碼保護",
       description:
         "使用密碼保護您的 AnythingLLM 系統。如果您忘記這個密碼，將沒有復原方法，因此請務必儲存此密碼。",
+      "instance": {
+      "title": "實例密碼",
+      "password": "系統密碼",
+      "description": "使用密碼保護您的系統，以限制未授權的訪問。"
+    }
     },
     instance: {
       title: "系統密碼保護",
@@ -1020,6 +1746,8 @@ const TRANSLATIONS = {
         "預設情況下，您將是唯一的管理員。身為管理員，您需要為所有新使用者或管理員建立帳號。請勿遺失您的密碼，因為只有管理員使用者可以重設密碼。",
       password: "系統密碼",
     },
+    "success": "多用戶模式已成功啟用。",
+    "failure": "啟用多用戶模式失敗：{{error}}"
   },
 
   // 事件記錄
@@ -1043,6 +1771,30 @@ const TRANSLATIONS = {
     embedding: "向量嵌入偏好設定",
     vector: "向量資料庫",
     anonymous: "已啟用匿名統計資訊",
+    "llmLogoAlt": "LLM 標誌",
+    "llmDescription": {
+      "desc1": "您的數據將被安全處理。",
+      "desc2": "支持先進的語言模型。",
+      "desc3": "數據在處理後不會被存儲。"
+    },
+    "embeddingLogoAlt": "嵌入引擎標誌",
+    "embeddingDescription": {
+      "desc1": "嵌入用於文本向量化。",
+      "desc2": "高效且可擴展的處理。",
+      "desc3": "支持與各種工具的集成。"
+    },
+    "vectorLogoAlt": "向量數據庫標誌",
+    "vectorDescription": {
+      "desc1": "存儲嵌入以快速檢索。",
+      "desc2": "為 AI 工作負載高度優化。",
+      "desc3": "注重隱私與安全性。"
+    },
+    "telemetryToast": {
+      "enabled": "已啟用匿名遙測。",
+      "disabled": "已停用匿名遙測。"
+    },
+    "telemetryDescription": "所有事件不會記錄 IP 地址，且不包含任何識別性內容。請參考 GitHub 上的事件標籤列表。",
+    "feedbackRequest": "如果您關閉遙測，請考慮提供反饋以幫助我們改進。"
   },
 };
 

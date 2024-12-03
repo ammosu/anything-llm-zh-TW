@@ -663,7 +663,6 @@ const TRANSLATIONS = {
     },
   },
 
-  /////////////////// test
   "agentDbConnection": {
     "confirmation": "Delete {{database_id}} from the list of available SQL connections? This cannot be undone.",
     "logoAlt": "{{engine}} logo",
@@ -1125,6 +1124,7 @@ const TRANSLATIONS = {
     }
   },
 
+  // Embed Row
   embedRow: {
     "confirmDisable": "Are you sure you want to disable this embed '{{embedName}}'?\nOnce disabled, the embed will no longer respond to any chat requests.",
     "disabledSuccess": "Embed has been disabled.",
@@ -1262,7 +1262,8 @@ const TRANSLATIONS = {
     "errorToast": "Failed to create workspace: {{error}}"
   },
 
-//////////////////////////////
+////////////////////// test
+
 
   // ChangeWarning
   changeWarning: {
@@ -1425,7 +1426,6 @@ const TRANSLATIONS = {
     description:
       "These are all the recorded chats and messages that have been sent by users ordered by their creation date.",
     export: "Export",
-    ////
     "exportSuccess": "Chats exported successfully as {{name}}.",
     "exportFail": "Failed to export chats.",
     "clearChats": "Clear Chats",
@@ -1435,7 +1435,6 @@ const TRANSLATIONS = {
     "orderFineTune": "Order Fine-Tune Model",
     "previousPage": "Previous Page",
     "nextPage": "Next Page",
-    ////
     table: {
       id: "Id",
       by: "Sent By",
@@ -1457,13 +1456,11 @@ const TRANSLATIONS = {
       recommended: "Recommended size: 800 x 200",
       remove: "Remove",
       replace: "Replace",
-      ////
       uploaded: "Uploaded Logo",
       uploadFailed: "Failed to upload logo: {{error}}",
       uploadSuccess: "Image uploaded successfully.",
       removeFailed: "Failed to remove logo: {{error}}",
       removeSuccess: "Image successfully removed."
-      ////
     },
     message: {
       title: "Customize Messages",
@@ -1475,11 +1472,9 @@ const TRANSLATIONS = {
       assistant: "AnythingLLM Chat Assistant",
       "double-click": "Double click to edit...",
       save: "Save Messages",
-      ////
       "doubleClick": "Double-click to edit this message.",
       "success": "Welcome messages updated successfully.",
       "error": "Failed to update welcome messages: {{error}}"
-      ////
     },
     icons: {
       title: "Custom Footer Icons",
@@ -1487,14 +1482,11 @@ const TRANSLATIONS = {
         "Customize the footer icons displayed on the bottom of the sidebar.",
       icon: "Icon",
       link: "Link",
-      ////
       "updateSuccess": "Successfully updated footer icons.",
       "updateError": "Failed to update footer icons - {{error}}"
-      ////
     },
   },
 
-  //////////////// pages /////////////////
   // Agents Badge
   "defaultBadge": {
     "tooltip": "This skill is enabled by default and cannot be turned off.",
@@ -1526,6 +1518,7 @@ const TRANSLATIONS = {
     },
   },
 
+  // Agent SQL
   "agentSql": {
     "newConnectionTitle": "New SQL Connection",
     "addConnectionInfo": "Add the connection information for your database below and it will be available for future SQL agent calls.",
@@ -1552,8 +1545,6 @@ const TRANSLATIONS = {
     }
   },
   
-  ///////////////////////////////////////////////////////
-
   // API Keys
   api: {
     title: "API Keys",
@@ -1573,13 +1564,11 @@ const TRANSLATIONS = {
     description:
       "These are the credentials and settings for your preferred LLM chat & embedding provider. Its important these keys are current and correct or else AnythingLLM will not function properly.",
     provider: "LLM Provider",
-    ////
     toastSaveSuccess: "LLM preferences saved successfully.",
     toastSaveError: "Failed to save LLM settings: {{error}}",
     searchPlaceholder: "Search all LLM providers",
     noneSelected: "None selected",
     noProviderSelected: "You need to select an LLM"
-    ////
   },
 
   transcription: {
@@ -1593,7 +1582,6 @@ const TRANSLATIONS = {
       "We recommend at least 2GB of RAM and upload files <10Mb.",
     "warn-end":
       "The built-in model will automatically download on the first use.",
-    ////
     "toast": {
       "success": "Transcription preferences saved successfully.",
       "error": "Failed to save preferences: {{error}}"
@@ -1609,7 +1597,6 @@ const TRANSLATIONS = {
         "description": "Run a built-in whisper model on this instance privately."
       }
     }
-    ////
   },
 
   embedding: {
@@ -1645,18 +1632,14 @@ const TRANSLATIONS = {
       description:
         "This is the maximum length of characters that can be present in a single vector.",
       recommend: "Embed model maximum length is",
-      ////
-      "placeholder": "Enter the maximum length",
-      ////
+      placeholder: "Enter the maximum length",
     },
 
     overlap: {
       title: "Text Chunk Overlap",
       description:
         "This is the maximum overlap of characters that occurs during chunking between two adjacent text chunks.",
-      ////
-      "placeholder": "Enter the overlap size"
-      ////
+      placeholder: "Enter the overlap size"
     },
   },
 
@@ -1669,7 +1652,6 @@ const TRANSLATIONS = {
       title: "Vector Database Provider",
       description: "There is no configuration needed for LanceDB.",
     },
-    ////
     "saveError": "Failed to save vector database settings: {{error}}",
     "saveSuccess": "Vector database preferences saved successfully.",
     "providers": {
@@ -1706,7 +1688,6 @@ const TRANSLATIONS = {
         "description": "Vector Search for Real-world GenAI."
       }
     }
-    ////
   },
 
   // Embeddable Chat Widgets
@@ -1725,10 +1706,8 @@ const TRANSLATIONS = {
   "embed-chats": {
     title: "Embed Chats",
     export: "Export",
-    ////
     exportSuccess: "Embed chats exported successfully as {{name}}.",
     exportFailure: "Failed to export embed chats.",
-    ////
     description:
       "These are all the recorded chats and messages from any embed that you have published.",
     table: {
@@ -1751,23 +1730,19 @@ const TRANSLATIONS = {
         "By default, you will be the only admin. As an admin you will need to create accounts for all new users or admins. Do not lose your password as only an Admin user can reset passwords.",
       username: "Admin account username",
       password: "Admin account password",
-      ////
       "isEnabled": "Multi-User Mode is Enabled",
       "usernamePlaceholder": "Enter admin username",
       "passwordPlaceholder": "Enter admin password",
-      ////
     },
     password: {
       title: "Password Protection",
       description:
         "Protect your AnythingLLM instance with a password. If you forget this there is no recovery method so ensure you save this password.",
-      ////
       "instance": {
         "title": "Instance Password",
         "password": "System Password",
         "description": "Protect your system with a password to restrict unauthorized access."
       }
-      ////
     },
     instance: {
       title: "Password Protect Instance",
@@ -1775,11 +1750,8 @@ const TRANSLATIONS = {
         "By default, you will be the only admin. As an admin you will need to create accounts for all new users or admins. Do not lose your password as only an Admin user can reset passwords.",
       password: "Instance password",
     },
-    ////
     "success": "Multi-User mode enabled successfully.",
     "failure": "Failed to enable Multi-User mode: {{error}}",
-
-    ////
   },
 
   // Event Logs
@@ -1804,7 +1776,6 @@ const TRANSLATIONS = {
     embedding: "Embedding Preference",
     vector: "Vector Database",
     anonymous: "Anonymous Telemetry Enabled",
-    ////
     "llmLogoAlt": "LLM Logo",
     "llmDescription": {
       "desc1": "Your data is securely processed.",
@@ -1829,7 +1800,6 @@ const TRANSLATIONS = {
     },
     "telemetryDescription": "All events do not record IP-address and contain no identifying content. See the list of event tags collected on GitHub.",
     "feedbackRequest": "If you turn off telemetry, consider sending feedback to help us improve."
-    ////
   },
 };
 
