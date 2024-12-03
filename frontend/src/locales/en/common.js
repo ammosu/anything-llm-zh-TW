@@ -1264,14 +1264,19 @@ const TRANSLATIONS = {
     "errorToast": "Failed to create workspace: {{error}}"
   },
 
-////////////////////// test
-
   vectorDatabase: {
     "updateSuccess": "Workspace updated successfully!",
     "updateError": "Error: {{message}}",
     "updating": "Updating...",
     "updateWorkspace": "Update workspace"
   },
+
+  "attachItem": {
+    "tooltip": "Attach a file to this chat",
+    "ariaLabel": "Attach a file to this chat"
+  },
+
+////////////////////// test
 
 
   // ChangeWarning

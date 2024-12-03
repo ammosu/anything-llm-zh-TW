@@ -1282,6 +1282,12 @@ const TRANSLATIONS = {
     "updateWorkspace": "更新工作區"
   },
 
+  // 附加檔案
+  "attachItem": {
+    "tooltip": "附加檔案到此聊天",
+    "ariaLabel": "附加檔案到此聊天"
+  },
+
 
 
   // 更改警告
