@@ -1040,7 +1040,9 @@ const TRANSLATIONS = {
       "saveSuccess": "Speech-to-text preferences saved successfully.",
       "saveError": "Failed to save preferences: {{error}}",
       "provider": "Provider",
-      "searchPlaceholder": "Search speech-to-text providers"
+      "searchPlaceholder": "Search speech-to-text providers",
+      "native": "System native",
+      "nativeDescription": "Uses your browser's built in STT service if supported.",
     },
     textToSpeech: {
       "preferenceTitle": "Text-to-speech Preference",

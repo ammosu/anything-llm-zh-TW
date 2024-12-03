@@ -10,11 +10,11 @@ import { useTranslation } from "react-i18next";
 
 const PROVIDERS = [
   {
-    name: "System native",
+    name: "native",
     value: "native",
     logo: AnythingLLMIcon,
     options: (settings) => <BrowserNative settings={settings} />,
-    description: "Uses your browser's built in STT service if supported.",
+    description: "audioPreference.speechToText.nativeDescription",
   },
 ];
 
@@ -166,10 +166,10 @@ export default function SpeechToTextProvider({ settings }) {
                 />
                 <div className="flex flex-col text-left">
                   <div className="text-sm font-semibold text-white">
-                    {selectedProviderObject.name}
+                    {t(`audioPreference.speechToText.${selectedProviderObject.name}`)}
                   </div>
                   <div className="mt-1 text-xs text-description">
-                    {selectedProviderObject.description}
+                    {t(selectedProviderObject.description)}
                   </div>
                 </div>
               </div>

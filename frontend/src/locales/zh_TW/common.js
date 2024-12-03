@@ -1042,7 +1042,9 @@ const TRANSLATIONS = {
       "saveSuccess": "語音轉文字偏好已成功儲存。",
       "saveError": "儲存偏好失敗：{{error}}",
       "provider": "提供商",
-      "searchPlaceholder": "搜尋語音轉文字提供商"
+      "searchPlaceholder": "搜尋語音轉文字提供商",
+      "native": "系統內建",
+      "nativeDescription": "使用瀏覽器內建的語音轉文字服務（若支援）。"
     },
     "textToSpeech": {
       "preferenceTitle": "文字轉語音偏好設定",
