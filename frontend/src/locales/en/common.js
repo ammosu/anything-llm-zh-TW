@@ -1240,6 +1240,18 @@ const TRANSLATIONS = {
     "getStartedButton": "Get started"
   },
 
+  dataHandling: {
+    "llmSelection": "LLM Selection",
+    "embeddingPreference": "Embedding Preference",
+    "vectorDatabase": "Vector Database",
+    "footer": "These settings can be reconfigured at any time in the settings.",
+    "alt": {
+      "llmLogo": "LLM Logo",
+      "embeddingLogo": "Embedding Engine Logo",
+      "vectorDbLogo": "Vector Database Logo"
+    }
+  },
+
 //////////////////////////////
 
   // ChangeWarning

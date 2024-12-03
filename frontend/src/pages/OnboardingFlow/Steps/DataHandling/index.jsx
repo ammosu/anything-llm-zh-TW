@@ -39,6 +39,7 @@ import VoyageAiLogo from "@/media/embeddingprovider/voyageai.png";
 import React, { useState, useEffect } from "react";
 import paths from "@/utils/paths";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const TITLE = "Data Handling & Privacy";
 const DESCRIPTION =
@@ -378,6 +379,7 @@ export default function DataHandling({ setHeader, setForwardBtn, setBackBtn }) {
   const [vectorDb, setVectorDb] = useState("pinecone");
   const [embeddingEngine, setEmbeddingEngine] = useState("openai");
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setHeader({ title: TITLE, description: DESCRIPTION });
@@ -414,12 +416,12 @@ export default function DataHandling({ setHeader, setForwardBtn, setBackBtn }) {
       <div className="p-8 flex flex-col gap-8">
         <div className="flex flex-col gap-y-2 border-b border-theme-sidebar-border pb-4">
           <div className="text-theme-text-primary text-base font-bold">
-            LLM Selection
+            {t("dataHandling.llmSelection")}
           </div>
           <div className="flex items-center gap-2.5">
             <img
               src={LLM_SELECTION_PRIVACY[llmChoice].logo}
-              alt="LLM Logo"
+              alt={t("dataHandling.alt.llmLogo")}
               className="w-8 h-8 rounded"
             />
             <p className="text-theme-text-primary text-sm font-bold">
@@ -434,12 +436,12 @@ export default function DataHandling({ setHeader, setForwardBtn, setBackBtn }) {
         </div>
         <div className="flex flex-col gap-y-2 border-b border-theme-sidebar-border pb-4">
           <div className="text-theme-text-primary text-base font-bold">
-            Embedding Preference
+            {t("dataHandling.embeddingPreference")}
           </div>
           <div className="flex items-center gap-2.5">
             <img
               src={EMBEDDING_ENGINE_PRIVACY[embeddingEngine].logo}
-              alt="LLM Logo"
+              alt={t("dataHandling.alt.embeddingLogo")}
               className="w-8 h-8 rounded"
             />
             <p className="text-theme-text-primary text-sm font-bold">
@@ -457,12 +459,12 @@ export default function DataHandling({ setHeader, setForwardBtn, setBackBtn }) {
 
         <div className="flex flex-col gap-y-2 pb-4">
           <div className="text-theme-text-primary text-base font-bold">
-            Vector Database
+            {t("dataHandling.vectorDatabase")}
           </div>
           <div className="flex items-center gap-2.5">
             <img
               src={VECTOR_DB_PRIVACY[vectorDb].logo}
-              alt="LLM Logo"
+              alt={t("dataHandling.alt.vectorDbLogo")}
               className="w-8 h-8 rounded"
             />
             <p className="text-theme-text-primary text-sm font-bold">
@@ -477,7 +479,7 @@ export default function DataHandling({ setHeader, setForwardBtn, setBackBtn }) {
         </div>
       </div>
       <p className="text-theme-text-secondary text-sm font-medium py-1">
-        These settings can be reconfigured at any time in the settings.
+        {t("dataHandling.footer")}
       </p>
     </div>
   );
