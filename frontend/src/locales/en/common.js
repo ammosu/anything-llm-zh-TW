@@ -1252,6 +1252,16 @@ const TRANSLATIONS = {
     }
   },
 
+  createWorkspace: {
+    "title": "Create your first workspace",
+    "description": "Create your first workspace and get started with AnythingLLM.",
+    "illustrationAlt": "Create workspace illustration",
+    "inputLabel": "Workspace Name",
+    "inputPlaceholder": "My Workspace",
+    "successToast": "Workspace created successfully! Taking you to home...",
+    "errorToast": "Failed to create workspace: {{error}}"
+  },
+
 //////////////////////////////
 
   // ChangeWarning

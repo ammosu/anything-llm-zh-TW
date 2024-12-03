@@ -6,10 +6,6 @@ import { useNavigate } from "react-router-dom";
 import Workspace from "@/models/workspace";
 import { useTranslation } from "react-i18next";
 
-const TITLE = "Create your first workspace";
-const DESCRIPTION =
-  "Create your first workspace and get started with AnythingLLM.";
-
 export default function CreateWorkspace({
   setHeader,
   setForwardBtn,
@@ -21,15 +17,30 @@ export default function CreateWorkspace({
   const { t } = useTranslation();
 
   useEffect(() => {
-    setHeader({ title: TITLE, description: DESCRIPTION });
-    setBackBtn({ showing: false, disabled: false, onClick: handleBack });
+    setHeader({
+      title: t("createWorkspace.title"),
+      description: t("createWorkspace.description"),
+    });
+    setBackBtn({
+      showing: false,
+      disabled: false,
+      onClick: handleBack,
+    });
   }, []);
 
   useEffect(() => {
     if (workspaceName.length > 0) {
-      setForwardBtn({ showing: true, disabled: false, onClick: handleForward });
+      setForwardBtn({
+        showing: true,
+        disabled: false,
+        onClick: handleForward,
+      });
     } else {
-      setForwardBtn({ showing: true, disabled: true, onClick: handleForward });
+      setForwardBtn({
+        showing: true,
+        disabled: true,
+        onClick: handleForward,
+      });
     }
   }, [workspaceName]);
 
@@ -41,14 +52,14 @@ export default function CreateWorkspace({
       onboardingComplete: true,
     });
     if (!!workspace) {
-      showToast(
-        "Workspace created successfully! Taking you to home...",
-        "success"
-      );
+      showToast(t("createWorkspace.successToast"), "success");
       await new Promise((resolve) => setTimeout(resolve, 1000));
       navigate(paths.home());
     } else {
-      showToast(`Failed to create workspace: ${error}`, "error");
+      showToast(
+        t("createWorkspace.errorToast", { error }),
+        "error"
+      );
     }
   };
 
@@ -65,7 +76,7 @@ export default function CreateWorkspace({
       onSubmit={handleCreate}
       className="w-full flex items-center justify-center flex-col gap-y-2"
     >
-      <img src={illustration} alt="Create workspace" />
+      <img src={illustration} alt={t("createWorkspace.illustrationAlt")} />
       <div className="flex flex-col gap-y-4 w-full max-w-[600px]">
         {" "}
         <div className="w-full mt-4">
@@ -73,13 +84,13 @@ export default function CreateWorkspace({
             htmlFor="name"
             className="block mb-3 text-sm font-medium text-white"
           >
-            {t("common.workspaces-name")}
+            {t("createWorkspace.inputLabel")}
           </label>
           <input
             name="name"
             type="text"
             className="border-none bg-theme-settings-input-bg text-white focus:outline-primary-button active:outline-primary-button placeholder:text-theme-settings-input-placeholder outline-none text-sm rounded-lg block w-full p-2.5"
-            placeholder="My Workspace"
+            placeholder={t("createWorkspace.inputPlaceholder")}
             required={true}
             autoComplete="off"
             onChange={(e) => setWorkspaceName(e.target.value)}
