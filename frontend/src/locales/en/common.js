@@ -905,6 +905,20 @@ const TRANSLATIONS = {
     "updateError": "Failed to update users: {{error}}"
   },
 
+  chatSettings: {
+    "update": "Update workspace",
+    "updating": "Updating...",
+    "updateSuccess": "Workspace updated successfully!",
+    "updateError": "Error: {{message}}"
+  },
+
+  generalInfo: {
+    "workspaceUpdated": "Workspace updated!",
+    "updateError": "Error: {{message}}",
+    "updating": "Updating...",
+    "updateWorkspace": "Update workspace"
+  },
+
   // Log row
   logRow: {
     "metadata": {

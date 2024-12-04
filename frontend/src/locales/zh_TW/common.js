@@ -1663,6 +1663,20 @@ const TRANSLATIONS = {
     }
   },
 
+  chatSettings: {
+    "update": "更新工作區",
+    "updating": "正在更新...",
+    "updateSuccess": "工作區已成功更新！",
+    "updateError": "錯誤：{{message}}"
+  },
+
+  generalInfo: {
+    "workspaceUpdated": "工作區已更新！",
+    "updateError": "錯誤：{{message}}",
+    "updating": "正在更新...",
+    "updateWorkspace": "更新工作區"
+  },
+
   // API 金鑰
   api: {
     title: "API 金鑰",
