@@ -330,6 +330,11 @@ const TRANSLATIONS = {
     "chartGeneration": "Chart generation"
   },
 
+  slashCommands: {
+    "tooltip": "View all available slash commands for chatting.",
+    "title": "Available Slash Commands"
+  },
+
   // Documents Upload
   uploadFile: {
     "documentProcessorUnavailable": "Document Processor Unavailable",

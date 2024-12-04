@@ -331,6 +331,11 @@ const TRANSLATIONS = {
     "chartGeneration": "圖表生成"
   },
 
+  slashCommands: {
+    "tooltip": "查看所有可用的聊天指令。",
+    "title": "可用指令列表"
+  },
+
   // 文件上傳
   "uploadFile": {
     "documentProcessorUnavailable": "文件處理器不可用",
