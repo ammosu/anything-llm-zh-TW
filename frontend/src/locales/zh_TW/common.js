@@ -1079,7 +1079,9 @@ const TRANSLATIONS = {
       "provider": "提供商",
       "searchPlaceholder": "搜尋語音轉文字提供商",
       "native": "系統內建",
-      "nativeDescription": "使用瀏覽器內建的語音轉文字服務（若支援）。"
+      "nativeDescription": "使用瀏覽器內建的語音轉文字服務（若支援）。",
+      "microphoneAccessAlert": "AnythingLLM 無法訪問麥克風。請啟用此網站的麥克風權限以使用此功能。",
+      "tooltipContent": "說出您的提示"
     },
     "textToSpeech": {
       "preferenceTitle": "文字轉語音偏好設定",

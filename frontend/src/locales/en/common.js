@@ -1077,6 +1077,8 @@ const TRANSLATIONS = {
       "searchPlaceholder": "Search speech-to-text providers",
       "native": "System native",
       "nativeDescription": "Uses your browser's built in STT service if supported.",
+      "microphoneAccessAlert": "AnythingLLM does not have access to microphone. Please enable for this site to use this feature.",
+      "tooltipContent": "Speak your prompt"
     },
     textToSpeech: {
       "preferenceTitle": "Text-to-speech Preference",
