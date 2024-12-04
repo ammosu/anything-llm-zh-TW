@@ -285,6 +285,7 @@ const TRANSLATIONS = {
   },
 
   directory: {
+    title: "My Documents",
     myDocuments: "My Documents",
     searchPlaceholder: "Search for document",
     newFolder: "New Folder",
@@ -298,7 +299,13 @@ const TRANSLATIONS = {
     successfullyMoved: "Successfully moved {{count}} documents.",
     searching: "Searching...",
     remove: "Remove",
-    uploading: "Uploading..."
+    uploading: "Uploading...",
+    errorDeleting: "Failed to delete selected files and folders.",
+  },
+
+  directoryTooltips: {
+    date: "Date",
+    type: "Type"
   },
 
   // Documents Upload

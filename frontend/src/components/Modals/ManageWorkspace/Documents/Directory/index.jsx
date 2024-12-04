@@ -85,7 +85,10 @@ function Directory({
 
       setLoading(true);
       setLoadingMessage(
-        t("directory.removingDocuments", { toRemove: toRemove.length, foldersToRemove: foldersToRemove.length })
+        t("directory.removingDocuments", {
+          toRemove: toRemove.length,
+          foldersToRemove: foldersToRemove.length,
+        })
       );
       await System.deleteDocuments(toRemove);
       for (const folderName of foldersToRemove) {
@@ -95,7 +98,7 @@ function Directory({
       await fetchKeys(true);
       setSelectedItems({});
     } catch (error) {
-      console.error("Failed to delete files and folders:", error);
+      console.error(t("directory.errorDeleting"), error);
     } finally {
       setLoading(false);
       setSelectedItems({});
@@ -196,7 +199,9 @@ function Directory({
       <div className="px-8 pb-8" onContextMenu={handleContextMenu}>
         <div className="flex flex-col gap-y-6">
           <div className="flex items-center justify-between w-[560px] px-5 relative">
-            <h3 className="text-white text-base font-bold">My Documents</h3>
+            <h3 className="text-white text-base font-bold">
+              {t("directory.title")}
+            </h3>
             <div className="relative">
               <input
                 type="search"
@@ -341,6 +346,8 @@ function Directory({
  * or updated so that tooltips are attached as the items are changed.
  */
 function DirectoryTooltips() {
+  const { t } = useTranslation();
+
   return (
     <Tooltip
       id="directory-item"
@@ -354,11 +361,11 @@ function DirectoryTooltips() {
           <div className="text-xs">
             <p className="text-white light:invert font-medium">{data.title}</p>
             <div className="flex mt-1 gap-x-2">
-              <p className="">
-                Date: <b>{data.date}</b>
+              <p>
+                {t("directoryTooltips.date")}: <b>{data.date}</b>
               </p>
-              <p className="">
-                Type: <b>{data.extension}</b>
+              <p>
+                {t("directoryTooltips.type")}: <b>{data.extension}</b>
               </p>
             </div>
           </div>

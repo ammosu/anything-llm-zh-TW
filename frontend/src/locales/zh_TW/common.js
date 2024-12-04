@@ -285,6 +285,7 @@ const TRANSLATIONS = {
   },
 
   "directory": {
+    title: "我的文件",
     "myDocuments": "我的文件",
     "searchPlaceholder": "搜尋文件",
     "newFolder": "新資料夾",
@@ -298,7 +299,13 @@ const TRANSLATIONS = {
     "successfullyMoved": "成功移動了 {{count}} 個文件。",
     "searching": "正在搜尋...",
     "remove": "移除",
-    "uploading": "正在上傳..."
+    "uploading": "正在上傳...",
+    errorDeleting: "刪除選取的文件及資料夾失敗",
+  },
+
+  directoryTooltips: {
+    date: "日期",
+    type: "類型"
   },
 
   // 文件上傳
