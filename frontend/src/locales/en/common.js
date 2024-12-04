@@ -361,6 +361,12 @@ const TRANSLATIONS = {
     }
   },
 
+  actionMenu: {
+    "tooltip": "More actions",
+    "fork": "Fork",
+    "delete": "Delete"
+  },
+
   // Documents Upload
   uploadFile: {
     "documentProcessorUnavailable": "Document Processor Unavailable",

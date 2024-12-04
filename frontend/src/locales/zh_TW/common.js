@@ -354,12 +354,18 @@ const TRANSLATIONS = {
       "good": "回應良好"
     },
     "copy": {
-      "copy": "複製",
+      "copy": "複製對話",
       "copied": "已複製！"
     },
     "regenerate": {
       "tooltip": "重新生成回應"
     }
+  },
+
+  actionMenu: {
+    "tooltip": "更多操作",
+    "fork": "分叉",
+    "delete": "刪除"
   },
 
   // 文件上傳
@@ -555,7 +561,7 @@ const TRANSLATIONS = {
 
   "userButton": {
     "account": "帳戶",
-    "support": "支援",
+    "support": "客服",
     "signOut": "登出",
     "profilePictureAlt": "使用者個人頭像",
     "defaultUsername": "AA"
@@ -1074,13 +1080,13 @@ const TRANSLATIONS = {
 
   // Support email
   "supportEmail": {
-    "title": "支援電子郵件",
-    "description": "設置在用戶登入此實例時，顯示於用戶選單中的支援電子郵件地址。",
+    "title": "客服電子郵件",
+    "description": "設置在用戶登入此實例時，顯示於用戶選單中的客服電子郵件地址。",
     "placeholder": "support@mycompany.com",
     "clearButton": "清除",
     "saveButton": "儲存",
-    "updateSuccess": "支援電子郵件已成功更新。",
-    "updateFailed": "更新支援電子郵件失敗：{{error}}"
+    "updateSuccess": "客服電子郵件已成功更新。",
+    "updateFailed": "更新客服電子郵件失敗：{{error}}"
   },
 
   // Theme preference
