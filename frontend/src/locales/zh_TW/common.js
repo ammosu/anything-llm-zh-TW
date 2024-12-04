@@ -877,6 +877,13 @@ const TRANSLATIONS = {
     "linkCopied": "連結已複製"
   },
 
+  settingsButton: {
+    "homeAriaLabel": "首頁",
+    "backToWorkspaces": "返回工作區",
+    "settingsAriaLabel": "設定",
+    "openSettings": "打開設定"
+  },
+
   // Log row
   logRow: {
     "metadata": {

@@ -877,6 +877,13 @@ const TRANSLATIONS = {
     "linkCopied": "Copied Link"
   },
 
+  settingsButton: {
+    "homeAriaLabel": "Home",
+    "backToWorkspaces": "Back to workspaces",
+    "settingsAriaLabel": "Settings",
+    "openSettings": "Open settings"
+  },
+
   // Log row
   logRow: {
     "metadata": {
