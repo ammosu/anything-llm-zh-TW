@@ -884,6 +884,16 @@ const TRANSLATIONS = {
     "openSettings": "打開設定"
   },
 
+  workspaceAgentConfiguration: {
+    "toastSuccess": "工作區已成功更新！",
+    "toastError": "錯誤：{{message}}",
+    "configureAgentSkills": "配置代理技能",
+    "customizeDescription": "自定義並增強默認代理的功能，啟用或禁用特定技能。這些設置將應用於所有工作區。",
+    "updatingAgent": "正在更新代理...",
+    "updateWorkspaceAgent": "更新工作區代理",
+    "loading": "正在加載工作區代理配置..."
+  },
+
   // Log row
   logRow: {
     "metadata": {

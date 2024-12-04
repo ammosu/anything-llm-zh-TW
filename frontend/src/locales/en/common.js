@@ -884,6 +884,16 @@ const TRANSLATIONS = {
     "openSettings": "Open settings"
   },
 
+  workspaceAgentConfiguration: {
+    "toastSuccess": "Workspace updated successfully!",
+    "toastError": "Error: {{message}}",
+    "configureAgentSkills": "Configure Agent Skills",
+    "customizeDescription": "Customize and enhance the default agent's capabilities by enabling or disabling specific skills. These settings will be applied across all workspaces.",
+    "updatingAgent": "Updating agent...",
+    "updateWorkspaceAgent": "Update workspace agent",
+    "loading": "Loading workspace agent configuration..."
+  },
+
   // Log row
   logRow: {
     "metadata": {

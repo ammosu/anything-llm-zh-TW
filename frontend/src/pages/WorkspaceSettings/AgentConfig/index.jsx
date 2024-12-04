@@ -9,8 +9,10 @@ import * as Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import paths from "@/utils/paths";
 import useUser from "@/hooks/useUser";
+import { useTranslation } from "react-i18next";
 
 export default function WorkspaceAgentConfiguration({ workspace }) {
+  const { t } = useTranslation();
   const { user } = useUser();
   const [settings, setSettings] = useState({});
   const [hasChanges, setHasChanges] = useState(false);
@@ -62,16 +64,20 @@ export default function WorkspaceAgentConfiguration({ workspace }) {
     await System.updateSystem(data.env);
 
     if (!!updatedWorkspace) {
-      showToast("Workspace updated!", "success", { clear: true });
+      showToast(t("workspaceAgentConfiguration.toastSuccess"), "success", {
+        clear: true,
+      });
     } else {
-      showToast(`Error: ${message}`, "error", { clear: true });
+      showToast(t("workspaceAgentConfiguration.toastError", { message }), "error", {
+        clear: true,
+      });
     }
 
     setSaving(false);
     setHasChanges(false);
   };
 
-  if (!workspace || loading) return <LoadingSkeleton />;
+  if (!workspace || loading) return <LoadingSkeleton t={t} />;
   return (
     <div id="workspace-agent-settings-container">
       <form
@@ -94,12 +100,10 @@ export default function WorkspaceAgentConfiguration({ workspace }) {
                   className="w-fit transition-all duration-300 border border-slate-200 px-5 py-2.5 rounded-lg text-white text-sm items-center flex gap-x-2 hover:bg-slate-200 hover:text-slate-800 focus:ring-gray-800"
                   href={paths.settings.agentSkills()}
                 >
-                  Configure Agent Skills
+                  {t("workspaceAgentConfiguration.configureAgentSkills")}
                 </a>
                 <p className="text-white text-opacity-60 text-xs font-medium">
-                  Customize and enhance the default agent's capabilities by
-                  enabling or disabling specific skills. These settings will be
-                  applied across all workspaces.
+                  {t("workspaceAgentConfiguration.customizeDescription")}
                 </p>
               </div>
             )}
@@ -112,7 +116,9 @@ export default function WorkspaceAgentConfiguration({ workspace }) {
             form="agent-settings-form"
             className="w-fit transition-all duration-300 border border-slate-200 px-5 py-2.5 rounded-lg text-white text-sm items-center flex gap-x-2 hover:bg-slate-200 hover:text-slate-800 focus:ring-gray-800"
           >
-            {saving ? "Updating agent..." : "Update workspace agent"}
+            {saving
+              ? t("workspaceAgentConfiguration.updatingAgent")
+              : t("workspaceAgentConfiguration.updateWorkspaceAgent")}
           </button>
         )}
       </form>
@@ -120,7 +126,7 @@ export default function WorkspaceAgentConfiguration({ workspace }) {
   );
 }
 
-function LoadingSkeleton() {
+function LoadingSkeleton({ t }) {
   return (
     <div id="workspace-agent-settings-container">
       <div className="w-1/2 flex flex-col gap-y-6">
@@ -144,6 +150,9 @@ function LoadingSkeleton() {
           containerClassName="flex flex-col gap-y-1 mt-4"
         />
       </div>
+      <p className="text-white text-opacity-60 text-xs font-medium text-center">
+        {t("workspaceAgentConfiguration.loading")}
+      </p>
     </div>
   );
 }
