@@ -335,6 +335,19 @@ const TRANSLATIONS = {
     "title": "Available Slash Commands"
   },
 
+  editMessageAction: {
+    "editPromptTooltip": "Edit Prompt",
+    "editResponseTooltip": "Edit Response",
+    "editPromptAria": "Edit Prompt",
+    "editResponseAria": "Edit Response"
+  },
+
+  editMessageForm: {
+    "placeholder": "Enter your message here...",
+    "saveButton": "Save & Submit",
+    "cancelButton": "Cancel"
+  },
+
   // Documents Upload
   uploadFile: {
     "documentProcessorUnavailable": "Document Processor Unavailable",

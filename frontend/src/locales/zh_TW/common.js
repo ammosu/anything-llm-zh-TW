@@ -336,6 +336,19 @@ const TRANSLATIONS = {
     "title": "可用指令列表"
   },
 
+  editMessageAction: {
+    "editPromptTooltip": "編輯提示詞",
+    "editResponseTooltip": "編輯回應",
+    "editPromptAria": "編輯提示詞",
+    "editResponseAria": "編輯回應"
+  },
+  
+  editMessageForm: {
+    "placeholder": "在此輸入您的訊息...",
+    "saveButton": "儲存並送出",
+    "cancelButton": "取消"
+  },
+
   // 文件上傳
   "uploadFile": {
     "documentProcessorUnavailable": "文件處理器不可用",
