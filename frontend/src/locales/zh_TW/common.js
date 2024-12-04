@@ -1055,7 +1055,7 @@ const TRANSLATIONS = {
       "saveSuccess": "文字轉語音偏好已成功儲存。",
       "saveError": "儲存偏好失敗：{{error}}",
       "searchPlaceholder": "搜尋文字轉語音提供商",
-      "native": "系統原生",
+      "native": "系統內建",
       "nativeDescription": "使用瀏覽器內建的文字轉語音服務（如支援）。",
       "openai": "OpenAI",
       "openaiDescription": "使用 OpenAI 的文字轉語音服務。",

@@ -86,11 +86,7 @@ function ThirdParty({ settings }) {
           </div>
           <ul className="flex flex-col list-disc ml-4">
             {LLM_SELECTION_PRIVACY[llmChoice].description.map((desc) => (
-              <li
-                className="text-theme-text-secondary text-sm"
-              >
-                {t(`privacy.llmDescription.${desc}`)}
-              </li>
+              <li className="text-theme-text-secondary text-sm">{desc}</li>
             ))}
           </ul>
         </div>
@@ -111,11 +107,7 @@ function ThirdParty({ settings }) {
           <ul className="flex flex-col list-disc ml-4">
             {EMBEDDING_ENGINE_PRIVACY[embeddingEngine].description.map(
               (desc) => (
-                <li
-                  className="text-theme-text-secondary text-sm"
-                >
-                  {t(`privacy.embeddingDescription.${desc}`)}
-                </li>
+                <li className="text-theme-text-secondary text-sm">{desc}</li>
               )
             )}
           </ul>
@@ -137,11 +129,7 @@ function ThirdParty({ settings }) {
           </div>
           <ul className="flex flex-col list-disc ml-4">
             {VECTOR_DB_PRIVACY[vectorDb].description.map((desc) => (
-              <li
-                className="text-theme-text-secondary text-sm"
-              >
-                {t(`privacy.vectorDescription.${desc}`)}
-              </li>
+              <li className="text-theme-text-secondary text-sm">{desc}</li>
             ))}
           </ul>
         </div>
