@@ -308,6 +308,13 @@ const TRANSLATIONS = {
     type: "類型"
   },
 
+  "promptInput": {
+    "placeholder": "傳送訊息",
+    "tooltipContent": "將提示訊息傳送到工作區",
+    "ariaLabel": "將提示訊息傳送到工作區",
+    "srLabel": "傳送訊息"
+  },
+
   // 文件上傳
   "uploadFile": {
     "documentProcessorUnavailable": "文件處理器不可用",

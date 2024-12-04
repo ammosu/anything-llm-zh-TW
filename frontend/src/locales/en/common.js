@@ -308,6 +308,13 @@ const TRANSLATIONS = {
     type: "Type"
   },
 
+  promptInput: {
+    "placeholder": "Send a message",
+    "tooltipContent": "Send prompt message to workspace",
+    "ariaLabel": "Send prompt message to workspace",
+    "srLabel": "Send message"
+  },
+
   // Documents Upload
   uploadFile: {
     "documentProcessorUnavailable": "Document Processor Unavailable",
