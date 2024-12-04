@@ -10,9 +10,9 @@ const TRANSLATIONS = {
     previous: "上一頁",
     next: "下一頁",
     // additional
-    Save: "存檔",
+    Save: "儲存",
     cancel: "取消",
-    unsavedChanges: "尚未保存的變更",
+    unsavedChanges: "尚未儲存的變更",
   },
 
   // 設定側邊欄選單項目
@@ -860,7 +860,7 @@ const TRANSLATIONS = {
     "deleteButton": "刪除"
   },
 
-  // Edit User Modal
+  // Edit User Modalc
   "editUserModal": {
     "title": "編輯 {{username}}",
     "username": {
@@ -903,7 +903,7 @@ const TRANSLATIONS = {
     "deleteConfirmation": "確定要刪除 {{name}} 嗎？\\n此操作完成後，該工作區將無法在此 AnythingLLM 實例中使用。\\n\\n此操作無法撤銷。"
   },
 
-  // Admin Workspace Modal
+  // Admin Workspace Modalc
   "adminNewWorkspaceModal": {
     "title": "創建新工作區",
     "workspaceNameLabel": "工作區名稱",
@@ -970,7 +970,7 @@ const TRANSLATIONS = {
   "newIconForm": {
     "iconSelector": {
       "tooltip": "選擇一個圖示",
-      "dropdown": "圖示選擇下拉菜單",
+      "dropdown": "圖示選擇下拉選單",
       "option": "選擇圖示：{{iconName}}"
     },
     "urlInput": {
@@ -1014,7 +1014,7 @@ const TRANSLATIONS = {
   // Support email
   "supportEmail": {
     "title": "支援電子郵件",
-    "description": "設置在用戶登入此實例時，顯示於用戶菜單中的支援電子郵件地址。",
+    "description": "設置在用戶登入此實例時，顯示於用戶選單中的支援電子郵件地址。",
     "placeholder": "support@mycompany.com",
     "clearButton": "清除",
     "saveButton": "儲存",
@@ -1068,7 +1068,7 @@ const TRANSLATIONS = {
     }
   },
 
-    // Settings Chats
+  // Settings Chats
   "settingsChats": {
     "viewingText": "檢視文字",
     "promptModalTitle": "檢視提示",
@@ -1288,8 +1288,6 @@ const TRANSLATIONS = {
     "ariaLabel": "附加檔案到此聊天"
   },
 
-
-
   // 更改警告
   "changeWarning": {
     "title": "警告",
@@ -1405,7 +1403,6 @@ const TRANSLATIONS = {
         "此工作區 @agent 智慧代理人將使用的特定 LLM 模型。",
       wait: "-- 等待模型中 --",
     },
-
     skill: {
       title: "預設智慧代理人技能",
       description:
@@ -1583,6 +1580,7 @@ const TRANSLATIONS = {
     },
   },
 
+  // LLM Preferences
   llm: {
     title: "LLM 偏好設定",
     description:
@@ -1650,7 +1648,6 @@ const TRANSLATIONS = {
       recommend: "嵌入模型的最大長度為",
       placeholder: "輸入最大長度",
     },
-
     overlap: {
       title: "文字區塊重疊",
       description: "這是區塊化過程中，兩個相鄰文字區塊之間的最大字元重疊數。",
@@ -1718,6 +1715,7 @@ const TRANSLATIONS = {
     },
   },
 
+  // Embeddable Chat History
   "embed-chats": {
     title: "嵌入對話",
     export: "匯出",
@@ -1752,10 +1750,10 @@ const TRANSLATIONS = {
       description:
         "使用密碼保護您的 AnythingLLM 系統。如果您忘記這個密碼，將沒有復原方法，因此請務必儲存此密碼。",
       "instance": {
-      "title": "實例密碼",
-      "password": "系統密碼",
-      "description": "使用密碼保護您的系統，以限制未授權的訪問。"
-    }
+        "title": "實例密碼",
+        "password": "系統密碼",
+        "description": "使用密碼保護您的系統，以限制未授權的訪問。"
+      }
     },
     instance: {
       title: "系統密碼保護",
