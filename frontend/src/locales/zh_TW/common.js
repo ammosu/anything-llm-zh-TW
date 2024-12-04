@@ -308,11 +308,27 @@ const TRANSLATIONS = {
     type: "類型"
   },
 
-  "promptInput": {
+  promptInput: {
     "placeholder": "傳送訊息",
     "tooltipContent": "將提示訊息傳送到工作區",
     "ariaLabel": "將提示訊息傳送到工作區",
     "srLabel": "傳送訊息"
+  },
+
+  availableAgents: {
+    "tooltipContent": "查看所有可用的以進行聊天。",
+    "defaultAgentDescription": "此工作區的默認代理。",
+    "customAgentsComingSoon": "自定義代理即將推出！"
+  },
+
+  abilities: {
+    "ragSearch": "RAG 搜索",
+    "webScraping": "網頁抓取",
+    "webBrowsing": "網頁瀏覽",
+    "saveFile": "保存檔案至瀏覽器",
+    "listDocuments": "列出文件",
+    "summarizeDocument": "摘要文件",
+    "chartGeneration": "圖表生成"
   },
 
   // 文件上傳

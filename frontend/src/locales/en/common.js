@@ -315,6 +315,21 @@ const TRANSLATIONS = {
     "srLabel": "Send message"
   },
 
+  availableAgents: {
+    "tooltipContent": "View all available agents you can use for chatting.",
+    "defaultAgentDescription": "the default agent for this workspace.",
+    "customAgentsComingSoon": "Custom agents are coming soon!"
+  },
+  abilities: {
+    "ragSearch": "RAG Search",
+    "webScraping": "Web Scraping",
+    "webBrowsing": "Web Browsing",
+    "saveFile": "Save file to browser",
+    "listDocuments": "List documents",
+    "summarizeDocument": "Summarize document",
+    "chartGeneration": "Chart generation"
+  },
+
   // Documents Upload
   uploadFile: {
     "documentProcessorUnavailable": "Document Processor Unavailable",
