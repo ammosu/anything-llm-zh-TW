@@ -348,6 +348,19 @@ const TRANSLATIONS = {
     "cancelButton": "Cancel"
   },
 
+  actions: {
+    "feedback": {
+      "good": "Good response"
+    },
+    "copy": {
+      "copy": "Copy",
+      "copied": "Copied!"
+    },
+    "regenerate": {
+      "tooltip": "Regenerate response"
+    }
+  },
+
   // Documents Upload
   uploadFile: {
     "documentProcessorUnavailable": "Document Processor Unavailable",

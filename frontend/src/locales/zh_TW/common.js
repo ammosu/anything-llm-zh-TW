@@ -349,6 +349,19 @@ const TRANSLATIONS = {
     "cancelButton": "取消"
   },
 
+  actions: {
+    "feedback": {
+      "good": "回應良好"
+    },
+    "copy": {
+      "copy": "複製",
+      "copied": "已複製！"
+    },
+    "regenerate": {
+      "tooltip": "重新生成回應"
+    }
+  },
+
   // 文件上傳
   "uploadFile": {
     "documentProcessorUnavailable": "文件處理器不可用",

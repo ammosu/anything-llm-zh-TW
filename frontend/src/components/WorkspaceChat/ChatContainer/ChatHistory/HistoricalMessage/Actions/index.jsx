@@ -4,6 +4,7 @@ import { Check, ThumbsUp, ArrowsClockwise, Copy } from "@phosphor-icons/react";
 import Workspace from "@/models/workspace";
 import { EditMessageAction } from "./EditMessage";
 import ActionMenu from "./ActionMenu";
+import { useTranslation } from "react-i18next";
 
 const Actions = ({
   message,
@@ -16,6 +17,7 @@ const Actions = ({
   isEditing,
   role,
 }) => {
+  const { t } = useTranslation();
   const [selectedFeedback, setSelectedFeedback] = useState(feedbackScore);
   const handleFeedback = async (newFeedback) => {
     const updatedFeedback =
@@ -46,7 +48,7 @@ const Actions = ({
               isSelected={selectedFeedback === true}
               handleFeedback={() => handleFeedback(true)}
               tooltipId="feedback-button"
-              tooltipContent="Good response"
+              tooltipContent={t("actions.feedback.good")}
               IconComponent={ThumbsUp}
             />
           )}
@@ -89,6 +91,7 @@ function FeedbackButton({
 }
 
 function CopyMessage({ message }) {
+  const { t } = useTranslation();
   const { copied, copyText } = useCopyText();
 
   return (
@@ -97,9 +100,9 @@ function CopyMessage({ message }) {
         <button
           onClick={() => copyText(message)}
           data-tooltip-id="copy-assistant-text"
-          data-tooltip-content="Copy"
+          data-tooltip-content={copied ? t("actions.copy.copied") : t("actions.copy.copy")}
           className="text-zinc-300"
-          aria-label="Copy"
+          aria-label={t("actions.copy.copy")}
         >
           {copied ? (
             <Check
@@ -121,15 +124,16 @@ function CopyMessage({ message }) {
 }
 
 function RegenerateMessage({ regenerateMessage, chatId }) {
+  const { t } = useTranslation();
   if (!chatId) return null;
   return (
     <div className="mt-3 relative">
       <button
         onClick={() => regenerateMessage(chatId)}
         data-tooltip-id="regenerate-assistant-text"
-        data-tooltip-content="Regenerate response"
+        data-tooltip-content={t("actions.regenerate.tooltip")}
         className="border-none text-zinc-300"
-        aria-label="Regenerate"
+        aria-label={t("actions.regenerate.tooltip")}
       >
         <ArrowsClockwise
           color="var(--theme-sidebar-footer-icon-fill)"
