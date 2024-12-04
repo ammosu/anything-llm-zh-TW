@@ -894,6 +894,17 @@ const TRANSLATIONS = {
     "loading": "正在加載工作區代理配置..."
   },
 
+  addMemberModal: {
+    "title": "使用者",
+    "searchPlaceholder": "搜尋使用者",
+    "noUsersFound": "找不到使用者",
+    "selectAll": "全選",
+    "unselect": "取消選取",
+    "saveButton": "儲存",
+    "updateSuccess": "使用者已成功更新。",
+    "updateError": "更新使用者失敗：{{error}}"
+  },
+
   // Log row
   logRow: {
     "metadata": {
@@ -913,13 +924,13 @@ const TRANSLATIONS = {
   "adminUsers": {
     "usersTitle": "用戶",
     "usersDescription": "這些是此實例中所有的帳號。刪除帳號將立即移除其對此實例的訪問權限。",
-    "addUser": "添加用戶",
+    "addUser": "新增用戶",
     "username": "用戶名",
     "role": "角色",
-    "dateAdded": "添加日期",
+    "dateAdded": "新增日期",
     "permissionsTitle": "權限",
     "roleHint": {
-      "default1": "僅能向其被管理員或管理者添加到的工作區發送訊息。",
+      "default1": "僅能向其被管理員或管理者新加入的工作區發送訊息。",
       "default2": "無法修改任何設置。",
       "manager1": "可以查看、創建和刪除任何工作區，並修改工作區特定設置。",
       "manager2": "可以創建、更新並邀請新用戶加入此實例。",
@@ -993,7 +1004,7 @@ const TRANSLATIONS = {
     "workspaceNameLabel": "工作區名稱",
     "workspaceNamePlaceholder": "我的工作區",
     "errorMessage": "錯誤：{{error}}",
-    "infoMessage": "創建此工作區後，只有管理員可以查看。您可以在創建後添加用戶。",
+    "infoMessage": "創建此工作區後，只有管理員可以查看。您可以在創建後新增用戶。",
     "createButton": "創建工作區"
   },
 
@@ -1628,7 +1639,7 @@ const TRANSLATIONS = {
   // Agent SQL
   "agentSql": {
     "newConnectionTitle": "新 SQL 連接",
-    "addConnectionInfo": "在下方添加您的資料庫連接資訊，之後可用於 SQL 代理呼叫。",
+    "addConnectionInfo": "在下方填入您的資料庫連接資訊，之後可用於 SQL 代理呼叫。",
     "warningMessage": "<b>警告：</b> SQL 代理被<i>指示</i>僅執行非修改性查詢。這<b>無法</b>防止因錯誤行為而刪除資料。僅連接具有<b>唯讀</b>權限的用戶。",
     "selectEngine": "選擇您的 SQL 引擎",
     "connectionName": "連接名稱",

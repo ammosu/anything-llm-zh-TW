@@ -894,6 +894,17 @@ const TRANSLATIONS = {
     "loading": "Loading workspace agent configuration..."
   },
 
+  addMemberModal: {
+    "title": "Users",
+    "searchPlaceholder": "Search for a user",
+    "noUsersFound": "No users found",
+    "selectAll": "Select All",
+    "unselect": "Unselect",
+    "saveButton": "Save",
+    "updateSuccess": "Users updated successfully.",
+    "updateError": "Failed to update users: {{error}}"
+  },
+
   // Log row
   logRow: {
     "metadata": {
