@@ -23,12 +23,15 @@ function FileUploadProgressComponent({
   const [status, setStatus] = useState("pending");
   const [error, setError] = useState("");
   const [isFadingOut, setIsFadingOut] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
+  // 处理淡出动画
   const fadeOut = (cb) => {
     setIsFadingOut(true);
     cb?.();
   };
 
+  // 移除文件组件
   const beginFadeOut = () => {
     setIsFadingOut(false);
     setFiles((prev) => {
@@ -36,116 +39,127 @@ function FileUploadProgressComponent({
     });
   };
 
+  // 获取基于状态的样式类名
+  const getStatusClasses = () => {
+    const baseClasses = "relative h-14 px-2 py-2 flex items-center gap-x-4 rounded-lg transition-all duration-300";
+    
+    if (rejected || status === "failed") {
+      return `${baseClasses} bg-red-500/10 border border-red-200 dark:border-red-800`;
+    }
+    
+    if (status === "complete") {
+      return `${baseClasses} bg-green-500/10 border border-green-200 dark:border-green-800`;
+    }
+
+    return `${baseClasses} bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700`;
+  };
+
+  // 获取图标样式
+  const getIconClasses = () => {
+    if (rejected || status === "failed") {
+      return "text-red-500 dark:text-red-400";
+    }
+    if (status === "complete") {
+      return "text-green-500 dark:text-green-400";
+    }
+    return "text-gray-500 dark:text-gray-400";
+  };
+
+  // 文件上传处理
   useEffect(() => {
     async function uploadFile() {
+      if (!file || rejected) return;
+
       setLoading(true);
       setLoadingMessage(t("uploadFile.uploading"));
       const start = Number(new Date());
       const formData = new FormData();
       formData.append("file", file, file.name);
+
+      // 计时器
       const timer = setInterval(() => {
         setTimerMs(Number(new Date()) - start);
       }, 100);
 
-      // Chunk streaming not working in production so we just sit and wait
-      const { response, data } = await Workspace.uploadFile(slug, formData);
-      if (!response.ok) {
+      try {
+        const { response, data } = await Workspace.uploadFile(slug, formData);
+        if (!response.ok) {
+          setStatus("failed");
+          setError(data.error);
+          onUploadError(data.error);
+        } else {
+          setStatus("complete");
+          onUploadSuccess();
+        }
+      } catch (err) {
         setStatus("failed");
-        clearInterval(timer);
-        onUploadError(data.error);
-        setError(data.error);
-      } else {
+        setError(t("uploadFile.uploadError"));
+        onUploadError(t("uploadFile.uploadError"));
+      } finally {
         setLoading(false);
         setLoadingMessage("");
-        setStatus("complete");
         clearInterval(timer);
-        onUploadSuccess();
-      }
 
-      // Begin fadeout timer to clear uploader queue.
-      setTimeout(() => {
-        fadeOut(() => setTimeout(() => beginFadeOut(), 300));
-      }, 5000);
+        // 5秒后开始淡出
+        setTimeout(() => {
+          fadeOut(() => setTimeout(() => beginFadeOut(), 300));
+        }, 5000);
+      }
     }
-    !!file && !rejected && uploadFile();
+
+    uploadFile();
   }, []);
 
-  if (rejected) {
+  // 进度条组件
+  const ProgressBar = () => (
+    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-200 dark:bg-gray-700 rounded-b-lg overflow-hidden">
+      <div 
+        className="h-full bg-blue-500 transition-all duration-300"
+        style={{ width: `${uploadProgress}%` }}
+      />
+    </div>
+  );
+
+  // 错误状态渲染
+  if (rejected || status === "failed") {
     return (
-      <div
-        className={`${
-          isFadingOut ? "file-upload-fadeout" : "file-upload"
-        } h-14 px-2 py-2 flex items-center gap-x-4 rounded-lg bg-error/40 light:bg-error/30 light:border-solid light:border-error/40 border border-transparent`}
-      >
+      <div className={`${getStatusClasses()} ${isFadingOut ? "opacity-0" : "opacity-100"}`}>
         <div className="w-6 h-6 flex-shrink-0">
-          <XCircle
-            color="var(--theme-bg-primary)"
-            className="w-6 h-6 stroke-white bg-error rounded-full p-1 w-full h-full"
-          />
+          <XCircle className={`w-6 h-6 ${getIconClasses()}`} />
         </div>
-        <div className="flex flex-col">
-          <p className="text-white light:text-red-600 text-xs font-semibold">
+        <div className="flex flex-col flex-1">
+          <p className="text-xs font-semibold text-gray-900 dark:text-gray-100">
             {truncate(file.name, 30)}
           </p>
-          <p className="text-red-100 light:text-red-600 text-xs font-medium">
-            {reason || "this file failed to upload"}
+          <p className="text-xs font-medium text-red-500 dark:text-red-400">
+            {reason || error || t("uploadFile.uploadError")}
           </p>
         </div>
       </div>
     );
   }
 
-  if (status === "failed") {
-    return (
-      <div
-        className={`${
-          isFadingOut ? "file-upload-fadeout" : "file-upload"
-        } h-14 px-2 py-2 flex items-center gap-x-4 rounded-lg bg-error/40 light:bg-error/30 light:border-solid light:border-error/40 border border-transparent`}
-      >
-        <div className="w-6 h-6 flex-shrink-0">
-          <XCircle
-            color="var(--theme-bg-primary)"
-            className="w-6 h-6 stroke-white bg-error rounded-full p-1 w-full h-full"
-          />
-        </div>
-        <div className="flex flex-col">
-          <p className="text-white light:text-red-600 text-xs font-semibold">
-            {truncate(file.name, 30)}
-          </p>
-          <p className="text-red-100 light:text-red-600 text-xs font-medium">
-            {error}
-          </p>
-        </div>
-      </div>
-    );
-  }
-
+  // 常规状态渲染
   return (
-    <div
-      className={`${
-        isFadingOut ? "file-upload-fadeout" : "file-upload"
-      } h-14 px-2 py-2 flex items-center gap-x-4 rounded-lg bg-zinc-800 light:border-solid light:border-theme-modal-border light:bg-theme-bg-sidebar border border-white/20 shadow-md`}
-    >
+    <div className={`${getStatusClasses()} ${isFadingOut ? "opacity-0" : "opacity-100"}`}>
       <div className="w-6 h-6 flex-shrink-0">
         {status !== "complete" ? (
           <div className="flex items-center justify-center">
-            <PreLoader size="6" />
+            <PreLoader size="6" className={getIconClasses()} />
           </div>
         ) : (
-          <CheckCircle
-            color="var(--theme-bg-primary)"
-            className="w-6 h-6 stroke-white bg-green-500 rounded-full p-1 w-full h-full"
-          />
+          <CheckCircle className={`w-6 h-6 ${getIconClasses()}`} />
         )}
       </div>
-      <div className="flex flex-col">
-        <p className="text-white light:text-theme-text-primary text-xs font-medium">
+      <div className="flex flex-col flex-1">
+        <p className="text-xs font-semibold text-gray-900 dark:text-gray-100">
           {truncate(file.name, 30)}
         </p>
-        <p className="text-white/80 light:text-theme-text-secondary text-xs font-medium">
+        <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
           {humanFileSize(file.size)} | {milliToHms(timerMs)}
         </p>
       </div>
+      {status !== "complete" && <ProgressBar />}
     </div>
   );
 }

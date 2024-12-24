@@ -176,7 +176,13 @@ export default {
             backgroundColor: "rgba(255, 255, 255, 0.0)"
           }
         }
-      }
+      },
+      zIndex: {
+        'modal-backdrop': '9998',
+        'modal': '9999',
+        'base': '1',
+        'chat': '10',
+      },
     }
   },
   variants: {
@@ -213,6 +219,10 @@ export default {
     {
       pattern:
         /^(fill-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/
+    },
+    {
+      pattern: /^z-(modal|modal-backdrop|base|chat)$/,
+      variants: ['hover', 'focus', 'active']
     }
   ],
   plugins: [

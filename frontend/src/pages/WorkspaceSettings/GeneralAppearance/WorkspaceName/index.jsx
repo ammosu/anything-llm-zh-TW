@@ -5,7 +5,7 @@ export default function WorkspaceName({ workspace, setHasChanges }) {
   return (
     <div>
       <div className="flex flex-col">
-        <label htmlFor="name" className="block input-label">
+        <label htmlFor="workspace-name" className="block input-label">
           {t("common.workspaces-name")}
         </label>
         <p className="text-white text-opacity-60 text-xs font-medium py-1.5">
@@ -13,6 +13,7 @@ export default function WorkspaceName({ workspace, setHasChanges }) {
         </p>
       </div>
       <input
+        id="workspace-name"
         name="name"
         type="text"
         minLength={2}

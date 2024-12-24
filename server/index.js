@@ -1,6 +1,5 @@
-process.env.NODE_ENV === "development"
-  ? require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` })
-  : require("dotenv").config();
+// Load environment variables
+require("dotenv").config();
 
 require("./utils/logger")();
 const express = require("express");
@@ -26,6 +25,15 @@ const { agentWebsocket } = require("./endpoints/agentWebsocket");
 const { experimentalEndpoints } = require("./endpoints/experimental");
 const { browserExtensionEndpoints } = require("./endpoints/browserExtension");
 const { communityHubEndpoints } = require("./endpoints/communityHub");
+
+// Log environment variables for debugging
+console.log("Environment variables loaded:", {
+  NODE_ENV: process.env.NODE_ENV,
+  OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY ? "Set" : "Not set",
+  OPENROUTER_API_URL: process.env.OPENROUTER_API_URL,
+  OPENROUTER_MODEL_PREF: process.env.OPENROUTER_MODEL_PREF,
+});
+
 const app = express();
 const apiRouter = express.Router();
 const FILE_LIMIT = "3GB";
@@ -111,7 +119,6 @@ if (process.env.NODE_ENV !== "development") {
         const resBody = await VectorDb[command](body);
         response.status(200).json({ ...resBody });
       } catch (e) {
-        // console.error(e)
         console.error(JSON.stringify(e));
         response.status(500).json({ error: e.message });
       }

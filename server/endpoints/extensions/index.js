@@ -12,11 +12,14 @@ const {
 function extensionEndpoints(app) {
   if (!app) return;
 
+  // 定義允許使用擴展功能的角色
+  const EXTENSION_MANAGEMENT_ROLES = [ROLES.admin, ROLES.manager, ROLES.workspace_manager];
+
   app.post(
     "/ext/:repo_platform/branches",
     [
       validatedRequest,
-      flexUserRoleValid([ROLES.admin, ROLES.manager]),
+      flexUserRoleValid(EXTENSION_MANAGEMENT_ROLES),
       isSupportedRepoProvider,
     ],
     async (request, response) => {
@@ -40,7 +43,7 @@ function extensionEndpoints(app) {
     "/ext/:repo_platform/repo",
     [
       validatedRequest,
-      flexUserRoleValid([ROLES.admin, ROLES.manager]),
+      flexUserRoleValid(EXTENSION_MANAGEMENT_ROLES),
       isSupportedRepoProvider,
     ],
     async (request, response) => {
@@ -65,7 +68,7 @@ function extensionEndpoints(app) {
 
   app.post(
     "/ext/youtube/transcript",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, flexUserRoleValid(EXTENSION_MANAGEMENT_ROLES)],
     async (request, response) => {
       try {
         const responseFromProcessor =
@@ -87,7 +90,7 @@ function extensionEndpoints(app) {
 
   app.post(
     "/ext/confluence",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, flexUserRoleValid(EXTENSION_MANAGEMENT_ROLES)],
     async (request, response) => {
       try {
         const responseFromProcessor =
@@ -108,7 +111,7 @@ function extensionEndpoints(app) {
   );
   app.post(
     "/ext/website-depth",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, flexUserRoleValid(EXTENSION_MANAGEMENT_ROLES)],
     async (request, response) => {
       try {
         const responseFromProcessor =

@@ -5,7 +5,6 @@ import {
   House,
   List,
   Robot,
-  Flask,
   Gear,
   UserCircleGear,
   PencilSimpleLine,
@@ -263,7 +262,7 @@ const SidebarOptions = ({ user = null, t }) => (
             {
               btnText: t("settings.users"),
               href: paths.settings.users(),
-              roles: ["admin", "manager"],
+              roles: ["admin", "manager", "workspace_manager"],
             },
             {
               btnText: t("settings.workspaces"),
@@ -275,12 +274,12 @@ const SidebarOptions = ({ user = null, t }) => (
               btnText: t("settings.workspace-chats"),
               href: paths.settings.chats(),
               flex: true,
-              roles: ["admin", "manager"],
+              roles: ["admin", "manager", "workspace_manager"],
             },
             {
               btnText: t("settings.invites"),
               href: paths.settings.invites(),
-              roles: ["admin", "manager"],
+              roles: ["admin", "manager", "workspace_manager"],
             },
           ]}
         />
@@ -295,6 +294,7 @@ const SidebarOptions = ({ user = null, t }) => (
         <Option
           btnText="Community Hub"
           icon={<Globe className="h-5 w-5 flex-shrink-0" />}
+          hidden={true}
           childOptions={[
             {
               btnText: "Explore Trending",
@@ -322,7 +322,7 @@ const SidebarOptions = ({ user = null, t }) => (
           href={paths.settings.appearance()}
           user={user}
           flex={true}
-          roles={["admin", "manager"]}
+          roles={["admin", "manager", "workspace_manager"]}
         />
         <Option
           btnText={t("settings.tools")}
@@ -359,6 +359,7 @@ const SidebarOptions = ({ user = null, t }) => (
               href: paths.settings.browserExtension(),
               flex: true,
               roles: ["admin", "manager"],
+              hidden: true
             },
           ]}
         />
@@ -371,66 +372,7 @@ const SidebarOptions = ({ user = null, t }) => (
           roles={["admin", "manager"]}
           hidden={user?.role}
         />
-        <HoldToReveal key="exp_features">
-          <Option
-            btnText={t("settings.experimental-features")}
-            icon={<Flask className="h-5 w-5 flex-shrink-0" />}
-            href={paths.settings.experimental()}
-            user={user}
-            flex={true}
-            roles={["admin"]}
-          />
-        </HoldToReveal>
       </>
     )}
   </CanViewChatHistoryProvider>
 );
-
-function HoldToReveal({ children, holdForMs = 3_000 }) {
-  let timeout = null;
-  const [showing, setShowing] = useState(
-    window.localStorage.getItem(
-      "anythingllm_experimental_feature_preview_unlocked"
-    )
-  );
-
-  useEffect(() => {
-    const onPress = (e) => {
-      if (!["Control", "Meta"].includes(e.key) || timeout !== null) return;
-      timeout = setTimeout(() => {
-        setShowing(true);
-        // Setting toastId prevents hook spam from holding control too many times or the event not detaching
-        showToast("Experimental feature previews unlocked!");
-        window.localStorage.setItem(
-          "anythingllm_experimental_feature_preview_unlocked",
-          "enabled"
-        );
-        window.removeEventListener("keypress", onPress);
-        window.removeEventListener("keyup", onRelease);
-        clearTimeout(timeout);
-      }, holdForMs);
-    };
-    const onRelease = (e) => {
-      if (!["Control", "Meta"].includes(e.key)) return;
-      if (showing) {
-        window.removeEventListener("keypress", onPress);
-        window.removeEventListener("keyup", onRelease);
-        clearTimeout(timeout);
-        return;
-      }
-      clearTimeout(timeout);
-    };
-
-    if (!showing) {
-      window.addEventListener("keydown", onPress);
-      window.addEventListener("keyup", onRelease);
-    }
-    return () => {
-      window.removeEventListener("keydown", onPress);
-      window.removeEventListener("keyup", onRelease);
-    };
-  }, []);
-
-  if (!showing) return null;
-  return children;
-}

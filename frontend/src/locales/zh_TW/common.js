@@ -242,14 +242,14 @@ const TRANSLATIONS = {
       "toastFetchingPages": "正在為 Confluence 空間提取所有頁面 - 這可能需要一些時間。",
       "toastPagesCollected": "已從 Confluence 空間 {{spaceKey}} 中收集頁面。輸出資料夾為 {{destination}}。",
       "deploymentType": "Confluence 部署類型",
-      "deploymentTypeDescription": "確定您的 Confluence 實例是託管於 Atlassian 雲端還是自託管。",
+      "deploymentTypeDescription": "確定您的 Confluence 平台是託管於 Atlassian 雲端還是自託管。",
       "atlassianCloud": "Atlassian 雲端",
       "selfHosted": "自託管",
       "baseUrl": "Confluence 基本 URL",
       "baseUrlDescription": "這是您的 Confluence 空間的基本 URL。",
       "baseUrlPlaceholder": "例如：https://example.atlassian.net, http://localhost:8211 等",
       "spaceKey": "Confluence 空間鍵值",
-      "spaceKeyDescription": "這是您的 Confluence 實例的空間鍵值。通常以 ~ 開頭。",
+      "spaceKeyDescription": "這是您的 Confluence 平台的空間鍵值。通常以 ~ 開頭。",
       "spaceKeyPlaceholder": "例如：~7120208c08555d52224113949698b933a3bb56",
       "username": "Confluence 使用者名稱",
       "usernameDescription": "您的 Confluence 使用者名稱。",
@@ -378,7 +378,7 @@ const TRANSLATIONS = {
     "placeholderUrl": "https://example.com",
     "fetchWebsite": "抓取網站",
     "fetching": "正在抓取...",
-    "disclaimer": "這些文件將上傳至此 AnythingLLM 實例中的文件處理器。這些文件不會發送或共享至第三方。",
+    "disclaimer": "這些文件將上傳至此 AnythingLLM 平台中的文件處理器。這些文件不會發送或共享至第三方。",
     "scrapingLink": "正在抓取連結...",
     "uploadLinkSuccess": "連結上傳成功",
     "uploadLinkError": "上傳連結時出現錯誤：{{error}}",
@@ -435,8 +435,9 @@ const TRANSLATIONS = {
     "loading": "正在載入訊息主題...",
     "listAriaLabel": "訊息主題",
     "defaultThreadName": "預設",
+    "Thread": "新主題",
     "startingThread": "正在開始新的主題...",
-    "newThread": "新主題",
+    "newThread": "新增主題",
     "deleteSelected": "刪除選擇的項目",
     "newThreadError": "無法建立主題 - {{error}}",
     "deleted": "已刪除主題",
@@ -710,6 +711,10 @@ const TRANSLATIONS = {
       save: "儲存訊息",
       heading: "請向我說明",
       body: "AnythingLLM 的優點",
+      headingLabel: "標題",
+      headingPlaceholder: "訊息標題",
+      messageLabel: "訊息",
+      messagePlaceholder: "請輸入訊息"
     },
     pfp: {
       title: "助理個人檔案圖片",
@@ -856,7 +861,7 @@ const TRANSLATIONS = {
   // Admin invitation
   "adminInvites": {
     "title": "邀請",
-    "description": "為組織中的人員創建邀請連結，供他們接受並註冊。每個邀請只能被單一用戶使用。",
+    "description": "為組織中的人員創建邀請連結，供他們接受並註冊。每個邀請只能被單一使用者使用。",
     "createInviteButton": "創建邀請連結",
     "table": {
       "status": "狀態",
@@ -869,12 +874,40 @@ const TRANSLATIONS = {
   "adminInviteModal": {
     "createTitle": "創建新邀請",
     "error": "錯誤：{{error}}",
-    "description": "創建後，您可以複製邀請並發送給新用戶，讓他們以<b>預設</b>角色創建帳號，並自動加入所選工作區。",
+    "description": "創建後，您可以複製邀請並發送給新使用者，讓他們以<b>預設</b>角色創建帳號，並自動加入所選工作區。",
     "workspaceLabel": "自動將受邀者加入工作區",
-    "workspaceDescription": "您可以選擇性地將用戶自動分配到以下工作區。預設情況下，用戶將無法查看任何工作區。接受邀請後，您也可以分配工作區。",
+    "workspaceDescription": "您可以選擇性地將使用者自動分配到以下工作區。預設情況下，使用者將無法查看任何工作區。接受邀請後，您也可以分配工作區。",
     "createButton": "創建邀請",
     "copyButton": "複製邀請連結",
     "linkCopied": "連結已複製"
+  },
+
+  settingsButton: {
+    "homeAriaLabel": "首頁",
+    "backToWorkspaces": "返回工作區",
+    "settingsAriaLabel": "設定",
+    "openSettings": "打開設定"
+  },
+
+  workspaceAgentConfiguration: {
+    "toastSuccess": "工作區已成功更新！",
+    "toastError": "錯誤：{{message}}",
+    "configureAgentSkills": "配置代理技能",
+    "customizeDescription": "自定義並增強默認代理的功能，啟用或禁用特定技能。這些設置將應用於所有工作區。",
+    "updatingAgent": "正在更新代理...",
+    "updateWorkspaceAgent": "更新工作區代理",
+    "loading": "正在加載工作區代理配置..."
+  },
+
+  addMemberModal: {
+    "title": "使用者",
+    "searchPlaceholder": "搜尋使用者",
+    "noUsersFound": "找不到使用者",
+    "selectAll": "全選",
+    "unselect": "取消選取",
+    "saveButton": "儲存",
+    "updateSuccess": "使用者已成功更新。",
+    "updateError": "更新使用者失敗：{{error}}"
   },
 
   // Log row
@@ -894,33 +927,36 @@ const TRANSLATIONS = {
 
   // Admin User
   "adminUsers": {
-    "usersTitle": "用戶",
-    "usersDescription": "這些是此實例中所有的帳號。刪除帳號將立即移除其對此實例的訪問權限。",
-    "addUser": "添加用戶",
-    "username": "用戶名",
-    "role": "角色",
-    "dateAdded": "添加日期",
+    "usersTitle": "使用者",
+    "usersDescription": "這些是此平台中所有的帳號。刪除帳號將立即移除其對此平台的訪問權限。",
+    "addUser": "新增使用者",
+    "username": "使用者名稱",
+    "role": "身份",
+    "dateAdded": "新增日期",
     "permissionsTitle": "權限",
     "roleHint": {
-      "default1": "僅能向其被管理員或管理者添加到的工作區發送訊息。",
+      "default1": "僅能向其被管理員或管理者新加入的工作區發送訊息。",
       "default2": "無法修改任何設置。",
       "manager1": "可以查看、創建和刪除任何工作區，並修改工作區特定設置。",
-      "manager2": "可以創建、更新並邀請新用戶加入此實例。",
+      "manager2": "可以創建、更新並邀請新使用者加入此平台。",
       "manager3": "無法修改 LLM、向量資料庫、嵌入或其他連線。",
-      "admin1": "最高權限用戶等級。可以查看並操作系統中的所有功能。"
+      "workspace_manager1": "可以查看和刪除所屬工作區，並修改工作區特定設置。",
+      "workspace_manager2": "可以創建、更新並邀請新使用者加入此平台。",
+      "workspace_manager3": "無法修改 LLM、向量資料庫、嵌入或其他連線。",
+      "admin1": "最高權限使用者等級。可以查看並操作系統中的所有功能。"
     },
     "limitMessagesTitle": "每日訊息限制",
-    "limitMessagesDescription": "限制該用戶在 24 小時內的成功查詢或對話數量。",
+    "limitMessagesDescription": "限制該使用者在 24 小時內的成功查詢或對話數量。",
     "messageLimitLabel": "每日訊息限制"
   },
 
   // Admin User Row
   "adminUserRow": {
-    "confirmSuspend": "確定要暫停 {{username}} 嗎？\\n此操作完成後，他們將被登出，且無法重新登入此 AnythingLLM 實例，直至由管理員取消暫停。",
-    "suspendSuccess": "用戶已被暫停。",
-    "unsuspendSuccess": "用戶已恢復正常狀態。",
-    "confirmDelete": "確定要刪除 {{username}} 嗎？\\n此操作完成後，他們將被登出，且無法使用此 AnythingLLM 實例。\\n\\n此操作無法撤銷。",
-    "deleteSuccess": "用戶已從系統中刪除。",
+    "confirmSuspend": "確定要暫停 {{username}} 嗎？\\n此操作完成後，他們將被登出，且無法重新登入此 AnythingLLM 平台，直至由管理員取消暫停。",
+    "suspendSuccess": "使用者已被暫停。",
+    "unsuspendSuccess": "使用者已恢復正常狀態。",
+    "confirmDelete": "確定要刪除 {{username}} 嗎？\\n此操作完成後，他們將被登出，且無法使用此 AnythingLLM 平台。\\n\\n此操作無法撤銷。",
+    "deleteSuccess": "使用者已從系統中刪除。",
     "editButton": "編輯",
     "suspendButton": "暫停",
     "unsuspendButton": "取消暫停",
@@ -931,9 +967,9 @@ const TRANSLATIONS = {
   "editUserModal": {
     "title": "編輯 {{username}}",
     "username": {
-      "label": "用戶名",
-      "placeholder": "用戶名",
-      "hint": "用戶名只能包含小寫字母、數字、底線和連字號，且不能包含空格"
+      "label": "使用者名稱",
+      "placeholder": "使用者名稱",
+      "hint": "使用者名稱只能包含小寫字母、數字、底線和連字號，且不能包含空格"
     },
     "password": {
       "label": "新密碼",
@@ -943,23 +979,24 @@ const TRANSLATIONS = {
     "role": {
       "label": "角色",
       "default": "預設",
-      "manager": "管理者",
-      "admin": "管理員"
+      "workspace_manager": "工作區管理員",
+      "manager": "系統管理員",
+      "admin": "最高權限管理員"
     },
     "error": "錯誤：{{error}}",
     "cancelButton": "取消",
-    "updateButton": "更新用戶"
+    "updateButton": "更新使用者"
   },
 
   // Admin workspace
   "adminWorkspaces": {
-    "title": "實例工作區",
-    "description": "這些是此實例中所有存在的工作區。刪除工作區將刪除其所有相關的對話和設置。",
+    "title": "平台工作區",
+    "description": "這些是此平台中所有存在的工作區。刪除工作區將刪除其所有相關的對話和設置。",
     "newWorkspaceButton": "新建工作區",
     "tableHeaders": {
       "name": "名稱",
       "link": "連結",
-      "users": "用戶數量",
+      "users": "使用者數量",
       "createdOn": "創建日期",
       "actions": "操作"
     }
@@ -967,7 +1004,7 @@ const TRANSLATIONS = {
 
   // Admin Workspace Row
   "adminWorkspaceRow": {
-    "deleteConfirmation": "確定要刪除 {{name}} 嗎？\\n此操作完成後，該工作區將無法在此 AnythingLLM 實例中使用。\\n\\n此操作無法撤銷。"
+    "deleteConfirmation": "確定要刪除 {{name}} 嗎？\\n此操作完成後，該工作區將無法在此 AnythingLLM 平台中使用。\\n\\n此操作無法撤銷。"
   },
 
   // Admin Workspace Modalc
@@ -976,14 +1013,14 @@ const TRANSLATIONS = {
     "workspaceNameLabel": "工作區名稱",
     "workspaceNamePlaceholder": "我的工作區",
     "errorMessage": "錯誤：{{error}}",
-    "infoMessage": "創建此工作區後，只有管理員可以查看。您可以在創建後添加用戶。",
+    "infoMessage": "創建此工作區後，只有管理員可以查看。您可以在創建後新增使用者。",
     "createButton": "創建工作區"
   },
 
   // API key modal
   "newApiKeyModal": {
     "title": "創建新 API 金鑰",
-    "description": "創建後，API 金鑰可用於以程式化方式訪問和配置此 AnythingLLM 實例。",
+    "description": "創建後，API 金鑰可用於以程式化方式訪問和配置此 AnythingLLM 平台。",
     "readDocs": "閱讀 API 文件",
     "cancel": "取消",
     "create": "創建 API 金鑰",
@@ -1081,7 +1118,7 @@ const TRANSLATIONS = {
   // Support email
   "supportEmail": {
     "title": "客服電子郵件",
-    "description": "設置在用戶登入此實例時，顯示於用戶選單中的客服電子郵件地址。",
+    "description": "設置在使用者登入此平台時，顯示於使用者選單中的客服電子郵件地址。",
     "placeholder": "support@mycompany.com",
     "clearButton": "清除",
     "saveButton": "儲存",
@@ -1162,7 +1199,7 @@ const TRANSLATIONS = {
       },
       "maxChatsPerSession": {
         "title": "每次會話最大聊天次數",
-        "hint": "限制此嵌入在 24 小時內每個會話用戶可以發送的聊天次數。0 表示無限制。"
+        "hint": "限制此嵌入在 24 小時內每個會話使用者可以發送的聊天次數。0 表示無限制。"
       },
       "allowModelOverride": {
         "title": "啟用動態模型使用",
@@ -1224,7 +1261,7 @@ const TRANSLATIONS = {
     },
     "maxChatsPerSession": {
       "title": "每次會話最大聊天次數",
-      "hint": "限制此嵌入在 24 小時內每個會話用戶可以發送的聊天次數。0 表示無限制。"
+      "hint": "限制此嵌入在 24 小時內每個會話使用者可以發送的聊天次數。0 表示無限制。"
     },
     "allowModelOverride": {
       "title": "啟用動態模型使用",
@@ -1264,8 +1301,8 @@ const TRANSLATIONS = {
   // New User Modal
   "newUserModal": {
     "title": "創建新帳號",
-    "usernameLabel": "用戶名",
-    "usernamePlaceholder": "我的用戶名",
+    "usernameLabel": "使用者名稱",
+    "usernamePlaceholder": "我的使用者名稱",
     "passwordLabel": "密碼",
     "passwordPlaceholder": "您的密碼",
     "error": "錯誤：{{error}}",
@@ -1284,15 +1321,15 @@ const TRANSLATIONS = {
   },
 
   "userSetup": {
-    "title": "用戶設置",
-    "description": "配置您的用戶設置。",
-    "question": "此實例將由多少人使用？",
+    "title": "使用者設置",
+    "description": "配置您的使用者設置。",
+    "question": "此平台將由多少人使用？",
     "just_Me": "只有我",
     "my_Team": "我的團隊",
 
     "justMe": {
       "passwordSetupQuestion": "您是否希望設置密碼？",
-      "passwordLabel": "實例密碼",
+      "passwordLabel": "平台密碼",
       "passwordPlaceholder": "您的管理員密碼",
       "passwordRequirement": "密碼必須至少包含 8 個字符。",
       "errorSettingPassword": "設置密碼失敗：{{error}}"
@@ -1301,13 +1338,13 @@ const TRANSLATIONS = {
     "no": "否",
 
     "myTeam": {
-      "usernameLabel": "管理員帳號用戶名",
-      "usernamePlaceholder": "您的管理員用戶名",
-      "usernameRequirement": "用戶名必須至少 6 個字符，僅能包含小寫字母、數字、底線和連字號，且不得包含空格。",
-      "passwordLabel": "管理員帳號密碼",
-      "passwordPlaceholder": "您的管理員密碼",
+      "usernameLabel": "最高權限管理員帳號使用者名稱",
+      "usernamePlaceholder": "您的最高權限管理員使用者名稱",
+      "usernameRequirement": "最高權限使用者名稱必須至少 6 個字符，僅能包含小寫字母、數字、底線和連字號，且不得包含空格。",
+      "passwordLabel": "最高權限管理員帳號密碼",
+      "passwordPlaceholder": "您的最高權限管理員密碼",
       "passwordRequirement": "密碼必須至少包含 8 個字符。",
-      "additionalInfo": "預設情況下，您將是唯一的管理員。完成設置後，您可以創建並邀請其他人成為用戶或管理員。請勿遺失密碼，因為只有管理員可以重置密碼。",
+      "additionalInfo": "預設情況下，您將是唯一的最高權限管理員。完成設置後，您可以創建並邀請其他人成為使用者或管理員。請勿遺失密碼，因為只有最高權限管理員可以重置密碼。",
       "error": "錯誤：{{error}}"
     }
   },
@@ -1421,6 +1458,18 @@ const TRANSLATIONS = {
       "desc-end":
         "數值越高，創意度越高。對於某些模型，設定過高可能會導致不連貫的回應。",
       hint: "大多數 LLM 都有各種可接受的有效值範圍。請查詢您的 LLM 提供者以取得該資訊。",
+    },
+    personalInfo: {
+      title: "個資檢測",
+      description: "啟用或停用此工作區的個資檢測功能。停用後將不會檢查訊息中是否包含個人資訊。",
+      enable: "啟用個資檢測",
+      checking: "正在檢查個人資訊...",
+      warning: {
+        title: "個人資訊警告",
+        description: "您的訊息中可能包含個人資訊。是否仍要傳送？",
+        confirm: "仍要傳送",
+        cancel: "取消"
+      }
     },
   },
 
@@ -1611,14 +1660,14 @@ const TRANSLATIONS = {
   // Agent SQL
   "agentSql": {
     "newConnectionTitle": "新 SQL 連接",
-    "addConnectionInfo": "在下方添加您的資料庫連接資訊，之後可用於 SQL 代理呼叫。",
-    "warningMessage": "<b>警告：</b> SQL 代理被<i>指示</i>僅執行非修改性查詢。這<b>無法</b>防止因錯誤行為而刪除資料。僅連接具有<b>唯讀</b>權限的用戶。",
+    "addConnectionInfo": "在下方填入您的資料庫連接資訊，之後可用於 SQL 代理呼叫。",
+    "warningMessage": "<b>警告：</b> SQL 代理被<i>指示</i>僅執行非修改性查詢。這<b>無法</b>防止因錯誤行為而刪除資料。僅連接具有<b>唯讀</b>權限的使用者。",
     "selectEngine": "選擇您的 SQL 引擎",
     "connectionName": "連接名稱",
     "connectionNamePlaceholder": "用於識別此 SQL 連接的唯一名稱",
-    "dbUser": "資料庫用戶",
+    "dbUser": "資料庫使用者",
     "dbUserPlaceholder": "root",
-    "dbPassword": "資料庫用戶密碼",
+    "dbPassword": "資料庫使用者密碼",
     "dbPasswordPlaceholder": "password123",
     "serverEndpoint": "伺服器端點",
     "serverEndpointPlaceholder": "您的資料庫的主機名稱或端點",
@@ -1633,6 +1682,20 @@ const TRANSLATIONS = {
       "mysql": "MySQL",
       "sql-server": "SQL Server"
     }
+  },
+
+  chatSettings: {
+    "update": "更新工作區",
+    "updating": "正在更新...",
+    "updateSuccess": "工作區已成功更新！",
+    "updateError": "錯誤：{{message}}"
+  },
+
+  generalInfo: {
+    "workspaceUpdated": "工作區已更新！",
+    "updateError": "錯誤：{{message}}",
+    "updating": "正在更新...",
+    "updateWorkspace": "更新工作區"
   },
 
   // API 金鑰
@@ -1685,7 +1748,7 @@ const TRANSLATIONS = {
       },
       "local": {
         "name": "AnythingLLM 內建",
-        "description": "在此實例上私密地運行內建的 Whisper 模型。"
+        "description": "在此平台上私密地運行內建的 Whisper 模型。"
       }
     }
   },
@@ -1738,7 +1801,7 @@ const TRANSLATIONS = {
     "providers": {
       "lancedb": {
         "name": "LanceDB",
-        "description": "100% 本地化的向量資料庫，與 AnythingLLM 運行於同一實例上。"
+        "description": "100% 本地化的向量資料庫，與 AnythingLLM 運行於同一平台上。"
       },
       "chroma": {
         "name": "Chroma",
@@ -1810,8 +1873,8 @@ const TRANSLATIONS = {
         "預設情況下，您將是唯一的管理員。身為管理員，您需要為所有新使用者或管理員建立帳號。請勿遺失您的密碼，因為只有管理員使用者可以重設密碼。",
       username: "管理員帳號使用者名稱",
       password: "管理員帳號密碼",
-      "isEnabled": "多用戶模式已啟用",
-      "usernamePlaceholder": "輸入管理員用戶名",
+      "isEnabled": "多使用者模式已啟用",
+      "usernamePlaceholder": "輸入管理員使用者名稱",
       "passwordPlaceholder": "輸入管理員密碼"
     },
     password: {
@@ -1819,7 +1882,7 @@ const TRANSLATIONS = {
       description:
         "使用密碼保護您的 AnythingLLM 系統。如果您忘記這個密碼，將沒有復原方法，因此請務必儲存此密碼。",
       "instance": {
-        "title": "實例密碼",
+        "title": "平台密碼",
         "password": "系統密碼",
         "description": "使用密碼保護您的系統，以限制未授權的訪問。"
       }
@@ -1830,8 +1893,8 @@ const TRANSLATIONS = {
         "預設情況下，您將是唯一的管理員。身為管理員，您需要為所有新使用者或管理員建立帳號。請勿遺失您的密碼，因為只有管理員使用者可以重設密碼。",
       password: "系統密碼",
     },
-    "success": "多用戶模式已成功啟用。",
-    "failure": "啟用多用戶模式失敗：{{error}}"
+    "success": "多使用者模式已成功啟用。",
+    "failure": "啟用多使用者模式失敗：{{error}}"
   },
 
   // 事件記錄

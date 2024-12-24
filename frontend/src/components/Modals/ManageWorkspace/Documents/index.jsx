@@ -193,7 +193,7 @@ export default function DocumentSettings({ workspace, systemSettings }) {
   };
 
   return (
-    <div className="flex upload-modal -mt-6 z-10 relative">
+    <div className="flex upload-modal -mt-6 z-modal relative">
       <Directory
         files={availableDocs}
         setFiles={setAvailableDocs}
@@ -209,8 +209,9 @@ export default function DocumentSettings({ workspace, systemSettings }) {
         setHighlightWorkspace={setHighlightWorkspace}
         moveToWorkspace={moveSelectedItemsToWorkspace}
         setLoadingMessage={setLoadingMessage}
+        className="z-modal"
       />
-      <div className="upload-modal-arrow">
+      <div className="upload-modal-arrow z-modal">
         <ArrowsDownUp className="text-white text-base font-bold rotate-90 w-11 h-11" />
       </div>
       <WorkspaceDirectory
@@ -226,6 +227,7 @@ export default function DocumentSettings({ workspace, systemSettings }) {
         saveChanges={updateWorkspace}
         embeddingCosts={embeddingsCost}
         movedItems={movedItems}
+        className="z-modal"
       />
     </div>
   );

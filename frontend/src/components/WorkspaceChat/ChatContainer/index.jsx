@@ -2,12 +2,15 @@ import { useState, useEffect, useContext } from "react";
 import ChatHistory from "./ChatHistory";
 import { CLEAR_ATTACHMENTS_EVENT, DndUploaderContext } from "./DnDWrapper";
 import PromptInput, { PROMPT_INPUT_EVENT } from "./PromptInput";
+import PersonalInfoWarning from "./PersonalInfoWarning";
+import CheckingPersonalInfo from "./CheckingPersonalInfo";
 import Workspace from "@/models/workspace";
 import handleChat, { ABORT_STREAM_EVENT } from "@/utils/chat";
 import { isMobile } from "react-device-detect";
 import { SidebarMobileHeader } from "../../Sidebar";
 import { useParams } from "react-router-dom";
 import { v4 } from "uuid";
+import { baseHeaders } from "@/utils/request";
 import handleSocketResponse, {
   websocketURI,
   AGENT_SESSION_END,
@@ -27,8 +30,13 @@ export default function ChatContainer({ workspace, knownHistory = [] }) {
   const [socketId, setSocketId] = useState(null);
   const [websocket, setWebsocket] = useState(null);
   const { files, parseAttachments } = useContext(DndUploaderContext);
+  const [personalInfoWarning, setPersonalInfoWarning] = useState({
+    isOpen: false,
+    details: null,
+    pendingAction: null,
+  });
+  const [isCheckingPersonalInfo, setIsCheckingPersonalInfo] = useState(false);
 
-  // Maintain state of message from whatever is in PromptInput
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
   };
@@ -37,8 +45,6 @@ export default function ChatContainer({ workspace, knownHistory = [] }) {
     clearTranscriptOnListen: true,
   });
 
-  // Emit an update to the state of the prompt input without directly
-  // passing a prop in so that it does not re-render constantly.
   function setMessageEmit(messageContent = "") {
     setMessage(messageContent);
     window.dispatchEvent(
@@ -46,9 +52,71 @@ export default function ChatContainer({ workspace, knownHistory = [] }) {
     );
   }
 
+  const checkPersonalInfo = async (messageContent) => {
+    try {
+      setIsCheckingPersonalInfo(true);
+      console.log("Checking personal info for message:", messageContent);
+      console.log("Using workspace slug:", workspace.slug);
+      
+      const headers = baseHeaders();
+      console.log("Request headers:", headers);
+
+      const response = await fetch(
+        `/api/workspace/${workspace.slug}/check-personal-info`,
+        {
+          method: "POST",
+          headers: {
+            ...headers,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: messageContent }),
+        }
+      );
+      
+      console.log("Personal info check response status:", response.status);
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Personal info check failed:", errorData);
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+      
+      const result = await response.json();
+      console.log("Personal info check result:", result);
+      return result;
+    } catch (error) {
+      console.error("Failed to check personal info:", error);
+      return { containsPersonalInfo: false };
+    } finally {
+      setIsCheckingPersonalInfo(false);
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!message || message === "") return false;
+
+    console.log("Submitting message:", message);
+    
+    if (workspace.enablePersonalInfoCheck) {
+      const personalInfoCheck = await checkPersonalInfo(message);
+      console.log("Personal info check result:", personalInfoCheck);
+      
+      if (personalInfoCheck.containsPersonalInfo) {
+        console.log("Personal information detected, showing warning");
+        setPersonalInfoWarning({
+          isOpen: true,
+          details: personalInfoCheck,
+          pendingAction: () => sendMessageToChat(),
+        });
+        return;
+      }
+    }
+
+    await sendMessageToChat();
+  };
+
+  const sendMessageToChat = async () => {
     const prevChatHistory = [
       ...chatHistory,
       {
@@ -66,7 +134,6 @@ export default function ChatContainer({ workspace, knownHistory = [] }) {
     ];
 
     if (listening) {
-      // Stop the mic if the send button is clicked
       endTTSSession();
     }
     setChatHistory(prevChatHistory);
@@ -74,14 +141,56 @@ export default function ChatContainer({ workspace, knownHistory = [] }) {
     setLoadingResponse(true);
   };
 
+  const handleWarningClose = () => {
+    console.log("Warning dialog closed");
+    setPersonalInfoWarning({
+      isOpen: false,
+      details: null,
+      pendingAction: null,
+    });
+  };
+
+  const handleWarningConfirm = async () => {
+    console.log("User confirmed to send message despite warning");
+    const { pendingAction } = personalInfoWarning;
+    handleWarningClose();
+    if (pendingAction) {
+      await pendingAction();
+    }
+  };
+
   function endTTSSession() {
     SpeechRecognition.stopListening();
     resetTranscript();
   }
 
-  const regenerateAssistantMessage = (chatId) => {
+  const regenerateAssistantMessage = async (chatId) => {
     const updatedHistory = chatHistory.slice(0, -1);
     const lastUserMessage = updatedHistory.slice(-1)[0];
+    
+    if (workspace.enablePersonalInfoCheck) {
+      const personalInfoCheck = await checkPersonalInfo(lastUserMessage.content);
+      if (personalInfoCheck.containsPersonalInfo) {
+        setPersonalInfoWarning({
+          isOpen: true,
+          details: personalInfoCheck,
+          pendingAction: () => {
+            Workspace.deleteChats(workspace.slug, [chatId])
+              .then(() =>
+                sendCommand(
+                  lastUserMessage.content,
+                  true,
+                  updatedHistory,
+                  lastUserMessage?.attachments
+                )
+              )
+              .catch((e) => console.error(e));
+          },
+        });
+        return;
+      }
+    }
+
     Workspace.deleteChats(workspace.slug, [chatId])
       .then(() =>
         sendCommand(
@@ -106,9 +215,59 @@ export default function ChatContainer({ workspace, knownHistory = [] }) {
       return;
     }
 
+    console.log("Sending command:", command);
+    
+    if (workspace.enablePersonalInfoCheck) {
+      const personalInfoCheck = await checkPersonalInfo(command);
+      console.log("Personal info check result for command:", personalInfoCheck);
+      
+      if (personalInfoCheck.containsPersonalInfo) {
+        console.log("Personal information detected in command, showing warning");
+        setPersonalInfoWarning({
+          isOpen: true,
+          details: personalInfoCheck,
+          pendingAction: () => {
+            let prevChatHistory;
+            if (history.length > 0) {
+              prevChatHistory = [
+                ...history,
+                {
+                  content: "",
+                  role: "assistant",
+                  pending: true,
+                  userMessage: command,
+                  attachments,
+                  animate: true,
+                },
+              ];
+            } else {
+              prevChatHistory = [
+                ...chatHistory,
+                {
+                  content: command,
+                  role: "user",
+                  attachments,
+                },
+                {
+                  content: "",
+                  role: "assistant",
+                  pending: true,
+                  userMessage: command,
+                  animate: true,
+                },
+              ];
+            }
+            setChatHistory(prevChatHistory);
+            setMessageEmit("");
+            setLoadingResponse(true);
+          },
+        });
+        return;
+      }
+    }
+
     let prevChatHistory;
     if (history.length > 0) {
-      // use pre-determined history chain.
       prevChatHistory = [
         ...history,
         {
@@ -150,7 +309,6 @@ export default function ChatContainer({ workspace, knownHistory = [] }) {
       const remHistory = chatHistory.length > 0 ? chatHistory.slice(0, -1) : [];
       var _chatHistory = [...remHistory];
 
-      // Override hook for new messages to now go to agents until the connection closes
       if (!!websocket) {
         if (!promptMessage || !promptMessage?.userMessage) return false;
         websocket.send(
@@ -164,8 +322,6 @@ export default function ChatContainer({ workspace, knownHistory = [] }) {
 
       if (!promptMessage || !promptMessage?.userMessage) return false;
 
-      // If running and edit or regeneration, this history will already have attachments
-      // so no need to parse the current state.
       const attachments = promptMessage?.attachments ?? parseAttachments();
       window.dispatchEvent(new CustomEvent(CLEAR_ATTACHMENTS_EVENT));
 
@@ -189,7 +345,6 @@ export default function ChatContainer({ workspace, knownHistory = [] }) {
     loadingResponse === true && fetchReply();
   }, [loadingResponse, chatHistory, workspace]);
 
-  // TODO: Simplify this WSS stuff
   useEffect(() => {
     function handleWSS() {
       try {
@@ -279,12 +434,19 @@ export default function ChatContainer({ workspace, knownHistory = [] }) {
         <PromptInput
           submit={handleSubmit}
           onChange={handleMessageChange}
-          inputDisabled={loadingResponse}
-          buttonDisabled={loadingResponse}
+          inputDisabled={loadingResponse || isCheckingPersonalInfo}
+          buttonDisabled={loadingResponse || isCheckingPersonalInfo}
           sendCommand={sendCommand}
           attachments={files}
         />
       </DnDFileUploaderWrapper>
+      <PersonalInfoWarning
+        isOpen={personalInfoWarning.isOpen}
+        onClose={handleWarningClose}
+        onConfirm={handleWarningConfirm}
+        details={personalInfoWarning.details}
+      />
+      <CheckingPersonalInfo isChecking={isCheckingPersonalInfo} />
       <ChatTooltips />
     </div>
   );

@@ -348,7 +348,7 @@ function systemEndpoints(app) {
 
   app.get(
     "/system/system-vectors",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager, ROLES.workspace_manager])],
     async (request, response) => {
       try {
         const query = queryParams(request);
@@ -366,7 +366,7 @@ function systemEndpoints(app) {
 
   app.delete(
     "/system/remove-document",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager, ROLES.workspace_manager])],
     async (request, response) => {
       try {
         const { name } = reqBody(request);
@@ -381,7 +381,7 @@ function systemEndpoints(app) {
 
   app.delete(
     "/system/remove-documents",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager, ROLES.workspace_manager])],
     async (request, response) => {
       try {
         const { names } = reqBody(request);
@@ -396,7 +396,7 @@ function systemEndpoints(app) {
 
   app.delete(
     "/system/remove-folder",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager, ROLES.workspace_manager])],
     async (request, response) => {
       try {
         const { name } = reqBody(request);
@@ -411,7 +411,7 @@ function systemEndpoints(app) {
 
   app.get(
     "/system/local-files",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager, ROLES.workspace_manager])],
     async (_, response) => {
       try {
         const localFiles = await viewLocalFiles();
@@ -1016,7 +1016,7 @@ function systemEndpoints(app) {
     [
       chatHistoryViewable,
       validatedRequest,
-      flexUserRoleValid([ROLES.admin, ROLES.manager]),
+      flexUserRoleValid([ROLES.admin, ROLES.manager, ROLES.workspace_manager]),
     ],
     async (request, response) => {
       try {

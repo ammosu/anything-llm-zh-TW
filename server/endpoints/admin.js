@@ -31,7 +31,7 @@ function adminEndpoints(app) {
 
   app.get(
     "/admin/users",
-    [validatedRequest, strictMultiUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, strictMultiUserRoleValid([ROLES.admin, ROLES.manager, ROLES.workspace_manager])],
     async (_request, response) => {
       try {
         const users = await User.where();
@@ -154,7 +154,7 @@ function adminEndpoints(app) {
 
   app.get(
     "/admin/invites",
-    [validatedRequest, strictMultiUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, strictMultiUserRoleValid([ROLES.admin, ROLES.manager, ROLES.workspace_manager])],
     async (_request, response) => {
       try {
         const invites = await Invite.whereWithUsers();
@@ -216,7 +216,7 @@ function adminEndpoints(app) {
 
   app.get(
     "/admin/workspaces",
-    [validatedRequest, strictMultiUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, strictMultiUserRoleValid([ROLES.admin, ROLES.manager, ROLES.workspace_manager])],
     async (_request, response) => {
       try {
         const workspaces = await Workspace.whereWithUsers();
@@ -230,7 +230,7 @@ function adminEndpoints(app) {
 
   app.get(
     "/admin/workspaces/:workspaceId/users",
-    [validatedRequest, strictMultiUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, strictMultiUserRoleValid([ROLES.admin, ROLES.manager, ROLES.workspace_manager])],
     async (request, response) => {
       try {
         const { workspaceId } = request.params;
@@ -264,7 +264,7 @@ function adminEndpoints(app) {
 
   app.post(
     "/admin/workspaces/:workspaceId/update-users",
-    [validatedRequest, strictMultiUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, strictMultiUserRoleValid([ROLES.admin, ROLES.manager, ROLES.workspace_manager])],
     async (request, response) => {
       try {
         const { workspaceId } = request.params;
@@ -409,7 +409,7 @@ function adminEndpoints(app) {
   // DEPRECATED - use /admin/system-preferences-for instead with ?labels=... comma separated string of labels
   app.get(
     "/admin/system-preferences",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager, ROLES.workspace_manager])],
     async (_, response) => {
       try {
         const embedder = getEmbeddingEngineSelection();

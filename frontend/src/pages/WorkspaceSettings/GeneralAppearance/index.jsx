@@ -6,8 +6,10 @@ import WorkspaceName from "./WorkspaceName";
 import SuggestedChatMessages from "./SuggestedChatMessages";
 import DeleteWorkspace from "./DeleteWorkspace";
 import WorkspacePfp from "./WorkspacePfp";
+import { useTranslation } from "react-i18next";
 
 export default function GeneralInfo({ slug }) {
+  const { t } = useTranslation();
   const [workspace, setWorkspace] = useState(null);
   const [hasChanges, setHasChanges] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -34,9 +36,11 @@ export default function GeneralInfo({ slug }) {
       data
     );
     if (!!updatedWorkspace) {
-      showToast("Workspace updated!", "success", { clear: true });
+      showToast(t("generalInfo.workspaceUpdated"), "success", { clear: true });
     } else {
-      showToast(`Error: ${message}`, "error", { clear: true });
+      showToast(t("generalInfo.updateError", { message }), "error", {
+        clear: true,
+      });
     }
     setSaving(false);
     setHasChanges(false);
@@ -60,7 +64,9 @@ export default function GeneralInfo({ slug }) {
             type="submit"
             className="transition-all w-fit duration-300 border border-slate-200 px-5 py-2.5 rounded-lg text-white text-sm items-center flex gap-x-2 hover:bg-slate-200 hover:text-slate-800 focus:ring-gray-800"
           >
-            {saving ? "Updating..." : "Update workspace"}
+            {saving
+              ? t("generalInfo.updating")
+              : t("generalInfo.updateWorkspace")}
           </button>
         )}
       </form>

@@ -8,8 +8,9 @@ import ModalWrapper from "@/components/ModalWrapper";
 import { useTranslation } from "react-i18next";
 
 const ModMap = {
-  admin: ["admin", "manager", "default"],
-  manager: ["manager", "default"],
+  admin: ["admin", "manager", "workspace_manager", "default"],
+  manager: ["workspace_manager", "default"],
+  workspace_manager: ["default"],
   default: [],
 };
 

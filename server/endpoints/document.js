@@ -11,9 +11,13 @@ const path = require("path");
 
 function documentEndpoints(app) {
   if (!app) return;
+
+  // 定義允許管理文件的角色
+  const DOC_MANAGEMENT_ROLES = [ROLES.admin, ROLES.manager, ROLES.workspace_manager];
+
   app.post(
     "/document/create-folder",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, flexUserRoleValid(DOC_MANAGEMENT_ROLES)],
     async (request, response) => {
       try {
         const { name } = reqBody(request);
@@ -43,7 +47,7 @@ function documentEndpoints(app) {
 
   app.post(
     "/document/move-files",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, flexUserRoleValid(DOC_MANAGEMENT_ROLES)],
     async (request, response) => {
       try {
         const { files } = reqBody(request);

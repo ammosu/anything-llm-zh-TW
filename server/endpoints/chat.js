@@ -3,6 +3,7 @@ const { reqBody, userFromSession, multiUserMode } = require("../utils/http");
 const { validatedRequest } = require("../utils/middleware/validatedRequest");
 const { Telemetry } = require("../models/telemetry");
 const { streamChatWithWorkspace } = require("../utils/chats/stream");
+const { checkPersonalInfo } = require("../utils/helpers/chat/personalInfoCheck");
 const {
   ROLES,
   flexUserRoleValid,
@@ -21,12 +22,53 @@ function chatEndpoints(app) {
   if (!app) return;
 
   app.post(
+    "/workspace/:slug/check-personal-info",
+    [validatedRequest, flexUserRoleValid([ROLES.all]), validWorkspaceSlug],
+    async (request, response) => {
+      try {
+        console.log("=== Personal Info Check Request ===");
+        console.log("Request body:", request.body);
+        console.log("OpenRouter API Key configured:", !!process.env.OPENROUTER_API_KEY);
+        console.log("OpenRouter API URL:", process.env.OPENROUTER_API_URL);
+        
+        const { message } = reqBody(request);
+        
+        if (!message?.length) {
+          console.log("Message is empty");
+          response.status(400).json({ error: "Message is empty." });
+          return;
+        }
+
+        console.log("Checking message for personal info:", message);
+        
+        try {
+          const result = await checkPersonalInfo(message);
+          console.log("Personal info check result:", result);
+          response.status(200).json(result);
+        } catch (checkError) {
+          console.error("Error during personal info check:", checkError);
+          response.status(500).json({ 
+            error: checkError.message,
+            details: "Error occurred during personal information check"
+          });
+        }
+      } catch (error) {
+        console.error("Error in check-personal-info endpoint:", error);
+        response.status(500).json({ 
+          error: error.message,
+          details: "Error occurred in the check-personal-info endpoint"
+        });
+      }
+    }
+  );
+
+  app.post(
     "/workspace/:slug/stream-chat",
     [validatedRequest, flexUserRoleValid([ROLES.all]), validWorkspaceSlug],
     async (request, response) => {
       try {
         const user = await userFromSession(request, response);
-        const { message, attachments = [] } = reqBody(request);
+        const { message, attachments = [], bypassPersonalInfo = false } = reqBody(request);
         const workspace = response.locals.workspace;
 
         if (!message?.length) {
@@ -111,7 +153,7 @@ function chatEndpoints(app) {
     async (request, response) => {
       try {
         const user = await userFromSession(request, response);
-        const { message, attachments = [] } = reqBody(request);
+        const { message, attachments = [], bypassPersonalInfo = false } = reqBody(request);
         const workspace = response.locals.workspace;
         const thread = response.locals.thread;
 
@@ -155,7 +197,6 @@ function chatEndpoints(app) {
           attachments
         );
 
-        // If thread was renamed emit event to frontend via special `action` response.
         await WorkspaceThread.autoRenameThread({
           thread,
           workspace,

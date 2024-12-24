@@ -434,6 +434,7 @@ const TRANSLATIONS = {
     loading: "Loading threads...",
     listAriaLabel: "Threads",
     defaultThreadName: "default",
+    Thread: "Thread",
     startingThread: "Starting Thread...",
     newThread: "New Thread",
     deleteSelected: "Delete Selected",
@@ -709,6 +710,10 @@ const TRANSLATIONS = {
       save: "Save Messages",
       heading: "Explain to me",
       body: "the benefits of AnythingLLM",
+      headingLabel: "Heading",
+      headingPlaceholder: "Message heading",
+      messageLabel: "Message",
+      messagePlaceholder: "Message"
     },
     pfp: {
       title: "Assistant Profile Image",
@@ -877,6 +882,48 @@ const TRANSLATIONS = {
     "linkCopied": "Copied Link"
   },
 
+  settingsButton: {
+    "homeAriaLabel": "Home",
+    "backToWorkspaces": "Back to workspaces",
+    "settingsAriaLabel": "Settings",
+    "openSettings": "Open settings"
+  },
+
+  workspaceAgentConfiguration: {
+    "toastSuccess": "Workspace updated successfully!",
+    "toastError": "Error: {{message}}",
+    "configureAgentSkills": "Configure Agent Skills",
+    "customizeDescription": "Customize and enhance the default agent's capabilities by enabling or disabling specific skills. These settings will be applied across all workspaces.",
+    "updatingAgent": "Updating agent...",
+    "updateWorkspaceAgent": "Update workspace agent",
+    "loading": "Loading workspace agent configuration..."
+  },
+
+  addMemberModal: {
+    "title": "Users",
+    "searchPlaceholder": "Search for a user",
+    "noUsersFound": "No users found",
+    "selectAll": "Select All",
+    "unselect": "Unselect",
+    "saveButton": "Save",
+    "updateSuccess": "Users updated successfully.",
+    "updateError": "Failed to update users: {{error}}"
+  },
+
+  chatSettings: {
+    "update": "Update workspace",
+    "updating": "Updating...",
+    "updateSuccess": "Workspace updated successfully!",
+    "updateError": "Error: {{message}}"
+  },
+
+  generalInfo: {
+    "workspaceUpdated": "Workspace updated!",
+    "updateError": "Error: {{message}}",
+    "updating": "Updating...",
+    "updateWorkspace": "Update workspace"
+  },
+
   // Log row
   logRow: {
     "metadata": {
@@ -943,6 +990,7 @@ const TRANSLATIONS = {
     "role": {
       "label": "Role",
       "default": "Default",
+      "workspace_manager": "Workspace Manager",
       "manager": "Manager",
       "admin": "Administrator"
     },
@@ -1412,6 +1460,18 @@ const TRANSLATIONS = {
         "The higher the number the more creative. For some models this can lead to incoherent responses when set too high.",
       hint: "Most LLMs have various acceptable ranges of valid values. Consult your LLM provider for that information.",
     },
+    personalInfo: {
+      title: "Personal Information Detection",
+      description: "Enable or disable the personal information detection feature for this workspace. When disabled, messages will not be checked for personal information.",
+      enable: "Enable Personal Information Detection",
+      checking: "Checking for personal information...",
+      warning: {
+        title: "Personal Information Warning",
+        description: "Your message may contain personal information. Do you still want to send it?",
+        confirm: "Send Anyway",
+        cancel: "Cancel"
+      }
+    },    
   },
 
   // Vector Database

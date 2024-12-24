@@ -27,6 +27,7 @@ const Workspace = {
     "agentProvider",
     "agentModel",
     "queryRefusalResponse",
+    "enablePersonalInfoCheck", // Added this field
   ],
   /**
    * The default Slugify module requires some additional mapping to prevent downstream issues
@@ -101,6 +102,13 @@ const Workspace = {
     if (updates?.chatProvider === "default") {
       updates.chatProvider = null;
       updates.chatModel = null;
+    }
+
+    // Convert enablePersonalInfoCheck to boolean if it exists
+    if (updates.hasOwnProperty('enablePersonalInfoCheck')) {
+      updates.enablePersonalInfoCheck = updates.enablePersonalInfoCheck === true || 
+                                      updates.enablePersonalInfoCheck === 'true' ||
+                                      updates.enablePersonalInfoCheck === 'on';
     }
 
     return this._update(id, updates);

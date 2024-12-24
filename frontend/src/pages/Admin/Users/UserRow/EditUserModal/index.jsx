@@ -110,6 +110,7 @@ export default function EditUserModal({ currentUser, user, closeModal }) {
                   className="border-none bg-theme-settings-input-bg w-full text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
                 >
                   <option value="default">{t("editUserModal.role.default")}</option>
+                  <option value="workspace_manager">{t("editUserModal.role.workspace_manager")}</option>
                   <option value="manager">{t("editUserModal.role.manager")}</option>
                   {currentUser?.role === "admin" && (
                     <option value="admin">{t("editUserModal.role.admin")}</option>

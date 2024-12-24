@@ -141,10 +141,10 @@ export default function SpeechToTextProvider({ settings }) {
                   {filteredProviders.map((provider) => (
                     <LLMItem
                       key={provider.name}
-                      name={provider.name}
+                      name={t(`audioPreference.speechToText.${provider.name}`)}
                       value={provider.value}
                       image={provider.logo}
-                      description={provider.description}
+                      description={t(provider.description)}
                       checked={selectedProvider === provider.value}
                       onClick={() => updateProviderChoice(provider.value)}
                     />

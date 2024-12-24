@@ -7,13 +7,25 @@ const { ROLES } = require("../../middleware/multiUserProtected");
 function validRoleSelection(currentUser = {}, newUserParams = {}) {
   if (!newUserParams.hasOwnProperty("role"))
     return { valid: true, error: null }; // not updating role, so skip.
+  
+  // Admin can modify any role
   if (currentUser.role === ROLES.admin) return { valid: true, error: null };
+  
+  // Manager can only modify workspace_manager and default roles
   if (currentUser.role === ROLES.manager) {
-    const validRoles = [ROLES.manager, ROLES.default];
+    const validRoles = [ROLES.workspace_manager, ROLES.default];
     if (!validRoles.includes(newUserParams.role))
       return { valid: false, error: "Invalid role selection for user." };
     return { valid: true, error: null };
   }
+
+  // Workspace manager can only modify default roles
+  if (currentUser.role === ROLES.workspace_manager) {
+    if (newUserParams.role !== ROLES.default)
+      return { valid: false, error: "Invalid role selection for user." };
+    return { valid: true, error: null };
+  }
+
   return { valid: false, error: "Invalid condition for caller." };
 }
 
@@ -39,9 +51,16 @@ async function canModifyAdmin(userToModify, updates) {
 
 function validCanModify(currentUser, existingUser) {
   if (currentUser.role === ROLES.admin) return { valid: true, error: null };
+  
   if (currentUser.role === ROLES.manager) {
-    const validRoles = [ROLES.manager, ROLES.default];
+    const validRoles = [ROLES.workspace_manager, ROLES.default];
     if (!validRoles.includes(existingUser.role))
+      return { valid: false, error: "Cannot perform that action on user." };
+    return { valid: true, error: null };
+  }
+
+  if (currentUser.role === ROLES.workspace_manager) {
+    if (existingUser.role !== ROLES.default)
       return { valid: false, error: "Cannot perform that action on user." };
     return { valid: true, error: null };
   }

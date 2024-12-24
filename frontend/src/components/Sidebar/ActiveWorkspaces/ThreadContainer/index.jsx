@@ -41,10 +41,15 @@ export default function ThreadContainer({ workspace }) {
       if (!workspace.slug) return;
       const { threads } = await Workspace.threads.all(workspace.slug);
       setLoading(false);
-      setThreads(threads);
+      // Ensure each thread has a default name if none is provided
+      const processedThreads = threads.map(thread => ({
+        ...thread,
+        name: thread.name === "Thread" ? t("threads.Thread") : thread.name
+      }));
+      setThreads(processedThreads);
     }
     fetchThreads();
-  }, [workspace.slug]);
+  }, [workspace.slug, t]);
 
   // Enable toggling of bulk-deletion by holding meta-key (ctrl on win and cmd/fn on others)
   useEffect(() => {

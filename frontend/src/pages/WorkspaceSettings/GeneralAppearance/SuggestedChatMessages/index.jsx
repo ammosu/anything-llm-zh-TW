@@ -92,13 +92,13 @@ export default function SuggestedChatMessages({ slug }) {
   if (loading)
     return (
       <div className="flex flex-col">
-        <label className="block input-label">
+        <label htmlFor="loading-messages" className="block input-label">
           {t("general.message.title")}
         </label>
         <p className="text-white text-opacity-60 text-xs font-medium py-1.5">
           {t("general.message.description")}
         </p>
-        <p className="text-white text-opacity-60 text-sm font-medium mt-6">
+        <p id="loading-messages" className="text-white text-opacity-60 text-sm font-medium mt-6">
           <PreLoader size="4" />
         </p>
       </div>
@@ -106,10 +106,10 @@ export default function SuggestedChatMessages({ slug }) {
   return (
     <div className="w-screen mt-6">
       <div className="flex flex-col">
-        <label className="block input-label">
+        <label htmlFor="loading-messages" className="block input-label">
           {t("general.message.title")}
         </label>
-        <p className="text-white text-opacity-60 text-xs font-medium py-1.5">
+        <p id="loading-messages" className="text-white text-opacity-60 text-xs font-medium py-1.5">
           {t("general.message.description")}
         </p>
       </div>
@@ -143,11 +143,12 @@ export default function SuggestedChatMessages({ slug }) {
       {editingIndex >= 0 && (
         <div className="flex flex-col gap-y-4 mr-2 mt-8">
           <div className="w-1/2">
-            <label className="text-white text-sm font-semibold block mb-2">
-              Heading
+            <label htmlFor="message-heading" className="text-white text-sm font-semibold block mb-2">
+              {t("general.message.headingLabel")}
             </label>
             <input
-              placeholder="Message heading"
+              id="message-heading"
+              placeholder={t("general.message.headingPlaceholder")}
               className="border-none bg-theme-settings-input-bg text-white placeholder:text-white/20 text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block p-2.5 w-full"
               value={newMessage.heading}
               name="heading"
@@ -155,11 +156,12 @@ export default function SuggestedChatMessages({ slug }) {
             />
           </div>
           <div className="w-1/2">
-            <label className="text-white text-sm font-semibold block mb-2">
-              Message
+            <label htmlFor="message-body" className="text-white text-sm font-semibold block mb-2">
+              {t("general.message.messageLabel")}
             </label>
             <input
-              placeholder="Message"
+              id="message-body"
+              placeholder={t("general.message.messagePlaceholder")}
               className="border-none bg-theme-settings-input-bg text-white placeholder:text-white/20 text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block p-2.5 w-full"
               value={newMessage.message}
               name="message"

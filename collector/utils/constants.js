@@ -7,6 +7,7 @@ const ACCEPTED_MIMES = {
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [
     ".docx",
   ],
+  "application/msword": [".doc"],  // 添加.doc支援
   "application/vnd.openxmlformats-officedocument.presentationml.presentation": [
     ".pptx",
   ],
@@ -40,6 +41,7 @@ const SUPPORTED_FILETYPE_CONVERTERS = {
   ".pdf": "./convert/asPDF/index.js",
 
   ".docx": "./convert/asDocx.js",
+  ".doc": "./convert/asDoc.js",  // 添加.doc轉換器
   ".pptx": "./convert/asOfficeMime.js",
 
   ".odt": "./convert/asOfficeMime.js",

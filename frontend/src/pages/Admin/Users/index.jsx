@@ -115,6 +115,11 @@ const ROLE_HINT = {
     "adminUsers.roleHint.default1",
     "adminUsers.roleHint.default2",
   ],
+  workspace_manager: [
+    "adminUsers.roleHint.workspace_manager1",
+    "adminUsers.roleHint.workspace_manager2",
+    "adminUsers.roleHint.workspace_manager3",
+  ],
   manager: [
     "adminUsers.roleHint.manager1",
     "adminUsers.roleHint.manager2",

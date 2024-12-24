@@ -80,36 +80,36 @@ export default function UploadFile({
   return (
     <div>
       <div
-        className={`w-[560px] border-dashed border-[2px] border-theme-modal-border light:border-[#686C6F] rounded-2xl bg-theme-bg-primary transition-colors duration-300 p-3 ${
+        className={`w-[560px] border-dashed border-[2px] border-theme-modal-border rounded-2xl transition-colors duration-300 p-3 ${
           ready
-            ? " light:bg-[#E0F2FE] cursor-pointer hover:bg-theme-bg-secondary light:hover:bg-transparent"
-            : "cursor-not-allowed"
+            ? "bg-theme-bg-container hover:bg-gray-50/10 cursor-pointer" 
+            : "bg-gray-100/10 cursor-not-allowed" 
         }`}
         {...getRootProps()}
       >
         <input {...getInputProps()} />
         {ready === false ? (
           <div className="flex flex-col items-center justify-center h-full">
-            <CloudArrowUp className="w-8 h-8 text-white/80 light:invert" />
-            <div className="text-white text-opacity-80 text-sm font-semibold py-1">
+            <CloudArrowUp className="w-8 h-8 text-gray-600" />
+            <div className="text-gray-700 text-sm font-semibold py-1">
               {t("uploadFile.documentProcessorUnavailable")}
             </div>
-            <div className="text-white text-opacity-60 text-xs font-medium py-1 px-20 text-center">
+            <div className="text-gray-600 text-xs font-medium py-1 px-20 text-center">
               {t("uploadFile.uploadUnavailableMessage")}
             </div>
           </div>
         ) : files.length === 0 ? (
           <div className="flex flex-col items-center justify-center">
-            <CloudArrowUp className="w-8 h-8 text-white/80 light:invert" />
-            <div className="text-white text-opacity-80 text-sm font-semibold py-1">
+            <CloudArrowUp className="w-8 h-8 text-gray-600" />
+            <div className="text-gray-700 text-sm font-semibold py-1">
               {t("uploadFile.clickToUpload")}
             </div>
-            <div className="text-white text-opacity-60 text-xs font-medium py-1">
+            <div className="text-gray-600 text-xs font-medium py-1">
               {t("uploadFile.supportMessage")}
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-2 overflow-auto max-h-[180px] p-1 overflow-y-scroll no-scroll">
+          <div className="grid grid-cols-2 gap-2 overflow-auto max-h-[180px] p-1">
             {files.map((file) => (
               <FileUploadProgress
                 key={file.uid}
@@ -128,7 +128,7 @@ export default function UploadFile({
           </div>
         )}
       </div>
-      <div className="text-center text-white text-opacity-50 text-xs font-medium w-[560px] py-2">
+      <div className="text-center text-gray-500 text-xs font-medium w-[560px] py-2">
         {t("uploadFile.submitLink")}
       </div>
       <form onSubmit={handleSendLink} className="flex gap-x-2">
@@ -136,21 +136,21 @@ export default function UploadFile({
           disabled={fetchingUrl}
           name="link"
           type="url"
-          className="border-none disabled:bg-theme-settings-input-bg disabled:text-theme-settings-input-placeholder bg-theme-settings-input-bg text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-3/4 p-2.5"
+          className="border border-gray-200 bg-white text-gray-700 placeholder:text-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2.5 disabled:bg-gray-100 disabled:text-gray-500"
           placeholder={t("uploadFile.placeholderUrl")}
           autoComplete="off"
         />
         <button
           disabled={fetchingUrl}
           type="submit"
-          className="disabled:bg-white/20 disabled:text-slate-300 disabled:border-slate-400 disabled:cursor-wait bg bg-transparent hover:bg-slate-200 hover:text-slate-800 w-auto border border-white light:border-theme-modal-border text-sm text-white p-2.5 rounded-lg"
+          className="bg-blue-500 hover:bg-blue-600 text-white w-auto border border-transparent text-sm px-4 py-2.5 rounded-lg disabled:bg-gray-200 disabled:text-gray-500 disabled:cursor-not-allowed transition-colors duration-200"
         >
           {fetchingUrl ? t("uploadFile.fetching") : t("uploadFile.fetchWebsite")}
         </button>
       </form>
-      <div className="mt-6 text-center text-white text-opacity-80 text-xs font-medium w-[560px]">
+      <div className="mt-6 text-center text-gray-600 text-xs font-medium w-[560px]">
         {t("uploadFile.disclaimer")}
       </div>
     </div>
-  );
+   );
 }
